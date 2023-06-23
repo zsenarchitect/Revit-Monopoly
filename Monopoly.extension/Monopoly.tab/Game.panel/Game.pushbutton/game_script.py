@@ -89,7 +89,7 @@ class SimpleEventHandler(IExternalEventHandler):
     def GetName(self):
         return "simple function executed by an IExternalEventHandler in a Form"
 
-
+"""
 class data_grid_obj:
     # use this to list a live dashboard for the game. Revit schedule cannot be updated without being the active view, so that is why no pioritised.
     def __init__(self, name):
@@ -100,7 +100,7 @@ class data_grid_obj:
         # other staus are [Prisoned, Hospitalized, Kidnapped, Bankrupted]
         self.luck = 100
         self.team = None
- 
+ """
 
 
 
@@ -148,8 +148,8 @@ class game_ModelessForm(WPFWindow):
         # the team can be Tean A or B, or indepedent.
         
         names = ["Tom", "Jerry", "Kate"]
-        
-        self.main_data_grid.ItemsSource = [data_grid_obj(x) for x in names]
+        from PLAYER import Player
+        self.main_data_grid.ItemsSource = [Player(x) for x in names]
         
 
     @ERROR_HANDLE.try_catch_error
