@@ -10,11 +10,15 @@ luck
 weapon
 speed
 direction: for which way to travel
+orientation: for keep player facing the direction when traveling.
 position(index on game board)
 orientation
 log
 
-    
+
+
+debate: store all those info in revit obj? or store in python?
+I think it is more flexible to update game if store atr in python.
     """
 import FINDER
 
