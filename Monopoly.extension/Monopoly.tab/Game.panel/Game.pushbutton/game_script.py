@@ -181,6 +181,8 @@ class game_ModelessForm(WPFWindow):
         pass
     
     
+    
+    
         # loop thru all player action. Each call GAME_LOGIC.
         
         # increament the game cycle
