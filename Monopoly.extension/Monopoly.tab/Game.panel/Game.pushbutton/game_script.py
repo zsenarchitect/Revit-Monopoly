@@ -144,6 +144,9 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def init_data_grid(self):
+        # this will be replaced by idenpendent dropdown menu Each cell can edit the name, team.
+        # the team can be Tean A or B, or indepedent.
+        
         names = ["Tom", "Jerry", "Kate"]
         
         self.main_data_grid.ItemsSource = [data_grid_obj(x) for x in names]
@@ -157,10 +160,48 @@ class game_ModelessForm(WPFWindow):
             self.textblock_dwg_detail.Text = ""
             return
 
+
+    @ERROR_HANDLE.try_catch_error
+    def game_start_click(self, sender, args):
+        
+        # validate the player info, make sure all field has valid input
+        
+        # once started, the data grid is display only, cannot edit again.
+
+
+        # set game cycle as 1. Begin game loop.
+        
+        pass
     
-
-
-
+    
+    @ERROR_HANDLE.try_catch_error
+    def main_loop(self):
+        
+        
+        pass
+    
+    
+        # loop thru all player action. Each call GAME_LOGIC.
+        
+        # increament the game cycle
+        
+        # update all UI window display
+        
+        
+        # check if game is over by call is_game_over
+        
+    
+    def is_game_over(self):
+        # check if only one players/teams have positive asset. 
+        # call finish
+        
+        # check if manual kill the game
+        # call finish
+        
+        # all seems ok, Then call main_loop again.
+        
+        
+        pass
 
 
 
