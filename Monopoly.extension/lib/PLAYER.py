@@ -20,6 +20,7 @@ import FINDER
 
 
 class Player(object):
+    """handle all player object, this has a child class called NPC"""
     def __init__(self, name, team, character, initial_money, is_NPC):
         self.name = name
         self.team = team  # Team A, Team B or Solo
@@ -28,7 +29,7 @@ class Player(object):
 
         self.money = initial_money
         self.propertie = []
-        self.is_NPC = is_NPC
+        self.is_NPC = is_NPC# pylint: disable=C0103 # disable snake naming style
         self.luck = 50
 
         self.position_index = -1  # -1 means have not start.

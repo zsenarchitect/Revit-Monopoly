@@ -11,6 +11,6 @@ class NPC(Player):
         name = character
         team = "NPC"
         initial_money = 0
-        # pylint: disable-next=global-statement
-        is_NPC = True
+       
+        is_NPC = True # pylint: disable=C0103 # disable snake naming style
         super().__init__(name, team, character, initial_money, is_NPC)
