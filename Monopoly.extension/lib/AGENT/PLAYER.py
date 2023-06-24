@@ -25,15 +25,18 @@ import FINDER
 
 class Player(object):
     """handle all player object, this has a child class called NPC"""
-    def __init__(self, name, team, character, initial_money, is_NPC):
+
+    def __init__(self, name, team_obj, character, initial_money, is_NPC):
         self.name = name
-        self.team = team  # Team A, Team B or Solo
-        self.character = character  # this is the name of the character
+        self.team = team_obj  # Team A, Team B or Solo
+
+        # this is the name of the character: Cat, Hat, Bat, etc..
+        self.character = character
         self.revit_obj = FINDER.get_character_object(character)
 
         self.money = initial_money
-        self.propertie = []
-        self.is_NPC = is_NPC# pylint: disable=C0103 # disable snake naming style
+        self.properties = []
+        self.is_NPC = is_NPC  # pylint: disable=C0103 # disable snake naming style
         self.luck = 50
 
         self.position_index = -1  # -1 means have not start.
@@ -59,3 +62,29 @@ class Player(object):
     def rank(self):
         # figure out the rank in all player
         return 1
+
+    @property
+    def is_bankrupted(self):
+        # return True if money is 0. and properties did not sell.
+        pass
+
+    def pay_money_to_target(self, money, target):
+        # target can be other players or building locations such as hospital
+        # update moeny
+        # also need to call animation.
+
+        pass
+
+    def receive_money(self, money):
+        # update money
+        pass
+
+    def purchase_property(self, property):
+        # payout money and own a land.
+        pass
+
+
+    def exchange_player_data(self, other_player, attr_name):
+        # exchange the data in the given attr betwen two players.
+        # this could be money, property, luck or position(exchange jail or hostpital)
+        pass

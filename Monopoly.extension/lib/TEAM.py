@@ -1,1 +1,0 @@
-"""handle all team action, solo player are also a team."""
