@@ -94,3 +94,7 @@ class Player(object):
         # target can be any asset obj.
         # this will call animation.
         pass
+
+    def change_team(self, new_team):
+        # change the team of the player
+        pass
