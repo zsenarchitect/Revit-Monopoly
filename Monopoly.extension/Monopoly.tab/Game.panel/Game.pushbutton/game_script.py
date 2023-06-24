@@ -148,7 +148,7 @@ class game_ModelessForm(WPFWindow):
         # the team can be Tean A or B, or indepedent.
         
         names = ["Tom", "Jerry", "Kate"]
-        from PLAYER import Player
+        from AGENT.PLAYER import Player
         self.main_data_grid.ItemsSource = [Player(x) for x in names]
         
 

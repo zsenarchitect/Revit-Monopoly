@@ -26,7 +26,7 @@ import FINDER
 class Player(object):
     """handle all player object, this has a child class called NPC"""
 
-    def __init__(self, name, team_obj, character, initial_money, is_NPC):
+    def __init__(self, name, team_obj = None, character= None):
         self.name = name
         self.team = team_obj  # Team A, Team B or Solo
 
@@ -34,9 +34,9 @@ class Player(object):
         self.character = character
         self.revit_obj = FINDER.get_character_object(character)
 
-        self.money = initial_money
+        self.money = 1000
         self.properties = []
-        self.is_NPC = is_NPC  # pylint: disable=C0103 # disable snake naming style
+        self.is_NPC = False  # pylint: disable=C0103 # disable snake naming style
         self.luck = 50
 
         self.position_index = -1  # -1 means have not start.
@@ -87,4 +87,10 @@ class Player(object):
     def exchange_player_data(self, other_player, attr_name):
         # exchange the data in the given attr betwen two players.
         # this could be money, property, luck or position(exchange jail or hostpital)
+        pass
+
+
+    def move(self, target):
+        # target can be any asset obj.
+        # this will call animation.
         pass
