@@ -20,29 +20,30 @@ log
 debate: store all those info in revit obj? or store in python?
 I think it is more flexible to update game if store atr in python.
     """
+from Autodesk.Revit import DB
+
 import FINDER
+from TEAM import Team
+from ..ANIMATION import player_money_animation
 
 
 class Player(object):
     """handle all player object, this has a child class called NPC
 
-        
-        Args:
-            name: the name of player.
-            team: the team_obj. Not the name of the team.
-            character: the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
+    attrs: xxxxxxxxxxxxxxxxxxxxxxx
     """
 
     def __init__(self, name, team, character):
         """This is the constructor method.
         
         Args:
-            name: the name of player.
-            team: the team_obj. Not the name of the team.
-            character: the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
+            name(str): the name of player.
+            team(Team): the team_obj. Not the name of the team.
+            character(str): the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
         """
         self.name = name
-        self.team = team_obj  # Team A, Team B or Solo
+        self.team = team
+        
 
         # this is the name of the character: Cat, Hat, Bat, etc..
         self.character = character
@@ -63,12 +64,26 @@ class Player(object):
         # kidnapped: no money in/out, can happen anywhere.
         # bankrupted: out of game. Property free to take.
 
+
+    @property
+    def team_name(self):
+        return self.team.team_name
+    
+    @property
+    def is_same_team(self, other_player):
+        """check if the two players are in the same team.
+        """
+        if self.team.is_solo or other_player.team.is_solo:
+            return False
+        return self.team == other_player.team
+
     @property
     def orientation(self):
         return DB.XYZ(0, 0, 0)
 
     @property
     def location(self):
+        """this is the XYZ location"""
         marker = FINDER.get_marker(self.position_index)
         return marker.location
 
@@ -90,17 +105,29 @@ class Player(object):
         also need to call animation.
         
         Args:
-            money: the money to pay.
-            target: the target to pay.
+            money(abs.int): the money to pay.
+            target(Player or BuildingLocation object): the target to pay.
         """
-        
+        self.money -= abs(money)
+        player_money_animation(self, abs(money), is_gain = False)
 
-
-        pass
+        if isinstance(target, Player):
+            target.receive_money(money)
+        else:
+            target.owner.receive_money(money)
 
     def receive_money(self, money):
-        # update money
-        pass
+        """ This is the constructor method.
+        update money
+        also need to call animation.
+        
+        Args:
+            money(abs.int): the money to come in.
+        """
+        self.money += abs(money)
+        player_money_animation(self, abs(money), is_gain = True)
+        
+        
 
     def purchase_property(self, property):
         # payout money and own a land.
@@ -108,16 +135,35 @@ class Player(object):
 
 
     def exchange_player_data(self, other_player, attr_name):
-        # exchange the data in the given attr betwen two players.
-        # this could be money, property, luck or position(exchange jail or hostpital)
+        """
+        
+        exchange the data in the given attr betwen two players.
+        
+
+        Args:
+            other_player(Player): the other player to exchange. COuld be same team or other team.
+            attr_name(str): the name of the attr. this could be money, property, luck or position(exchange jail or hostpital)
+        
+        """
         pass
 
 
     def move(self, target):
-        # target can be any asset obj.
+        """
+         target can be any asset obj.
         # this will call animation.
+
+        Args:
+            target(Asset object): the target to move.
+        
+        """
         pass
 
     def change_team(self, new_team):
-        # change the team of the player
-        pass
+        """change the team of player.
+        
+        Args:
+            new_team(Team): the new team to change to.
+        
+        """
+        self.team = new_team

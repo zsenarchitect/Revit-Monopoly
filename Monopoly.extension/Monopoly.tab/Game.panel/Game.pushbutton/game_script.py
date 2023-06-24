@@ -25,7 +25,8 @@ try:
     uidoc = __revit__.ActiveUIDocument
     doc = __revit__.ActiveUIDocument.Document
 except:
-    print "nnned to allow open revit doc when zero doc."
+    print 
+    "nnned to allow open revit doc when zero doc."
 
 __persistentengine__ = True
 
@@ -64,11 +65,11 @@ class SimpleEventHandler(IExternalEventHandler):
                 #print "try to do event handler func"
                 self.OUT = self.do_this(*self.kwargs)
             except:
-                print "failed"
-                print traceback.format_exc()
+                print ("failed")
+                print (traceback.format_exc())
         except InvalidOperationException:
             # If you don't catch this exeption Revit may crash.
-            print "InvalidOperationException catched"
+            print ("InvalidOperationException catched")
 
     def GetName(self):
         return "simple function executed by an IExternalEventHandler in a Form"
@@ -105,10 +106,14 @@ class game_ModelessForm(WPFWindow):
         # this will be replaced by idenpendent dropdown menu Each cell can edit the name, team.
         # the team can be Tean A or B, or indepedent.
         
-        names = ["Tom", "Jerry", "Kate"]
         from AGENT.PLAYER import Player
-        a = Player("Tom")
-        self.main_data_grid.ItemsSource = [Player(x) for x in names]
+        from AGENT.TEAM import Team
+        
+        names = ["Tom", "Jerry", "Timon", "Pumbaa"]
+        teams = [Team(team_name="Solo")] * len(names)
+        characters = ["Hat"] * len(names)
+        self.players = [Player(name, team, character) for name, team, character in zip(names, teams, characters)] 
+        self.main_data_grid.ItemsSource = self.players
         
 
     @ERROR_HANDLE.try_catch_error
@@ -122,6 +127,8 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
+        # lock the file, saveas the revit file so not losing original stage.
+
         
         # validate the player info, make sure all field has valid input
         

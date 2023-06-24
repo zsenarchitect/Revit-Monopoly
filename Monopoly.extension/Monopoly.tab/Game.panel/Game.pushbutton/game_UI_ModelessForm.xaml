@@ -156,7 +156,7 @@
                           Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn  IsReadOnly="True" Header="Name"  Binding="{Binding name}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Team"  Binding="{Binding team}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Team"  Binding="{Binding team_name}"/>
                             <DataGridTextColumn  IsReadOnly="True" Header="Luck"  Binding="{Binding luck}"/>
                             <DataGridTextColumn  IsReadOnly="True" Header="Status"  Binding="{Binding status}"/>
 
@@ -169,7 +169,7 @@
                           
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock x:Name="textblock_dwg_detail" Text="DWG details:" Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock x:Name="textblock_display_detail" Text="text display:" Grid.Column="0" Grid.Row="1"/>
 
                 </Grid>
 

@@ -1,11 +1,12 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 14, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 152, in init_data_grid
-    self.main_data_grid.ItemsSource = [Player(x) for x in names]
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 35, in __init__
-    self.revit_obj = FINDER.get_character_object(character)
-AttributeError: 'module' object has no attribute 'get_character_object'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 110, in init_data_grid
+    from AGENT.PLAYER import Player
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 36
+    def __init__(self, name : str, team: Team, character: str):
+                            ^
+SyntaxError: unexpected token ':'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
