@@ -24,9 +24,23 @@ import FINDER
 
 
 class Player(object):
-    """handle all player object, this has a child class called NPC"""
+    """handle all player object, this has a child class called NPC
 
-    def __init__(self, name, team_obj = None, character= None):
+        
+        Args:
+            name: the name of player.
+            team: the team_obj. Not the name of the team.
+            character: the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
+    """
+
+    def __init__(self, name, team, character):
+        """This is the constructor method.
+        
+        Args:
+            name: the name of player.
+            team: the team_obj. Not the name of the team.
+            character: the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
+        """
         self.name = name
         self.team = team_obj  # Team A, Team B or Solo
 
@@ -60,6 +74,7 @@ class Player(object):
 
     @property
     def rank(self):
+
         # figure out the rank in all player
         return 1
 
@@ -69,9 +84,17 @@ class Player(object):
         pass
 
     def pay_money_to_target(self, money, target):
-        # target can be other players or building locations such as hospital
-        # update moeny
-        # also need to call animation.
+        """This is the constructor method.
+        target can be other players or building locations such as hospital
+        update moeny
+        also need to call animation.
+        
+        Args:
+            money: the money to pay.
+            target: the target to pay.
+        """
+        
+
 
         pass
 

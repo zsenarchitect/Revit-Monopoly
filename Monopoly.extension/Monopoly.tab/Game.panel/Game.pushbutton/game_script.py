@@ -25,27 +25,11 @@ try:
     uidoc = __revit__.ActiveUIDocument
     doc = __revit__.ActiveUIDocument.Document
 except:
-    pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print "nnned to allow open revit doc when zero doc."
 
 __persistentengine__ = True
 
 import ERROR_HANDLE
-
 
 
 @ERROR_HANDLE.try_catch_error
@@ -89,35 +73,16 @@ class SimpleEventHandler(IExternalEventHandler):
     def GetName(self):
         return "simple function executed by an IExternalEventHandler in a Form"
 
-"""
-class data_grid_obj:
-    # use this to list a live dashboard for the game. Revit schedule cannot be updated without being the active view, so that is why no pioritised.
-    def __init__(self, name):
-        self.name = name
-        self.rank = 0
-        self.money = 100
-        self.status = "Normal"
-        # other staus are [Prisoned, Hospitalized, Kidnapped, Bankrupted]
-        self.luck = 100
-        self.team = None
- """
-
 
 
 # A simple WPF form used to call the ExternalEvent
 class game_ModelessForm(WPFWindow):
-    """
-    Simple modeless form sample
-    """
 
     def pre_actions(self):
         # if active doc is not "Monopoly Game Board" then open the game board fiel.
-        
-        
-        
+
         self.simple_event_handler = SimpleEventHandler(play)
         self.ext_event = ExternalEvent.Create(self.simple_event_handler)
-
 
 
     @ERROR_HANDLE.try_catch_error
@@ -128,16 +93,9 @@ class game_ModelessForm(WPFWindow):
         WPFWindow.__init__(self, xaml_file_name)
 
         self.title_text.Text = "Monopoly"
-
         self.sub_text.Text = "Classic board game, in Revit!"
-
-
         self.Title = self.title_text.Text
-
         self.set_image_source(self.logo_img, "icon.png")
-
-
-    
         self.init_data_grid()
 
         self.Show()
@@ -149,6 +107,7 @@ class game_ModelessForm(WPFWindow):
         
         names = ["Tom", "Jerry", "Kate"]
         from AGENT.PLAYER import Player
+        a = Player("Tom")
         self.main_data_grid.ItemsSource = [Player(x) for x in names]
         
 
@@ -157,7 +116,7 @@ class game_ModelessForm(WPFWindow):
         return
         obj = self.main_data_grid.SelectedItem
         if not obj:
-            self.textblock_dwg_detail.Text = ""
+            self.textblock_display_detail.Text = ""
             return
 
 
@@ -204,36 +163,6 @@ class game_ModelessForm(WPFWindow):
         
         
         pass
-
-
-
-    @ERROR_HANDLE.try_catch_error
-    def repath_dwgs_click(self, sender, args):
-        return
-
-        dwg_type_list = DB.FilteredElementCollector(doc).OfClass(DB.CADLinkType ).ToElements()
-
-        new_folder = forms.pick_folder(title = "Select a new folder to copy DWGs to")
-        if not new_folder:
-            self.debug_textbox.Text = "No Folder Selected."
-            return
-
-        if len(dwg_type_list) == 0:
-            self.debug_textbox.Text = "There is no DWG in this project."
-            
-            return
-
-
-        self.simple_event_handler.kwargs = new_folder, dwg_type_list
-        self.ext_event.Raise()
-        res = self.simple_event_handler.OUT
-        if res:
-            self.debug_textbox.Text = res
-        else:
-            self.debug_textbox.Text = "Debug Output:"
-
-
-        self.Close()
 
 
 
