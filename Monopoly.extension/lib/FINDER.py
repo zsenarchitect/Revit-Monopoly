@@ -1,9 +1,12 @@
 # use this to find revit obj by spec. or find game obj by spec
-#import logging
-# logging.basicConfig(level=logging.DEBUG,
-#                     filename="FINDER_log.txt",
-#                     filemode="w")
+import logging
 import ERROR_HANDLE
+import os
+logging.basicConfig(level=logging.INFO,
+                    filename="{}\{}_log.txt".format(ERROR_HANDLE.LOG_FOLDER,
+                                                    os.path.basename(__file__).rstrip(".py")),
+                    filemode="w")
+
 
 
 from Autodesk.Revit import DB
@@ -36,16 +39,15 @@ def get_revit_obj_by_player_character_name(character_name):
     all_gms = get_all_generic_models()
     for gm in all_gms:
   
-        if gm.Name == "PlayerModel":
-            if gm.LookupParameter("Type Name").AsString() == character_name:
-                return gm
+        if gm.Name == character_name:
+            return gm
         
-    #logging.warning("no such revit obj found")
+    logging.warning("no such revit obj found")
     
     return None
 
 @ERROR_HANDLE.try_catch_error
-def get_revit_obj_by_family_name(name):
+def get_revit_obj_by_type_name(name):
     """get the revit obj by the name
     
     Args:
@@ -58,11 +60,11 @@ def get_revit_obj_by_family_name(name):
     
     all_gms = get_all_generic_models()
     for gm in all_gms:
-        #print (gm.Name)
+        logging.info(gm.Name)
         if gm.Name == name:
             return gm
         
-    #logging.warning("no such revit obj found")
+    logging.warning("no such revit obj found")
     
     return None
 

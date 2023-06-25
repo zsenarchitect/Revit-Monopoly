@@ -1,14 +1,30 @@
+import logging
+import ERROR_HANDLE
+import os
+logging.basicConfig(level=logging.INFO,
+                    filename="{}\{}_log.txt".format(ERROR_HANDLE.LOG_FOLDER,
+                                                    os.path.basename(__file__).rstrip(".py")),
+                    filemode="w")
 
 
+
+
+import FINDER
 # foundation class for all thing in map that is not moveable.
 
 class Asset(object):
-    def __init__(self, revit_object):
+    def __init__(self, revit_object = None):
         """COnstructor for base class Asset, that is something that is not moveable.
         Args:
-            revit_object (object): the revit object
+            revit_object (optional: DB.Element): the revit object, if do not provide infomation then use class name to find revit oject
         """
+        if revit_object is None:
+            revit_object = FINDER.get_revit_obj_by_type_name(self.__class__.__name__)
+        
+        
         self.revit_object = revit_object
+        logging.info (self.__class__.__name__)
+        logging.info (self.revit_object)
 
     def hide(self, animated = False):
         """hide asset in view.

@@ -1,9 +1,11 @@
 Traceback (most recent call last):
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 21, in wrapper
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 114, in register_event_handler
-    self.ext_event = ExternalEvent.Create(self.simple_event_handler)
-Exception: Attempting to create an ExternalEvent outside of a standard API execution
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 153, in game_start_click
+    board = Board()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\BOARD.py", line 42, in __init__
+    for index in avaiable_route_indexs:
+TypeError: iteration over non-sequence of type NoneType
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

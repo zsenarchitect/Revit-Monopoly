@@ -48,7 +48,10 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def __init__(self):
+
+
         
+
 
         xaml_file_name = "game_UI_ModelessForm.xaml"
         WPFWindow.__init__(self, xaml_file_name)
@@ -61,6 +64,46 @@ class game_ModelessForm(WPFWindow):
         self.init_data_grid()
 
         self.Show()
+
+        self.register_event_handler()
+
+
+
+    @ERROR_HANDLE.try_catch_error
+    def register_event_handler(self, func_list = None):
+        """register the event handler to the player.
+        Args:
+
+            example: func_list = [player_money_animation, player_move_animation]
+
+        """
+
+        """
+        Note to self:
+        after many tri, cannot create extra event handler at this step.
+        Next idea is to create a all the ext event in UI init stage as usual. Then pass the collection to Players or Asset when make instance at game beginging.
+        
+        
+        """
+        if func_list is None:
+            from ANIMATION import player_money_animation, player_move_animation
+            func_list = [player_money_animation, player_move_animation]
+            
+        
+        from Autodesk.Revit.UI import ExternalEvent
+        from EVENT_HANDLE import SimpleEventHandler
+        
+
+
+        self.event_map = dict()
+
+        for func in func_list:
+            setattr(self, "event_handler_{}".format(func.__name__), SimpleEventHandler(func))
+            handler = getattr(self, "event_handler_{}".format(func.__name__))
+            setattr(self, "ext_event_{}".format(func.__name__), ExternalEvent.Create(handler))
+            ext_event = getattr(self, "ext_event_{}".format(func.__name__))
+
+            self.event_map[func.__name__] = (handler, ext_event)
 
     @ERROR_HANDLE.try_catch_error
     def init_data_grid(self):
@@ -75,7 +118,7 @@ class game_ModelessForm(WPFWindow):
         template_players = [TemplatePlayer(name, team, character)
                             for name, team, character in zip(names, teams, characters)]
 
-        #self.textblock_display_detail.Text = str(self.players)
+        
         self.main_data_grid.ItemsSource = template_players
 
     @ERROR_HANDLE.try_catch_error
@@ -90,7 +133,7 @@ class game_ModelessForm(WPFWindow):
     def game_start_click(self, sender, args):
         # validate the player info, make sure all field has valid input
         team_dict = dict()
-        real_players = []
+        self.real_players = []
         for template_player_info in self.main_data_grid.ItemsSource:
             if template_player_info.team_name not in team_dict:
                 new_team = Team(team_name=template_player_info.team_name)
@@ -98,16 +141,17 @@ class game_ModelessForm(WPFWindow):
 
             else: 
                 new_team = team_dict[template_player_info.team_name]
-            real_players.append(Player(new_team, template_player_info))
+            self.real_players.append(Player(new_team, template_player_info, self.event_map))
                 
-        self.main_data_grid.ItemsSource = real_players
-        return
+        self.main_data_grid.ItemsSource = self.real_players
+        #self.textblock_display_detail.Text = str(self.real_players)
+        print (self.event_map)
 
 
         # lock the file, saveas the revit file so not losing original stage.
-        players = self.players
+        players = self.real_players
         board = Board()
-        rule = Rule(max_game_round=30, max_money=3000)
+        rule = Rule(max_game_round=3, max_money=1200)
         self.game = Game( players, board, rule)
 
         # once started, the data grid is display only, cannot edit again.
@@ -126,7 +170,7 @@ class game_ModelessForm(WPFWindow):
     def close_Click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         self.Close()
-        print (str(self.players))
+        print (str(self.real_players))
 
     def mouse_down_main_panel(self, sender, args):
         # print "mouse down"

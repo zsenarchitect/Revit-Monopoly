@@ -11,6 +11,8 @@ logging.basicConfig(level=logging.DEBUG,
                     filename="{}\MAIN ERROR_log.txt".format(os.path.dirname(os.path.realpath(__file__))))
 """
 
+LOG_FOLDER = "{}\LOG".format(os.path.dirname(os.path.realpath(__file__)))
+
 def try_catch_error(func):
 
     def wrapper(*args, **kwargs):

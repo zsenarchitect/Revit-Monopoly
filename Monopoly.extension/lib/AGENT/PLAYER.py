@@ -59,16 +59,18 @@ class Player(object):
     """
 
     @ERROR_HANDLE.try_catch_error
-    def __init__(self, team, template_player):
+    def __init__(self, team, template_player, event_map):
         """This is the constructor method.
         
         Args:
             name(str): the name of player.
-            team(Team): the team_obj. Not the name of the team.
-            character(str): the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
+            template_player(TemplatePlayer): the template_player object from the datagrid with user edit
+            event_map(dict): dict of all the registered event, key = func_name, value = (handler, event)
+            
         """
         self.name = template_player.format_name
         self.team = team
+        self.event_map = event_map
 
 
 
@@ -96,13 +98,11 @@ class Player(object):
         # bankrupted: out of game. Property free to take.
 
 
-        func_list = [player_money_animation, player_move_animation]
-        self.register_event_handler(func_list)
 
 
     
     @ERROR_HANDLE.try_catch_error
-    def register_event_handler(self, func_list):
+    def NOT_IN_USE_register_event_handler(self, func_list):
         """register the event handler to the player.
         Args:
 
@@ -218,8 +218,10 @@ class Player(object):
         self.money -= abs(money)
 
         is_gain = False
-        self.event_handler_player_money_animation.kwargs = self, abs(money), is_gain
-        self.ext_event_player_money_animation.Raise()
+        
+        handler, ext_event = self.event_map["player_money_animation"]
+        handler.kwargs = self, abs(money), is_gain
+        ext_event.Raise()
 
         if isinstance(target, Player):
             target.receive_money(money)
@@ -238,8 +240,10 @@ class Player(object):
         self.money += abs(money)
 
         is_gain = True
-        self.event_handler_player_money_animation.kwargs = self, abs(money), is_gain
-        self.ext_event_player_money_animation.Raise()
+        handler, ext_event = self.event_map["player_money_animation"]
+        handler.kwargs = self, abs(money), is_gain
+        ext_event.Raise()
+
 
         
         

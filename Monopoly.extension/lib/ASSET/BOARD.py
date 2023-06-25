@@ -49,7 +49,7 @@ class Board(Asset):
     def find_all_route_index(self):
         """find all abstract mark that is part of mapin file, return the sorted list of index
         """
-        pass
+        return [0, 12]
 
 
     def update_file_position_index(self):

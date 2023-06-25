@@ -21,6 +21,10 @@ class Game:
         self.rule = rule
         self.round = 1
 
+        # change camera to view XX
+
+        
+
 
 
     def play(self):
@@ -34,7 +38,12 @@ class Game:
         """
         :return: True if the game is over
         """
-        pass
+        if self.round > self.rule.max_game_round:
+            return True
+        for player in self.players:
+            if player.money >self.rule.max_money: 
+                return True
+        return False
 
     def update_round(self):
 
@@ -42,8 +51,13 @@ class Game:
         self.update_NPC()
         self.update_UI()
 
+        self.round += 1
+
     def update_players(self):
         """iterate through  all players action"""
+
+        for player in self.players:
+            print (player.name + " is playing")
         pass
 
     def update_NPC(self):
