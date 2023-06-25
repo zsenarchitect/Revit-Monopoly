@@ -10,8 +10,6 @@ asset show and hide gradient effect
     """
 
 
-
-
 def player_money_animation(player, money, is_gain):
     """money animation on revit object. affect color, symbol, sound, gradient change.
     Args:

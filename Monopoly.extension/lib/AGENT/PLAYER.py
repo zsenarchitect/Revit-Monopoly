@@ -22,10 +22,15 @@ I think it is more flexible to update game if store atr in python.
     """
 from Autodesk.Revit import DB
 
+from Autodesk.Revit.UI import ExternalEvent
+
+
 import FINDER
 from TEAM import Team
-from ANIMATION import player_money_animation
+from ANIMATION import player_money_animation, player_move_animation
 import ERROR_HANDLE
+from EVENT_HANDLE import register_event_handler
+
 
 class Player(object):
     """handle all player object, this has a child class called NPC
@@ -65,6 +70,16 @@ class Player(object):
         # hospital: can receive money, must pay fee per round.
         # kidnapped: no money in/out, can happen anywhere.
         # bankrupted: out of game. Property free to take.
+
+
+        func_list = [player_money_animation, player_move_animation]
+        register_event_handler(self, func_list)
+
+
+    
+
+
+
 
     def __repr__(self):
         return "{}:{}:{}".format(self.name, self.team.team_name, self.character)
@@ -130,7 +145,7 @@ class Player(object):
         """return True if money is less than 0"""
         return self.money < 0
         
-
+    @ERROR_HANDLE.try_catch_error
     def pay_money_to_target(self, money, target):
         """This is the constructor method.
         target can be other players or building locations such as hospital
@@ -142,13 +157,17 @@ class Player(object):
             target(Player or BuildingLocation object): the target to pay.
         """
         self.money -= abs(money)
-        player_money_animation(self, abs(money), is_gain = False)
+
+        is_gain = False
+        self.event_handler_player_money_animation.kwargs = self, abs(money), is_gain
+        self.ext_event_player_money_animation.Raise()
 
         if isinstance(target, Player):
             target.receive_money(money)
         else:
             target.owner.receive_money(money)
 
+    @ERROR_HANDLE.try_catch_error
     def receive_money(self, money):
         """ This is the constructor method.
         update money
@@ -158,7 +177,11 @@ class Player(object):
             money(abs.int): the money to come in.
         """
         self.money += abs(money)
-        player_money_animation(self, abs(money), is_gain = True)
+
+        is_gain = True
+        self.event_handler_player_money_animation.kwargs = self, abs(money), is_gain
+        self.ext_event_player_money_animation.Raise()
+
         
         
 
