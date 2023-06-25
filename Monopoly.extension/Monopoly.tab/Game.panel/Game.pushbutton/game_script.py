@@ -31,7 +31,8 @@ except:
 __persistentengine__ = True
 
 import ERROR_HANDLE
-
+from AGENT.PLAYER import Player
+from AGENT.TEAM import Team
 
 @ERROR_HANDLE.try_catch_error
 def play(title):
@@ -93,6 +94,7 @@ class game_ModelessForm(WPFWindow):
         self.sub_text.Text = "Classic board game, in Revit!"
         self.Title = self.title_text.Text
         self.set_image_source(self.logo_img, "icon.png")
+        print (123)
         self.init_data_grid()
 
         self.Show()
@@ -101,16 +103,21 @@ class game_ModelessForm(WPFWindow):
     def init_data_grid(self):
         # this will be replaced by idenpendent dropdown menu Each cell can edit the name, team.
         # the team can be Tean A or B, or indepedent.
+        print("init_data_grid")
 
-        from AGENT.PLAYER import Player
-        from AGENT.TEAM import Team
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
+        print (names)
         teams = [Team(team_name="Solo")] * len(names)
+        print (teams)
         characters = ["Hat"] * len(names)
         self.players = [Player(name, team, character)
                         for name, team, character in zip(names, teams, characters)]
+        
+        self.textblock_display_detail.Text = str (self.players)
         self.main_data_grid.ItemsSource = self.players
+
+  
 
     @ERROR_HANDLE.try_catch_error
     def preview_selection_changed(self, sender, args):

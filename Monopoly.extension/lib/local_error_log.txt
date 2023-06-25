@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 21, in wrapper
+    out = func(*args, **kwargs)
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 91, in __init__
+    WPFWindow.__init__(self, xaml_file_name)
+  File "C:\Users\szhang\AppData\Roaming\pyRevit-Master\pyrevitlib\pyrevit\forms\__init__.py", line 152, in __init__
+    self.load_xaml(
+  File "C:\Users\szhang\AppData\Roaming\pyRevit-Master\pyrevitlib\pyrevit\forms\__init__.py", line 165, in load_xaml
+    wpf.LoadComponent(self,
+SystemError: 'Width' is an unexpected token. Expecting white space. Line 161, position 83.
+
+
+######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
+#########Not sure what to do? Msg Sen Zhang, you have dicovered a important bug and we need to fix it ASAP!!!!!########
