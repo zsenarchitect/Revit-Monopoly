@@ -33,7 +33,8 @@ __persistentengine__ = True
 import ERROR_HANDLE
 from AGENT.PLAYER import Player
 from AGENT.TEAM import Team
-
+from LOGIC import Game
+from ASSET
 
 @ERROR_HANDLE.try_catch_error
 def play(title):
@@ -129,7 +130,9 @@ class game_ModelessForm(WPFWindow):
     def game_start_click(self, sender, args):
         # lock the file, saveas the revit file so not losing original stage.
 
-        self.game = 123
+        players = self.players
+        board = 
+        self.game = Game()
 
         # validate the player info, make sure all field has valid input
 
