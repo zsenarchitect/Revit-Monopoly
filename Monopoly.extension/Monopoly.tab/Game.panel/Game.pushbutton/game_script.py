@@ -107,7 +107,8 @@ class game_ModelessForm(WPFWindow):
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
         teams = [Team(team_name="Solo")] * len(names)
-        characters = ["Hat"] * len(names)
+        sample_characters = ["Hat", "Boot", "Cheese", "Toilet"]
+        characters = sample_characters[0: len(names)]
         self.players = [Player(name, team, character)
                         for name, team, character in zip(names, teams, characters)]
         self.main_data_grid.ItemsSource = self.players
@@ -123,6 +124,8 @@ class game_ModelessForm(WPFWindow):
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
         # lock the file, saveas the revit file so not losing original stage.
+
+        self.game = 123
 
         # validate the player info, make sure all field has valid input
 
