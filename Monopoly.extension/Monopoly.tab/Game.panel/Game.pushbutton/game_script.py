@@ -31,7 +31,7 @@ except:
 __persistentengine__ = True
 
 import ERROR_HANDLE
-from AGENT.PLAYER import Player
+from AGENT.PLAYER import Player, TemplatePlayer
 from AGENT.TEAM import Team
 from LOGIC import Game
 from ASSET.BOARD import Board
@@ -70,13 +70,13 @@ class game_ModelessForm(WPFWindow):
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
  
         teams = [Team(team_name="Solo")] * len(names)
-        sample_characters = ["Hat", "Boot", "Cheese", "Toilet"]
+        sample_characters = ["Hat", "Boot", "Cheese", "Duck"]
         characters = sample_characters[0: len(names)]
-        self.players = [Player(name, team, character)
-                        for name, team, character in zip(names, teams, characters)]
+        template_players = [TemplatePlayer(name, team, character)
+                            for name, team, character in zip(names, teams, characters)]
 
-        self.textblock_display_detail.Text = str(self.players)
-        self.main_data_grid.ItemsSource = self.players
+        #self.textblock_display_detail.Text = str(self.players)
+        self.main_data_grid.ItemsSource = template_players
 
     @ERROR_HANDLE.try_catch_error
     def preview_selection_changed(self, sender, args):
@@ -89,6 +89,19 @@ class game_ModelessForm(WPFWindow):
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
         # validate the player info, make sure all field has valid input
+        team_dict = dict()
+        real_players = []
+        for template_player_info in self.main_data_grid.ItemsSource:
+            if template_player_info.team_name not in team_dict:
+                new_team = Team(team_name=template_player_info.team_name)
+                team_dict[template_player_info.team_name] = new_team
+
+            else: 
+                new_team = team_dict[template_player_info.team_name]
+            real_players.append(Player(new_team, template_player_info))
+                
+        self.main_data_grid.ItemsSource = real_players
+        return
 
 
         # lock the file, saveas the revit file so not losing original stage.
@@ -113,6 +126,7 @@ class game_ModelessForm(WPFWindow):
     def close_Click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         self.Close()
+        print (str(self.players))
 
     def mouse_down_main_panel(self, sender, args):
         # print "mouse down"

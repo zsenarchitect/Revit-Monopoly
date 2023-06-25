@@ -7,8 +7,6 @@ from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
 from Autodesk.Revit.Exceptions import InvalidOperationException
 import traceback
 
-import ERROR_HANDLE
-
 
 # Create a subclass of IExternalEventHandler
 class SimpleEventHandler(IExternalEventHandler):
@@ -40,15 +38,3 @@ class SimpleEventHandler(IExternalEventHandler):
     def GetName(self):
         return "simple function executed by an IExternalEventHandler in a Form"
     
-@ERROR_HANDLE.try_catch_error
-def register_event_handler(instance, func_list):
-    """register the event handler to the player.
-    Args:
-
-        example: func_list = [player_money_animation, player_move_animation]
-
-    """
-    for func in func_list:
-        setattr(instance, "event_handler_{}".format(func.__name__), SimpleEventHandler(func))
-        handler = getattr(instance, "event_handler_{}".format(func.__name__))
-        setattr(instance, "ext_event_{}".format(func.__name__), ExternalEvent.Create(handler))

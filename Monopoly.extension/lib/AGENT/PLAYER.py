@@ -22,16 +22,36 @@ I think it is more flexible to update game if store atr in python.
     """
 from Autodesk.Revit import DB
 
-from Autodesk.Revit.UI import ExternalEvent
+
 
 
 import FINDER
 from TEAM import Team
 from ANIMATION import player_money_animation, player_move_animation
 import ERROR_HANDLE
-from EVENT_HANDLE import register_event_handler
+from EVENT_HANDLE import SimpleEventHandler
 
+class TemplatePlayer(object):
+    """this classe is only used to help fill the pre-game data form."""
 
+    @ERROR_HANDLE.try_catch_error
+    def __init__(self, name, team, character):
+
+        self.format_name = name
+        self.team_name = team.team_name
+        self.character = character
+        self.money = 1000
+        self.format_money = "${}".format(self.money)
+        self.properties = []
+        self.format_properties = len(self.properties)
+        
+        self.luck = 50
+        self.format_luck = "{}%".format(self.luck)
+        self.status = "Normal"
+        self.rank = 1
+        self.format_rank = "NO.{}".format(self.rank)
+
+        
 class Player(object):
     """handle all player object, this has a child class called NPC
 
@@ -39,7 +59,7 @@ class Player(object):
     """
 
     @ERROR_HANDLE.try_catch_error
-    def __init__(self, name, team, character):
+    def __init__(self, team, template_player):
         """This is the constructor method.
         
         Args:
@@ -47,25 +67,29 @@ class Player(object):
             team(Team): the team_obj. Not the name of the team.
             character(str): the name of the character such as Cat, Hat, Bat. This is for FINDER to find the family in revit.
         """
-        self.name = name
+        self.name = template_player.format_name
         self.team = team
+
+
+
         
 
         # this is the name of the character: Cat, Hat, Bat, etc..
-        self.character = character
-        self.revit_obj = FINDER.get_revit_obj_by_name(character)
+        self.character = template_player.character
+        self.revit_obj = FINDER.get_revit_obj_by_player_character_name(template_player.character)
 
-        self.money = 1000
-        self.properties = []
+        self.money = template_player.money
+        self.properties = template_player.properties
         self.is_NPC = False  # pylint: disable=C0103 # disable snake naming style
-        self.luck = 50
+        self.luck = template_player.luck
 
         self.position_index = -1  # -1 means have not start.
         self.velocity = 1  # this could be +4 or -3 to record speed and drecition on track
 
         self.remaining_hold = 0
-        self.status = "Normal"
-        self.rank = 1
+        self.status = template_player.status
+        self.rank = template_player.rank
+
         # jail: no money in/out, can use money to get out early, display as grey
         # hospital: can receive money, must pay fee per round.
         # kidnapped: no money in/out, can happen anywhere.
@@ -73,20 +97,55 @@ class Player(object):
 
 
         func_list = [player_money_animation, player_move_animation]
-        register_event_handler(self, func_list)
+        self.register_event_handler(func_list)
 
 
     
+    @ERROR_HANDLE.try_catch_error
+    def register_event_handler(self, func_list):
+        """register the event handler to the player.
+        Args:
 
+            example: func_list = [player_money_animation, player_move_animation]
+
+        """
+
+        """
+        Note to self:
+        after many tri, cannot create extra event handler at this step.
+        Next idea is to create a all the ext event in UI init stage as usual. Then pass the collection to Players or Asset when make instance at game beginging.
+        
+        
+        """
+        
+        
+        
+        from Autodesk.Revit.UI import ExternalEvent
+        self.simple_event_handler = SimpleEventHandler(player_money_animation)
+        self.ext_event = ExternalEvent.Create(self.simple_event_handler)
+
+        return
+
+
+        for func in func_list:
+            setattr(self, "event_handler_{}".format(func.__name__), SimpleEventHandler(func))
+            handler = getattr(self, "event_handler_{}".format(func.__name__))
+
+            # ext_event_attr = getattr(self, "ext_event_{}".format(func.__name__))
+            # ext_event_attr = ExternalEvent.Create(handler)
+            # continue
+            setattr(self, "ext_event_{}".format(func.__name__), ExternalEvent.Create(handler))
 
 
 
     def __repr__(self):
         return "{}:{}:{}".format(self.name, self.team.team_name, self.character)
 
+    
     @property
     def format_name(self):
         return self.name
+   
 
     @property
     def format_money(self):

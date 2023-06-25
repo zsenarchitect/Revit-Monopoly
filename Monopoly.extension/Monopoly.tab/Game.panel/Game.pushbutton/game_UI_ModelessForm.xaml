@@ -150,11 +150,12 @@
                     <DataGrid x:Name="main_data_grid" 
                           AutoGenerateColumns="False" 
                           MaxHeight="400" Cursor="Cross"  
-                          MaxWidth="450"
+                          MaxWidth="600"
                           SelectedCellsChanged="preview_selection_changed"
                           Margin="0,10,0,0"
                           Grid.ColumnSpan="2">
                         <DataGrid.Columns>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Character" Width="*"  Binding="{Binding character}"/>
                             <DataGridTextColumn  IsReadOnly="False" Header="Name" Width="*" Binding="{Binding format_name}"/>
                             <DataGridTextColumn  IsReadOnly="False" Header="Team" Width="*"  Binding="{Binding team_name}"/>
                             <DataGridTextColumn  IsReadOnly="True" Header="Luck" Width="*"  Binding="{Binding format_luck}"/>
@@ -174,7 +175,7 @@
 
                 </Grid>
 
-
+                <Button Content="Start Game" Click="game_start_click" HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0,5,0,5"/>
                 <Separator/>
 
                 <TextBlock x:Name="debug_textbox" Text="debug text" Foreground="#FFCBCBCB" />
