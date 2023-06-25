@@ -14,6 +14,9 @@ class Board(Asset):
     For furture, can use design option as map control, so in one revit file there can be many level to play from."""
     
     def __init__(self):
+        """this is a contructor of board
+        Args:
+        not args"""
         
         birth_place = BUILDING.BIRTH_PLACE.BirthPlace()
         gate = BUILDING.GATE.Gate()

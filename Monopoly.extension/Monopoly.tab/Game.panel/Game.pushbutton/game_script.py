@@ -34,60 +34,21 @@ import ERROR_HANDLE
 from AGENT.PLAYER import Player
 from AGENT.TEAM import Team
 from LOGIC import Game
-from ASSET
-
-@ERROR_HANDLE.try_catch_error
-def play(title):
-
-    t = DB.Transaction(doc, title)
-    t.Start()
-    pass
-    t.Commit()
+from ASSET.BOARD import Board
+from RULE import Rule
 
 
-# Create a subclass of IExternalEventHandler
-class SimpleEventHandler(IExternalEventHandler):
-    """
-    Simple IExternalEventHandler sample
-    """
 
-    # __init__ is used to make function from outside of the class to be executed by the handler. \
-    # Instructions could be simply written under Execute method only
-    def __init__(self, do_this):
-        self.do_this = do_this
-        self.kwargs = None
-        self.OUT = None
 
-    # Execute method run in Revit API environment.
 
-    def Execute(self,  uiapp):
-        try:
-            try:
-                # print "try to do event handler func"
-                self.OUT = self.do_this(*self.kwargs)
-            except:
-                print("failed")
-                print(traceback.format_exc())
-        except InvalidOperationException:
-            # If you don't catch this exeption Revit may crash.
-            print("InvalidOperationException catched")
-
-    def GetName(self):
-        return "simple function executed by an IExternalEventHandler in a Form"
 
 
 # A simple WPF form used to call the ExternalEvent
 class game_ModelessForm(WPFWindow):
 
-    def pre_actions(self):
-        # if active doc is not "Monopoly Game Board" then open the game board fiel.
-
-        self.simple_event_handler = SimpleEventHandler(play)
-        self.ext_event = ExternalEvent.Create(self.simple_event_handler)
-
     @ERROR_HANDLE.try_catch_error
     def __init__(self):
-        self.pre_actions()
+        
 
         xaml_file_name = "game_UI_ModelessForm.xaml"
         WPFWindow.__init__(self, xaml_file_name)
@@ -128,43 +89,23 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
-        # lock the file, saveas the revit file so not losing original stage.
-
-        players = self.players
-        board = 
-        self.game = Game()
-
         # validate the player info, make sure all field has valid input
 
+
+        # lock the file, saveas the revit file so not losing original stage.
+        players = self.players
+        board = Board()
+        rule = Rule(max_game_round=30, max_money=3000)
+        self.game = Game( players, board, rule)
+
         # once started, the data grid is display only, cannot edit again.
+        # all game play handle in there.
+        result = self.game.play()
+        
 
-        # set game cycle as 1. Begin game loop.
 
-        pass
+        
 
-    @ERROR_HANDLE.try_catch_error
-    def main_loop(self):
-
-        pass
-
-        # loop thru all player action. Each call GAME_LOGIC.
-
-        # increament the game cycle
-
-        # update all UI window display
-
-        # check if game is over by call is_game_over
-
-    def is_game_over(self):
-        # check if only one players/teams have positive asset.
-        # call finish
-
-        # check if manual kill the game
-        # call finish
-
-        # all seems ok, Then call main_loop again.
-
-        pass
 
     @ERROR_HANDLE.try_catch_error
     def close_Click(self, sender, e):
