@@ -57,7 +57,7 @@ class game_ModelessForm(WPFWindow):
         self.sub_text.Text = "Classic board game, in Revit!"
         self.Title = self.title_text.Text
         self.set_image_source(self.logo_img, "icon.png")
-        print(123)
+ 
         self.init_data_grid()
 
         self.Show()
@@ -66,10 +66,9 @@ class game_ModelessForm(WPFWindow):
     def init_data_grid(self):
         # this will be replaced by idenpendent dropdown menu Each cell can edit the name, team.
         # the team can be Tean A or B, or indepedent.
-        print("init_data_grid")
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
-        print(names)
+ 
         teams = [Team(team_name="Solo")] * len(names)
         sample_characters = ["Hat", "Boot", "Cheese", "Toilet"]
         characters = sample_characters[0: len(names)]
@@ -101,6 +100,9 @@ class game_ModelessForm(WPFWindow):
         # once started, the data grid is display only, cannot edit again.
         # all game play handle in there.
         result = self.game.play()
+
+
+        print (result)
         
 
 
