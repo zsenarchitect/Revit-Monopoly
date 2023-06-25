@@ -24,8 +24,8 @@ from Autodesk.Revit import DB
 
 import FINDER
 from TEAM import Team
-from ..ANIMATION import player_money_animation
-
+from ANIMATION import player_money_animation
+import ERROR_HANDLE
 
 class Player(object):
     """handle all player object, this has a child class called NPC
@@ -33,6 +33,7 @@ class Player(object):
     attrs: xxxxxxxxxxxxxxxxxxxxxxx
     """
 
+    @ERROR_HANDLE.try_catch_error
     def __init__(self, name, team, character):
         """This is the constructor method.
         
@@ -47,7 +48,7 @@ class Player(object):
 
         # this is the name of the character: Cat, Hat, Bat, etc..
         self.character = character
-        self.revit_obj = FINDER.get_character_object(character)
+        self.revit_obj = FINDER.get_revit_obj_by_name(character)
 
         self.money = 1000
         self.properties = []
@@ -58,20 +59,44 @@ class Player(object):
         self.velocity = 1  # this could be +4 or -3 to record speed and drecition on track
 
         self.remaining_hold = 0
-        self.status = "normal"
+        self.status = "Normal"
+        self.rank = 1
         # jail: no money in/out, can use money to get out early, display as grey
         # hospital: can receive money, must pay fee per round.
         # kidnapped: no money in/out, can happen anywhere.
         # bankrupted: out of game. Property free to take.
 
+    def __repr__(self):
+        return "{}:{}:{}".format(self.name, self.team.team_name, self.character)
+
+    @property
+    def format_name(self):
+        return self.name
+
+    @property
+    def format_money(self):
+        return "${}".format(self.money)
+    
+    @property
+    def format_properties(self):
+        return len(self.properties)
+    
+    @property
+    def format_luck(self):
+        return "{}%".format(self.luck)
+    
 
     @property
     def team_name(self):
         return self.team.team_name
     
-    @property
+    
     def is_same_team(self, other_player):
         """check if the two players are in the same team.
+        Args:
+            other_player(Player): the other player to check.
+        Returns:
+            bool: True if they are in the same team or either one is in solo team
         """
         if self.team.is_solo or other_player.team.is_solo:
             return False
@@ -84,19 +109,27 @@ class Player(object):
     @property
     def location(self):
         """this is the XYZ location"""
-        marker = FINDER.get_marker(self.position_index)
-        return marker.location
+        """
+        marker = FINDER.get_abstract_marker_by_index(self.position_index)
+        if not marker:
+            return None
+        
+        """
+        if self.revit_obj is None:
+            return None
+        return self.revit_obj.Location.Point
 
     @property
-    def rank(self):
+    def format_rank(self):
 
-        # figure out the rank in all player
-        return 1
+        """figure out the rank in all player"""
+        return "NO.{}".format(self.rank)
 
     @property
     def is_bankrupted(self):
-        # return True if money is 0. and properties did not sell.
-        pass
+        """return True if money is less than 0"""
+        return self.money < 0
+        
 
     def pay_money_to_target(self, money, target):
         """This is the constructor method.

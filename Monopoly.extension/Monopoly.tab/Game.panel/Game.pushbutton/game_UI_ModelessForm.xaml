@@ -149,26 +149,27 @@
                     </Grid.RowDefinitions>
                     <DataGrid x:Name="main_data_grid" 
                           AutoGenerateColumns="False" 
-                          MaxHeight="600" Cursor="Cross"  
-                          MaxWidth="900"
+                          MaxHeight="700" Cursor="Cross"  
+                          MaxWidth="600"
                           SelectedCellsChanged="preview_selection_changed"
                           Margin="0,10,0,0"
                           Grid.ColumnSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn  IsReadOnly="False" Header="Name"  Binding="{Binding name}"/>
-                            <DataGridTextColumn  IsReadOnly="False" Header="Team"  Binding="{Binding team_name}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Luck"  Binding="{Binding luck}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Status"  Binding="{Binding status}"/>
+                            <DataGridTextColumn  IsReadOnly="False" Header="Name" Width="*" Binding="{Binding format_name}"/>
+                            <DataGridTextColumn  IsReadOnly="False" Header="Team" Width="*"  Binding="{Binding team_name}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Luck" Width="*"  Binding="{Binding format_luck}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Status" Width="*"   Binding="{Binding status}"/>
 
 
-                            <DataGridTextColumn  IsReadOnly="True" Header="Money"  Binding="{Binding money}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Asset"  Binding="{Binding asset}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Ranking"  Binding="{Binding rank}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Money" Width="*"   Binding="{Binding format_money}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Property" Width="*"  Binding="{Binding format_properties}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Ranking" Width="*"   Binding="{Binding format_rank}"/>
 
 
                           
                         </DataGrid.Columns>
                     </DataGrid>
+                   
                     <TextBlock x:Name="textblock_display_detail" Text="text display:" Grid.Column="0" Grid.Row="1"/>
 
                 </Grid>
@@ -177,7 +178,7 @@
                 <Separator/>
 
                 <TextBlock x:Name="debug_textbox" Text="debug text" Foreground="#FFCBCBCB" />
-                <Button Content="Close DWG Manager" Click="close_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"  Margin="0,5,0,5"/>
+                <Button Content="Close Game" Click="close_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"  Margin="0,5,0,5"/>
 
 
             </StackPanel>

@@ -50,7 +50,9 @@ class Asset(object):
         
         """
 
-        pass
+        return self.revit_object.Location.Point
+    
+    
 
     def is_occupied(self):
         """return True if there is a player or NPC on top."""

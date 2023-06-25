@@ -1,7 +1,10 @@
 """handle all team action, solo player are also a team."""
 from Autodesk.Revit import DB
+import ERROR_HANDLE
+
 
 class Team(object):
+    @ERROR_HANDLE.try_catch_error
     def __init__(self, team_name):
          """This is the constructor method.
         
@@ -12,6 +15,11 @@ class Team(object):
          self.team_name = team_name
          self.team_members = []
          self.team_color = DB.Color(100, 200, 200)
+
+
+    def __str__(self):
+        return "{}".format(self.team_name)
+    
 
     @property
     def is_solo(self):
