@@ -7,3 +7,4 @@ from ASSET import Asset
 class AbstractMarker(Asset):
 
     pass
+

@@ -57,9 +57,10 @@ class game_ModelessForm(WPFWindow):
         WPFWindow.__init__(self, xaml_file_name)
 
         self.title_text.Text = "Monopoly"
-        self.sub_text.Text = "Classic board game, in Revit!"
+        self.sub_text.Text = "Classic board game, in Revit!\nYou can edit Player Name and Team Name below.\nUse 'Solo' to be independent."
         self.Title = self.title_text.Text
         self.set_image_source(self.logo_img, "icon.png")
+        self.set_image_source(self.main_logo, "title.png")
  
         self.init_data_grid()
 
@@ -113,7 +114,7 @@ class game_ModelessForm(WPFWindow):
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
  
         teams = [Team(team_name="Solo")] * len(names)
-        sample_characters = ["Hat", "Boot", "Cheese", "Duck"]
+        sample_characters = [ "Boot", "Cheese", "Duck","Hat"]
         characters = sample_characters[0: len(names)]
         template_players = [TemplatePlayer(name, team, character)
                             for name, team, character in zip(names, teams, characters)]
@@ -131,36 +132,38 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
-        # validate the player info, make sure all field has valid input
-        team_dict = dict()
-        self.real_players = []
-        for template_player_info in self.main_data_grid.ItemsSource:
-            if template_player_info.team_name not in team_dict:
-                new_team = Team(team_name=template_player_info.team_name)
-                team_dict[template_player_info.team_name] = new_team
+        if not hasattr(self, "game"):
+            # validate the player info, make sure all field has valid input
+            team_dict = dict()
+            self.real_players = []
+            for template_player_info in self.main_data_grid.ItemsSource:
+                if template_player_info.team_name not in team_dict:
+                    new_team = Team(team_name=template_player_info.team_name)
+                    team_dict[template_player_info.team_name] = new_team
 
-            else: 
-                new_team = team_dict[template_player_info.team_name]
-            self.real_players.append(Player(new_team, template_player_info, self.event_map))
-                
-        self.main_data_grid.ItemsSource = self.real_players
-        #self.textblock_display_detail.Text = str(self.real_players)
-        print (self.event_map)
+                else: 
+                    new_team = team_dict[template_player_info.team_name]
+                self.real_players.append(Player(new_team, template_player_info, self.event_map))
+                    
+            self.main_data_grid.ItemsSource = self.real_players
+            #self.textblock_display_detail.Text = str(self.real_players)
+            #print (self.event_map)
 
 
-        # lock the file, saveas the revit file so not losing original stage.
-        players = self.real_players
-        board = Board()
-        rule = Rule(max_game_round=3, max_money=1200)
-        self.game = Game( players, board, rule)
+            # lock the file, saveas the revit file so not losing original stage.
+            players = self.real_players
+            board = Board()
+            rule = Rule(max_game_round=40, max_money=1200)
+            self.game = Game( players, board, rule)
+
+            self.bt_start_game.Content = "Next Player"
 
         # once started, the data grid is display only, cannot edit again.
         # all game play handle in there.
         result = self.game.play()
 
 
-        print (result)
-        
+        self.textblock_display_detail.Text = str(result)
 
 
         
@@ -170,7 +173,7 @@ class game_ModelessForm(WPFWindow):
     def close_Click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         self.Close()
-        print (str(self.real_players))
+        #print (str(self.real_players))
 
     def mouse_down_main_panel(self, sender, args):
         # print "mouse down"

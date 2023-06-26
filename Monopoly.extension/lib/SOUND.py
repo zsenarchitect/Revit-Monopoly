@@ -1,13 +1,28 @@
 """handle all sound"""
-
+import os
+from System.Media import SoundPlayer
 
 def play_sound(sound_file):
     """play sound"""
-    pass
+
+    root_folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sound_file_path = "{}\\bin\\audio\\{}".format(root_folder, sound_file)
+
+    #print "sound_file_path = " + sound_file_path
+
+
+    #print "final path = " + path
+
+    
+    sp = SoundPlayer()
+    sp.SoundLocation = sound_file_path
+    sp.Play()
+
+
 
 def player_moving():
     """play sound when player move"""
-    pass
+    play_sound("sound effect_mario jump.wav")
 
 def player_bankrupted():
     """play sound when player is bankrupted"""
@@ -45,11 +60,11 @@ def hospital_leave():
 
 def roll_dice():
     """play sound when player roll dice"""
-    pass
+    play_sound("sound effect_dice.wav")
 
 def game_over():
     """play sound when game over"""
-    pass
+    play_sound("sound effect_game over.wav")
 
 
 def read_card_description():

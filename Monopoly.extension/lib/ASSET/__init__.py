@@ -10,7 +10,22 @@ logging.basicConfig(level=logging.INFO,
 
 
 import FINDER
+
+
+doc = __revit__.ActiveUIDocument.Document
+
+
+
+
+
+
+
+
 # foundation class for all thing in map that is not moveable.
+
+
+
+
 
 class Asset(object):
     def __init__(self, revit_object = None):
@@ -25,6 +40,8 @@ class Asset(object):
         self.revit_object = revit_object
         logging.info (self.__class__.__name__)
         logging.info (self.revit_object)
+        #print (self.__class__.__name__)
+        #print (self.revit_object)
 
     def hide(self, animated = False):
         """hide asset in view.
@@ -58,7 +75,19 @@ class Asset(object):
         """return the index of the position on map.
         # this index is uesed for other to find it
         """
-        pass
+        return int(self.revit_object.LookupParameter("Mark").AsString())
+    
+    def update_position_index(self, index):
+        """update the index of the position on map.
+        # this index is uesed for other to find it
+        """
+        #print ("-------------changing mark" + str(index))
+        id = self.revit_object.Id
+        doc.GetElement(id).LookupParameter("Mark").Set(index)
+        self.revit_object.LookupParameter("Mark").Set(index)
+
+        #print (self.revit_object.LookupParameter("Mark").AsInteger())
+        #print (self.revit_object)
 
     @property
     def location(self):

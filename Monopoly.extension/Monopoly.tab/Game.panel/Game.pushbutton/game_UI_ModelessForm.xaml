@@ -18,8 +18,8 @@
         MouseLeftButtonDown="mouse_down_main_panel"
         Cursor="ScrollAll">
     <Window.Resources>
-        <SolidColorBrush x:Key="AboutWindowTextColor" Color="#FFDAE8FD"/>
-        <SolidColorBrush x:Key="AboutWindowHightlightColor" Color="#f39c12"/>
+        <SolidColorBrush x:Key="AboutWindowTextColor" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="AboutWindowHightlightColor" Color="#FFF35812"/>
         <SolidColorBrush x:Key="AboutWindowMainPanelColor" Color="#FF464646"/>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground"
@@ -96,7 +96,7 @@
             CornerRadius="15"
             Margin="20,20,20,20">
         <Border.Background>
-            <SolidColorBrush Color="#FF464646" Opacity="1"/>
+            <SolidColorBrush Color="#FFBF9632" Opacity="1"/>
         </Border.Background>
         <Border.Effect>
 
@@ -116,20 +116,22 @@
 
             <StackPanel Margin="0, 20, 0, 0"
                         Grid.Column ="1">
-                <TextBlock x:Name = "title_text" Text="AAAAAAAAAAAAAAAAAAAAA" Foreground="#FFFFE59C" FontSize="20" TextWrapping="Wrap" FontWeight="Bold" />
+                <Image x:Name="main_logo" HorizontalAlignment="Center" Height="180"/>
+                <TextBlock x:Name = "title_text" Text="AAAAAAAAAAAAAAAAAAAAA" Foreground="#FFFFF1CA" FontSize="20" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name = "sub_text" 
+                               Text="aaaaaaaaaaaaaaaaaa" 
+                               
+                               TextWrapping="Wrap"  
+                               MaxWidth="500" 
+                               HorizontalAlignment="Center"
+                               />
                 <Grid  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name = "sub_text" 
-                               Text="aaaaaaaaaaaaaaaaaa" 
-                               Foreground="#FFCBCBCB" 
-                               TextWrapping="Wrap"  
-                               MaxWidth="500" 
-                               HorizontalAlignment="Left"
-                               Grid.Column="0"/>
+                  
                     
                     
                 </Grid>
@@ -175,7 +177,9 @@
 
                 </Grid>
 
-                <Button Content="Start Game" Click="game_start_click" HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0,5,0,5"/>
+                <Button Content="Start Game" Click="game_start_click" x:Name="bt_start_game"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0,5,0,1" BorderBrush="#FFF40101" BorderThickness="1,1,1,1"/>
+
                 <Separator/>
 
                 <TextBlock x:Name="debug_textbox" Text="debug text" Foreground="#FFCBCBCB" />

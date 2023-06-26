@@ -23,7 +23,7 @@ I think it is more flexible to update game if store atr in python.
 from Autodesk.Revit import DB
 
 
-
+import time
 
 import FINDER
 from TEAM import Team
@@ -79,6 +79,11 @@ class Player(object):
         # this is the name of the character: Cat, Hat, Bat, etc..
         self.character = template_player.character
         self.revit_obj = FINDER.get_revit_obj_by_player_character_name(template_player.character)
+        #print (999999999999999999999999999999999999)
+        #print (self.revit_obj.Id)
+        self.Id = self.revit_obj.Id
+
+
 
         self.money = template_player.money
         self.properties = template_player.properties
@@ -121,6 +126,7 @@ class Player(object):
         
         
         from Autodesk.Revit.UI import ExternalEvent
+
         self.simple_event_handler = SimpleEventHandler(player_money_animation)
         self.ext_event = ExternalEvent.Create(self.simple_event_handler)
 
@@ -273,10 +279,22 @@ class Player(object):
         # this will call animation.
 
         Args:
-            target(Asset object): the target to move.
+            target(Asset):  target object to move into. .
         
         """
-        pass
+        # print ("##############")
+        # print (self.revit_obj)
+        handler, ext_event = self.event_map["player_move_animation"]
+        handler.kwargs = self, target
+        ext_event.Raise()
+        self.position_index = target.position_index
+
+        # for i in range(10):
+        #     time.sleep(0.1)
+        #     if handler.OUT:
+        #         break
+   
+        return True
 
     def change_team(self, new_team):
         """change the team of player.

@@ -1,9 +1,17 @@
+import logging
+import ERROR_HANDLE
+import os
+logging.basicConfig(level=logging.INFO,
+                    filename="{}\{}_log.txt".format(ERROR_HANDLE.LOG_FOLDER,
+                                                    os.path.basename(__file__).rstrip(".py")),
+                    filemode="w")
 
 import BUILDING
 
 
 
 from ASSET import Asset
+from ABSTRACT_MARKER import AbstractMarker
 import FINDER
 
 class Board(Asset):
@@ -22,9 +30,9 @@ class Board(Asset):
         gate = BUILDING.GATE.Gate()
         hospital = BUILDING.HOSPITAL.Hospital() 
         jail = BUILDING.JAIL.Jail()
-        train_station_A = BUILDING.TRAIN_STATION.TrainStation("A")
-        train_station_B = BUILDING.TRAIN_STATION.TrainStation("B")
-        store = BUILDING.STORE.Store()
+        #train_station_A = BUILDING.TRAIN_STATION.TrainStation("A")
+        #train_station_B = BUILDING.TRAIN_STATION.TrainStation("B")
+        #store = BUILDING.STORE.Store()
 
 
         # dict for key position index
@@ -32,28 +40,35 @@ class Board(Asset):
             -1: birth_place,
             0: gate,
             -10: hospital,
-            -100: jail,
-            -1000: train_station_A,
-            -1001: train_station_B,
-            -2000: store
+            -11: jail#,
+            #-12: train_station_A,
+            #-13: train_station_B,
+            #-14: store
         }
 
-        avaiable_route_indexs = self.find_all_route_index()
-        for index in avaiable_route_indexs:
-            self.map_key[index] = FINDER.get_abstract_marker_by_index(index)
+        abstract_marker_instances = [x for x in FINDER.get_all_generic_models() if x.Symbol.Family.Name == "AbstractMarker"]
+        for abstract_marker_instance in abstract_marker_instances:
+            abstract_marker = AbstractMarker(abstract_marker_instance)
+            self.map_key[abstract_marker.position_index] = abstract_marker
+          
+        #print (self.map_key)
+        #self.update_file_position_index()
 
-        self.update_file_position_index()
 
 
 
-    def find_all_route_index(self):
-        """find all abstract mark that is part of mapin file, return the sorted list of index
-        """
-        return [0, 12]
 
 
     def update_file_position_index(self):
         """for each item map, make sure the revit object parameter for position index is matching the map_key dict"""
-        pass
+        
+        
+        for index, asset in self.map_key.items():
+            print (index)
+            logging.info("updating position index for {} to {}".format(asset.revit_object, index))
+            asset.update_position_index(index)
 
-
+    @property
+    def max_marker_index(self):
+        """return the max index of marker"""
+        return max(self.map_key.keys())

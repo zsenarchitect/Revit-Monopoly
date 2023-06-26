@@ -1,11 +1,13 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 153, in game_start_click
-    board = Board()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\BOARD.py", line 42, in __init__
-    for index in avaiable_route_indexs:
-TypeError: iteration over non-sequence of type NoneType
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 163, in game_start_click
+    result = self.game.play()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 40, in play
+    return self.post_game_summary()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 109, in post_game_summary
+    return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}\nNew Position:{}".format(self.current_player_index, self.players[self.current_player_index].name, self.dice.last_roll, self.players[self.current_player_index].position_index)
+AttributeError: 'Dice' object has no attribute 'last_roll'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

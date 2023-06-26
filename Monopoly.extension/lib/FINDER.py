@@ -95,4 +95,13 @@ def get_abstract_marker_by_index(index):
         AbstractMarker: the abstract marker
     
     """
-    pass
+    all_gms = get_all_generic_models()
+    for gm in all_gms:
+        if not gm.LookupParameter("Mark"):
+            print (gm.Id)
+            continue
+        if gm.LookupParameter("Mark").AsString() == str(index):
+            print ("find ")
+            return gm
+
+
