@@ -35,11 +35,11 @@ def player_rotate_animation(player, angle):
     pass
 
 
-def player_move_animation_single(player_revit_obj, target_asset):
+def player_move_animation_single(player, target_asset):
     SOUND.player_moving()
 
 
-    initial_pt = player_revit_obj.Location.Point
+    initial_pt = player.revit_obj.Location.Point
     final_pt = target_asset.revit_object.Location.Point
 
     try:
@@ -58,7 +58,7 @@ def player_move_animation_single(player_revit_obj, target_asset):
         #DB.ElementTransformUtils.MoveElement(doc, player.Id,vec)
 
         translation = DB.Transform.CreateTranslation(vec)
-        DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player_revit_obj , translation, True)
+        DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player.revit_obj , translation, True)
         
 
         t.Commit()
@@ -74,7 +74,7 @@ def player_move_animation_single(player_revit_obj, target_asset):
 
         t = DB.Transaction(doc,"frame update" )
         t.Start()
-        player_revit_obj.Location.Point = temp_location
+        player.revit_obj.Location.Point = temp_location
         # CLOUD.change_sky(wind)
         # MONEY_GATE.spin_gate()
         t.Commit()
@@ -95,29 +95,32 @@ def player_move_animation_single(player_revit_obj, target_asset):
 def player_move_animation(player, target_asset):
     """player move animation.
     Args:
-        player_revit_obj(revit object): revit object
+        player(Player): player object
         target_asset(Asset ): targt object
     """
-
 
     # also call sound
     #target = FINDER.get_abstract_marker_by_index(position_index)
     current_position = player.position_index
-    print (current_position)
-    print (target_asset.position_index)
+    #print ("\n\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    #print ("current player position at : {}".format(current_position))
+   
+    #print ("the target position index is {}".format(target_asset.position_index))
     while True:
         
         next_position = current_position
         next_position = next_position % player.board.max_marker_index
-        print (next_position)
+       
+        #print ("the next local position index is {}".format(next_position))
+        local_target_asset = player.board.map_key[next_position]
+        player_move_animation_single(player, local_target_asset)
+        
+
         if next_position == target_asset.position_index:
             break
-        local_target_asset = player.board.map_key[next_position]
-        player_move_animation_single(player.revit_obj, local_target_asset)
-
-
-
         current_position += 1
+
+    player.position_index = target_asset.position_index
 
 
 def gradually_appear(element, time_interval):

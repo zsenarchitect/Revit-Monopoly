@@ -95,6 +95,7 @@ class Game:
                 break
         """
         target = self.board.map_key[new_position]
+        #print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
         player.move(target)
 
     def update_NPC(self):

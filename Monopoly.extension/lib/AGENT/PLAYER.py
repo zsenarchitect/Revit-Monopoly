@@ -287,7 +287,7 @@ class Player(object):
         handler, ext_event = self.event_map["player_move_animation"]
         handler.kwargs = self, target
         ext_event.Raise()
-        self.position_index = target.position_index
+        #self.position_index = target.position_index
 
         # for i in range(10):
         #     time.sleep(0.1)
