@@ -19,7 +19,7 @@ class Dice(Asset):
         SOUND.roll_dice()
         
         while True:
-            num =  random.randint(1, 12) 
+            num =  random.randint(1, 30) 
             """
             num = int (num * ((luck + 50)/100) )
             if luck > 70 and num <= 1:

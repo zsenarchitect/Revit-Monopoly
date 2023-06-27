@@ -131,6 +131,9 @@ def speak(text, language='en', accent='com'):
 def run_exe():
     # script parrent folder
     lib_folder = os.path.dirname(os.path.abspath(__file__))
-    bin_folder = os.path.dirname(lib_folder)
-    exe_file_path = r"{}\EXE\Monopoly_Speaker\Monopoly_Speaker.exe - Shortcut".format(bin_folder)   
+    # print lib_folder
+    extension_folder = os.path.dirname(lib_folder)
+    # print extension_folder
+    exe_file_path = r"{}\bin\EXE\Monopoly_Speaker\Monopoly_Speaker.exe - Shortcut".format(extension_folder)   
+    # print exe_file_path
     os.startfile(exe_file_path)

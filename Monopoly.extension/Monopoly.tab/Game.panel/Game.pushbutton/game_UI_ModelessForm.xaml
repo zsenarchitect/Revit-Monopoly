@@ -99,8 +99,8 @@
             <SolidColorBrush Color="#FFBF9632" Opacity="1"/>
         </Border.Background>
         <Border.Effect>
-
-            <DropShadowEffect Color="#FFFFE59C" BlurRadius="15" Opacity="0.8"/>
+            
+            <DropShadowEffect Color="#FFFFE59C" BlurRadius="35" Opacity="0.8"/>
 
         </Border.Effect>
         <Grid Margin="20,20,20,20">
@@ -131,23 +131,23 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                  
-                    
-                    
+
+
+
                 </Grid>
 
-                
+
                 <Separator/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
-                       
+
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        
+
                     </Grid.RowDefinitions>
                     <DataGrid x:Name="main_data_grid" 
                           AutoGenerateColumns="False" 
@@ -169,16 +169,47 @@
                             <DataGridTextColumn  IsReadOnly="True" Header="Ranking" Width="*"   Binding="{Binding format_rank}"/>
 
 
-                          
+
                         </DataGrid.Columns>
                     </DataGrid>
-                   
+
                     <TextBlock x:Name="textblock_display_detail" Text="text display:" Grid.Column="0" Grid.Row="1"/>
 
                 </Grid>
 
-                <Button Content="Start Game" Click="game_start_click" x:Name="bt_start_game"
-                        HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0,5,0,1" BorderBrush="#FFF40101" BorderThickness="1,1,1,1"/>
+                <Button Content=" Start Game " Click="game_start_click" x:Name="bt_start_game"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"  
+                        Margin="0,5,0,1" BorderBrush="#FFF40101" BorderThickness="1,1,1,1"
+                        Padding="10" FontSize="25" Cursor="Hand">
+                    <Button.Resources >
+
+                        <Style TargetType="Border">
+
+
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="3" BorderBrush="#FFD45454" >
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource AboutWindowHightlightColor}"/>
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
 
                 <Separator/>
 

@@ -99,26 +99,23 @@ def player_move_animation(player, target_asset):
         target_asset(Asset ): targt object
     """
 
-    # also call sound
-    #target = FINDER.get_abstract_marker_by_index(position_index)
+
     current_position = player.position_index
-    #print ("\n\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    #print ("current player position at : {}".format(current_position))
-   
-    #print ("the target position index is {}".format(target_asset.position_index))
-    while True:
+    next_position = current_position # this is to assume the next position is the same as current position
+
+    while next_position != target_asset.position_index:
         
-        next_position = current_position
-        next_position = next_position % player.board.max_marker_index
+        
+        # this is to ensure all tile is reach
+        # becasue if end in max marker index, the last tile will be formated to 0 and jump to gate. That is not right
+        next_position = next_position % (player.board.max_marker_index + 1)
        
         #print ("the next local position index is {}".format(next_position))
         local_target_asset = player.board.map_key[next_position]
         player_move_animation_single(player, local_target_asset)
         
 
-        if next_position == target_asset.position_index:
-            break
-        current_position += 1
+        next_position += 1
 
     player.position_index = target_asset.position_index
 

@@ -157,7 +157,7 @@ class game_ModelessForm(WPFWindow):
             rule = Rule(max_game_round=40, max_money=1200)
             self.game = Game( players, board, rule)
 
-            self.bt_start_game.Content = "Next Player"
+            self.bt_start_game.Content = " Next Player "
             
             SOUND.speak("Game Start! Let's make some money rain!")
 
