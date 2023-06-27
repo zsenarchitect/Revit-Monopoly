@@ -91,3 +91,30 @@ def menu_select():
     """play sound when menu select"""
     pass
 
+
+
+def speak(text, language='en', accent='com'):
+    """
+    #language = 'zh-CN'
+    #language = 'zh-TW'
+    #language = 'en'
+
+    #accent = 'co.uk'
+    #accent = 'co.in'
+    #accent = 'com'
+    """
+ 
+
+    if text:
+        data = dict()
+        data["text"] = text
+        data["language"] = language
+        data["accent"] = accent
+        file_name = "Monopoly_Speaker.json"
+        file_path = FOLDER.get_EA_dump_folder_file(file_name)
+        DATA_FILE.save_dict_to_json(data, file_path)
+
+
+    run_exe()
+
+   

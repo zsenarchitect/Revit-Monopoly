@@ -1,0 +1,7 @@
+DEBUG:root:Traceback (most recent call last):
+  File "c:/Users/szhang/github/Revit-Monopoly/Monopoly.extension/bin/exe_maker/Monopoly_Speaker.py", line 36, in wrapper
+    out = func(*args, **kwargs)
+  File "c:/Users/szhang/github/Revit-Monopoly/Monopoly.extension/bin/exe_maker/Monopoly_Speaker.py", line 197, in main
+    Monopoly_logo = pygame.image.load("dollar_bag.png").convert_alpha()
+IOError: No such file or directory.
+
