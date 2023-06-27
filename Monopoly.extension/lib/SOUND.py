@@ -129,5 +129,8 @@ def speak(text, language='en', accent='com'):
     run_exe()
 
 def run_exe():
-    exe_file_path = r"C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\bin\EXE\Monopoly_Speaker\Monopoly_Speaker.exe - Shortcut"
+    # script parrent folder
+    lib_folder = os.path.dirname(os.path.abspath(__file__))
+    bin_folder = os.path.dirname(lib_folder)
+    exe_file_path = r"{}\EXE\Monopoly_Speaker\Monopoly_Speaker.exe - Shortcut".format(bin_folder)   
     os.startfile(exe_file_path)
