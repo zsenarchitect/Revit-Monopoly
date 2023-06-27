@@ -5,7 +5,7 @@ __pycache__/
 .pyc
 
 # ignore LOG folder
-LOG/
+Monopoly.extension/lib/LOG/
 
 # C extensions
 *.so
