@@ -1,11 +1,11 @@
 """handle all team action, solo player are also a team."""
 from Autodesk.Revit import DB
 import ERROR_HANDLE
-
+import FINDER
 
 class Team(object):
     @ERROR_HANDLE.try_catch_error
-    def __init__(self, team_name):
+    def __init__(self, team_name, team_index):
          """This is the constructor method.
         
         Args:
@@ -14,7 +14,8 @@ class Team(object):
         """
          self.team_name = team_name
          self.team_members = []
-         self.team_color = DB.Color(100, 200, 200)
+         self.team_material = FINDER.get_material_by_name("TeamColor_{}".format(team_index))
+         self.team_color = self.team_material.Color
 
 
     def __str__(self):

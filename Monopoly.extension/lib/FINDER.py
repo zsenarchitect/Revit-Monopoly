@@ -105,3 +105,19 @@ def get_abstract_marker_by_index(index):
             return gm
 
 
+@ERROR_HANDLE.try_catch_error
+def get_material_by_name(name):
+    """get the material by the name
+    
+    Args:
+        name (str): the name of the material
+    
+    Returns:
+        DB.Material: the material
+    
+    """
+    all_materials = DB.FilteredElementCollector(doc).OfClass(DB.Material).ToElements()
+    for material in all_materials:
+        if material.Name == name:
+            return material
+    return None

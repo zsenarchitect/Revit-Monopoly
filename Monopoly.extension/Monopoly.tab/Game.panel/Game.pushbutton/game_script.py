@@ -39,7 +39,7 @@ from RULE import Rule
 
 import SOUND
 
-
+import pprint
 
 
 
@@ -57,9 +57,9 @@ class game_ModelessForm(WPFWindow):
         WPFWindow.__init__(self, xaml_file_name)
 
         self.title_text.Text = "Monopoly"
-        self.sub_text.Text = "Classic board game, in Revit!\nYou can edit Player Name and Team Name below.\nUse 'Solo' to be independent."
+        self.sub_text.Text = "Classic board game, in Revit!\nYou can edit Player Name and Team Name below.\nPlayer inside same team name will be assigned same color."
         self.Title = self.title_text.Text
-        self.set_image_source(self.logo_img, "icon.png")
+        self.set_image_source(self.logo_img, "coin.png")
         self.set_image_source(self.main_logo, "title.png")
  
         self.init_data_grid()
@@ -67,7 +67,7 @@ class game_ModelessForm(WPFWindow):
         self.Show()
 
         self.register_event_handler()
-        SOUND.speak("Welcome to the world of Monopoly, in Revit?")
+        SOUND.speak("Welcome to the world of Monopoly, in Revit!")
 
 
 
@@ -89,7 +89,11 @@ class game_ModelessForm(WPFWindow):
         """
         if func_list is None:
             from ANIMATION import player_money_animation, player_move_animation
-            func_list = [player_money_animation, player_move_animation]
+            from DISPLAY import colorize_players_by_team
+
+            func_list = [player_money_animation, 
+                         player_move_animation, 
+                         colorize_players_by_team]
             
         
         from Autodesk.Revit.UI import ExternalEvent
@@ -106,6 +110,12 @@ class game_ModelessForm(WPFWindow):
             ext_event = getattr(self, "ext_event_{}".format(func.__name__))
 
             self.event_map[func.__name__] = (handler, ext_event)
+        
+
+        #pprint.pprint (self.event_map)
+
+        """note to self
+        make sure to not asdd error catch wraper, otherwise the event map will not capture the name correctly."""
 
     @ERROR_HANDLE.try_catch_error
     def init_data_grid(self):
@@ -114,7 +124,7 @@ class game_ModelessForm(WPFWindow):
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
  
-        teams = [Team(team_name="Solo")] * len(names)
+        teams = ["Team A", "Team A", "Team B", "Team C"]
         sample_characters = [ "Boot", "Cheese", "Duck","Hat"]
         characters = sample_characters[0: len(names)]
         template_players = [TemplatePlayer(name, team, character)
@@ -139,12 +149,15 @@ class game_ModelessForm(WPFWindow):
             self.real_players = []
             for template_player_info in self.main_data_grid.ItemsSource:
                 if template_player_info.team_name not in team_dict:
-                    new_team = Team(team_name=template_player_info.team_name)
+                    new_team = Team(team_name=template_player_info.team_name, 
+                                    team_index=len(team_dict)+1)
                     team_dict[template_player_info.team_name] = new_team
 
                 else: 
                     new_team = team_dict[template_player_info.team_name]
-                self.real_players.append(Player(new_team, template_player_info, self.event_map))
+                self.real_players.append(Player(new_team, 
+                                                template_player_info, 
+                                                self.event_map))
                     
             self.main_data_grid.ItemsSource = self.real_players
             #self.textblock_display_detail.Text = str(self.real_players)
@@ -154,8 +167,10 @@ class game_ModelessForm(WPFWindow):
             # lock the file, saveas the revit file so not losing original stage.
             players = self.real_players
             board = Board()
-            rule = Rule(max_game_round=40, max_money=1200)
-            self.game = Game( players, board, rule)
+            rule = Rule(max_game_round=40, 
+                        max_money=1200)
+            event_map = self.event_map
+            self.game = Game( players, board, rule, event_map)
 
             self.bt_start_game.Content = " Next Player "
             

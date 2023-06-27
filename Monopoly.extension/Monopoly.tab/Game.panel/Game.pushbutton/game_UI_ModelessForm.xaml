@@ -124,6 +124,8 @@
                                TextWrapping="Wrap"  
                                MaxWidth="500" 
                                HorizontalAlignment="Center"
+                           
+                                
                                />
                 <Grid  >
                     <Grid.ColumnDefinitions>

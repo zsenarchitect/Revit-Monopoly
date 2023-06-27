@@ -35,10 +35,10 @@ class TemplatePlayer(object):
     """this classe is only used to help fill the pre-game data form."""
 
     @ERROR_HANDLE.try_catch_error
-    def __init__(self, name, team, character):
+    def __init__(self, name, team_name, character):
 
         self.format_name = name
-        self.team_name = team.team_name
+        self.team_name = team_name
         self.character = character
         self.money = 1000
         self.format_money = "${}".format(self.money)
@@ -68,9 +68,12 @@ class Player(object):
             event_map(dict): dict of all the registered event, key = func_name, value = (handler, event)
             
         """
+        self.event_map = event_map
+
+
         self.name = template_player.format_name
         self.team = team
-        self.event_map = event_map
+        self.update_color()
 
 
 
@@ -90,7 +93,7 @@ class Player(object):
         self.is_NPC = False  # pylint: disable=C0103 # disable snake naming style
         self.luck = template_player.luck
 
-        self.position_index = -1  # -1 means have not start.
+        self.position_index = 0  # 0 means have not start.
         self.velocity = 1  # this could be +4 or -3 to record speed and drecition on track
 
         self.remaining_hold = 0
@@ -272,7 +275,7 @@ class Player(object):
         """
         pass
 
-
+    @ERROR_HANDLE.try_catch_error
     def move(self, target):
         """
          target can be any asset obj.
@@ -296,6 +299,13 @@ class Player(object):
    
         return True
 
+    @ERROR_HANDLE.try_catch_error
+    def update_color(self):
+        handler, ext_event = self.event_map["colorize_players_by_team"]
+        handler.kwargs = [self],
+        ext_event.Raise()
+
+    @ERROR_HANDLE.try_catch_error
     def change_team(self, new_team):
         """change the team of player.
         
@@ -304,3 +314,4 @@ class Player(object):
         
         """
         self.team = new_team
+        self.update_color()

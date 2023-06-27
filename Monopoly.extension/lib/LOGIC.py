@@ -4,7 +4,7 @@ from ASSET.DICE import Dice
 import SOUND
 
 class Game:
-    def __init__(self, players, board, rule):
+    def __init__(self, players, board, rule, event_map):
         """setup game
 
         Args:
@@ -21,17 +21,26 @@ class Game:
 
             # add board data here to each player so can access key may
             player.board = board
+        
+
         self.board = board
         self.rule = rule
+        self.event_map = event_map
+
+
         self.round = 1
         self.current_player_index = 0
         self.dice = Dice()
+        self.update_all_player_color()
 
         # change camera to view XX
 
         
 
-
+    def update_all_player_color(self):
+        handler, ext_event = self.event_map["colorize_players_by_team"]
+        handler.kwargs = self.players,
+        ext_event.Raise()
 
     def play(self):
         if not self.is_game_over:
@@ -67,6 +76,7 @@ class Game:
         """iterate through  all players action"""
 
         player = self.players[self.current_player_index]
+       
 
         # get a list of other player current position.
         other_players_position = [other_player.position_index for other_player in self.players if other_player != player]
@@ -98,6 +108,8 @@ class Game:
         #print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
         player.move(target)
 
+   
+
     def update_NPC(self):
         """iterate through all npc action"""
         pass
@@ -107,4 +119,6 @@ class Game:
         pass
 
     def post_game_summary(self):
-        return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}\nNew Position:{}".format(self.current_player_index, self.players[self.current_player_index].name, self.dice.last_roll, self.players[self.current_player_index].position_index)
+        return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}".format(self.current_player_index, 
+                                                                             self.players[self.current_player_index].name,
+                                                                               self.dice.last_roll)
