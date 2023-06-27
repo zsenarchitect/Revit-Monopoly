@@ -2,6 +2,8 @@
 
 from ASSET.DICE import Dice
 import SOUND
+from PLAYER_COLLECTION import PlayerCollection
+
 
 class Game:
     def __init__(self, players, board, rule, event_map):
@@ -13,6 +15,7 @@ class Game:
         rule(Rule): rules of the game, such as how long play, winning money, win by team or by player
         """
         self.players = players
+        
 
         self.teams = []
         for player in self.players:
@@ -22,7 +25,8 @@ class Game:
             # add board data here to each player so can access key may
             player.board = board
         
-
+        self.player_collection = PlayerCollection(self.players)
+        
         self.board = board
         self.rule = rule
         self.event_map = event_map
@@ -35,7 +39,11 @@ class Game:
 
         # change camera to view XX
 
-        
+    @property
+    def current_player(self):
+        return self.players[self.current_player_index]
+
+
 
     def update_all_player_color(self):
         handler, ext_event = self.event_map["colorize_players_by_team"]
@@ -73,42 +81,16 @@ class Game:
         self.current_player_index = (self.current_player_index + 1) % len(self.players)
 
     def update_player(self):
-        """iterate through  all players action"""
-
-        player = self.players[self.current_player_index]
-       
-
-        # get a list of other player current position.
-        other_players_position = [other_player.position_index for other_player in self.players if other_player != player]
-           
-
-
-        #print (player.name + " is playing")
-        self.dice.player_name = player.name
-
-        # avoid getting in the sam espot as other player
-        while True:
-            num = self.dice.roll(player.luck)
-            new_position = player.position_index + num * player.velocity
-            new_position = new_position % self.board.max_marker_index
-            if new_position not in other_players_position:
-                break
+        if self.current_player.remaining_hold > 0:
+            SOUND.speak(self.current_player.name + " has " + str(self.current_player.remaining_hold) + " hold")
+            return
         
-        """
-        while True:
-            current_position = player.position_index
-            temp_next_position = (current_position + 1)% self.board.max_marker_index
-            print (temp_next_position)
-            target = self.board.map_key[temp_next_position]
-            player.move(target)
-            if player.position_index == new_position:
-                break
-        """
-        target = self.board.map_key[new_position]
-        #print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
-        player.move(target)
-
-   
+        self.current_player.game = self
+        self.current_player.change_location()
+        self.current_player.get_action_option()
+        self.current_player.take_action()
+       
+ 
 
     def update_NPC(self):
         """iterate through all npc action"""

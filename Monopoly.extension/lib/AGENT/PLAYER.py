@@ -31,6 +31,8 @@ from ANIMATION import player_money_animation, player_move_animation
 import ERROR_HANDLE
 from EVENT_HANDLE import SimpleEventHandler
 
+from PLAYER_COLLECTION import PlayerCollection
+
 class TemplatePlayer(object):
     """this classe is only used to help fill the pre-game data form."""
 
@@ -315,3 +317,47 @@ class Player(object):
         """
         self.team = new_team
         self.update_color()
+
+
+
+
+    def change_location(self):
+        # get a list of other player current position.
+
+
+        other_players_position = [other_player.position_index for other_player in self.game.player_collection.get_other_players(self)]
+           
+        dice = self.game.dice
+
+        #print (player.name + " is playing")
+        dice.player_name = self.name
+
+        # avoid getting in the sam espot as other player
+        while True:
+            num = dice.roll(self.luck)
+            new_position = self.position_index + num * self.velocity
+            new_position = new_position % self.board.max_marker_index
+            if new_position not in other_players_position:
+                break
+        
+        """
+        while True:
+            current_position = player.position_index
+            temp_next_position = (current_position + 1)% self.board.max_marker_index
+            print (temp_next_position)
+            target = self.board.map_key[temp_next_position]
+            player.move(target)
+            if player.position_index == new_position:
+                break
+        """
+        target = self.board.map_key[new_position]
+        #print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
+        self.move(target)
+
+    def take_action(self):
+        """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
+        pass
+
+    def get_action_option(self):
+        """return the action option at current position. and handle autoamtic action such as  update data,send to location, or pay rent"""
+        pass

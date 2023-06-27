@@ -1,13 +1,17 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 172, in game_start_click
-    self.game = Game( players, board, rule)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 31, in __init__
-    self.update_all_player_color()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 38, in update_all_player_color
-    handler, ext_event = self.event_map["colorize_players_by_team"]
-AttributeError: Game instance has no attribute 'event_map'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 181, in game_start_click
+    result = self.game.play()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 54, in play
+    self.update_round()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 75, in update_round
+    self.update_player()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 88, in update_player
+    self.current_player.change_location()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 330, in change_location
+    dice = self.board.dice
+AttributeError: 'Board' object has no attribute 'dice'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

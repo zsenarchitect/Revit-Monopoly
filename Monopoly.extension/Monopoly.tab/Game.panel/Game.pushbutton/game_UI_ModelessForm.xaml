@@ -93,7 +93,7 @@
 
     </Window.Resources>
     <Border BorderThickness="1"
-            CornerRadius="15"
+            CornerRadius="40, 40, 0, 40"
             Margin="20,20,20,20">
         <Border.Background>
             <SolidColorBrush Color="#FFBF9632" Opacity="1"/>
