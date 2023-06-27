@@ -1,6 +1,7 @@
 """handle all sound"""
 import os
 from System.Media import SoundPlayer
+import json
 
 def play_sound(sound_file):
     """play sound"""
@@ -111,10 +112,21 @@ def speak(text, language='en', accent='com'):
         data["language"] = language
         data["accent"] = accent
         file_name = "Monopoly_Speaker.json"
-        file_path = FOLDER.get_EA_dump_folder_file(file_name)
-        DATA_FILE.save_dict_to_json(data, file_path)
+        user_doc_folder = os.path.expanduser('X')
+        monopoly_folder = "{}\Monopoly".format(user_doc_folder)
+
+        if not os.path.exists(monopoly_folder):
+            os.makedirs(monopoly_folder)
+
+
+        file_path = os.path.join(monopoly_folder, file_name)
+        with open(file_path, 'w') as f:
+            json.dump(data, f)
+
 
 
     run_exe()
 
-   
+def run_exe():
+    exe_file_path = r"C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\bin\EXE\Monopoly_Speaker\Monopoly_Speaker.exe - Shortcut"
+    os.startfile(exe_file_path)

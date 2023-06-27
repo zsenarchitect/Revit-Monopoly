@@ -1,6 +1,6 @@
 # if current inteprater is python 2.x then import future print function
 
-from future import print_function
+from __future__ import print_function
 
 
 import time
@@ -187,9 +187,10 @@ class TTS:
 
         # logo
         # exe_folder = r"L:\\4b_Applied Computing\\03_Rhino\\12_Monopoly for Rhino\Source Codes\lib\Monopoly_Speaker"
-        # get png file from the same folder as the script
+        
+        script_folder = os.path.abspath(os.path.dirname(__file__))
 
-        Monopoly_logo = pygame.image.load("dollar_bag.png").convert_alpha()
+        Monopoly_logo = pygame.image.load("{}\\dollar_bag.png".format(script_folder)).convert_alpha()
         target_img_size = (100, 100)
         Monopoly_logo = pygame.transform.scale(Monopoly_logo, target_img_size)
         original_logo = Monopoly_logo
@@ -207,7 +208,7 @@ class TTS:
         # unmute_img = pygame.image.load("images\\button_audio_unmute.png").convert_alpha()
         # louder_img = pygame.image.load("images\\button_audio_higher_voice.png").convert_alpha()
         # quieter_img = pygame.image.load("images\\button_audio_lower_voice.png").convert_alpha()
-        quit_img = pygame.image.load("images\\button_quit.png").convert_alpha()
+        quit_img = pygame.image.load("{}\\button_quit.png".format(script_folder)).convert_alpha()
         # coffin_img = pygame.image.load("images\\button_coffin.png").convert_alpha()
 
         # create button instances
@@ -218,7 +219,7 @@ class TTS:
         # louder_button = button.Button(SCREEN_WIDTH/2, SCREEN_HEIGHT - 200, louder_img, 0.7)
         # quiter_button = button.Button(SCREEN_WIDTH/2 + 170, SCREEN_HEIGHT - 200, quieter_img, 0.7)
         quit_button = button.Button(
-            SCREEN_WIDTH/2, SCREEN_HEIGHT - 120, quit_img, 1)
+            SCREEN_WIDTH/2, SCREEN_HEIGHT - 140, quit_img, 1)
 
         # game loop
         run = True
@@ -247,7 +248,7 @@ class TTS:
             self.screen.blit(Monopoly_logo, logo_rect)
 
             # check if game is paused
-            self.draw_text("Monopoly Talkie. ", font_title, TEXT_COL, 50, 50)
+            self.draw_text("Monopoly.", font_title, TEXT_COL, 50, 50)
             # self.draw_text("Keep this window alive. ", font_title, TEXT_COL_FADE, 50, 100)
             # self.draw_text("Do not close after every talk.", font_title, TEXT_COL_FADE, 50, 130)
             # self.draw_text("Minimize it is ok though.", font_title, TEXT_COL_FADE, 50, 160)
@@ -286,7 +287,8 @@ class TTS:
             text_life = int(life_count / FPS)
             text_min = int(math.floor(text_life / 60))
             text_secs = text_life % 60
-            self.draw_text("Monopoly Talkie will close itself in {}m {}s if there is nothing to say.".format(
+            self.draw_text("Monopoly Talkie will close itself", font_note, TEXT_COL, 50, SCREEN_HEIGHT - 40)
+            self.draw_text("in {}m {}s if there is nothing to say.".format(
                 text_min, text_secs), font_note, TEXT_COL, 50, SCREEN_HEIGHT - 20)
             life_count -= 1
 
