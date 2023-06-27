@@ -5,4 +5,33 @@ from ASSET import Asset
 
 
 class Cursor(Asset):
-    pass
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        """if this works well, will need to try it on Board and Dice class."""
+        if not isinstance(cls._instance, cls):
+            cls._instance = super(Cursor, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+    
+
+    def move_forward(self, step = 1):
+        """move the curver object forward by syep number
+        Args:
+            step (positive int, optional): step number. Defaults to 1.
+        """
+        pass
+
+        pass
+
+    def move_backward(self, step = 1):
+        """move the curver object backward by syep number
+        Args:
+            step (positive int, optional): step number. Defaults to 1.
+            #this will call the move forward with negative step
+        """
+        pass
+
+        self.move_forward(-step)
+
+    
+    
