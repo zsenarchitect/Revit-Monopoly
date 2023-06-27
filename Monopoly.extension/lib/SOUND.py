@@ -112,7 +112,8 @@ def speak(text, language='en', accent='com'):
         data["language"] = language
         data["accent"] = accent
         file_name = "Monopoly_Speaker.json"
-        user_doc_folder = os.path.expanduser('X')
+        user_doc_folder =  "{}\Documents".format(os.environ["USERPROFILE"])
+        
         monopoly_folder = "{}\Monopoly".format(user_doc_folder)
 
         if not os.path.exists(monopoly_folder):

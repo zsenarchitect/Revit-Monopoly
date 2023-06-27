@@ -46,7 +46,7 @@ class Board(Asset):
             #-14: store
         }
 
-        abstract_marker_instances = [x for x in FINDER.get_all_generic_models() if x.Symbol.Family.Name == "AbstractMarker"]
+        abstract_marker_instances = [x for x in FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.Family.Name == "AbstractMarker"]
         for abstract_marker_instance in abstract_marker_instances:
             abstract_marker = AbstractMarker(abstract_marker_instance)
             self.map_key[abstract_marker.position_index] = abstract_marker

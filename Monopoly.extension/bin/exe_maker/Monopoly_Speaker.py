@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 def get_local_dump_folder():
     """get the user document folder and create a Monopoly folder inside if it does not exist, then return that Monopoly folder"""
-    user_doc_folder = os.path.expanduser('X')
+    user_doc_folder =  "{}\Documents".format(os.environ["USERPROFILE"])
     monopoly_folder = "{}\Monopoly".format(user_doc_folder)
 
     if not os.path.exists(monopoly_folder):

@@ -37,7 +37,7 @@ from LOGIC import Game
 from ASSET.BOARD import Board
 from RULE import Rule
 
-
+import SOUND
 
 
 
@@ -67,6 +67,7 @@ class game_ModelessForm(WPFWindow):
         self.Show()
 
         self.register_event_handler()
+        SOUND.speak("Welcome to the world of Monopoly, in Revit?")
 
 
 
@@ -157,6 +158,8 @@ class game_ModelessForm(WPFWindow):
             self.game = Game( players, board, rule)
 
             self.bt_start_game.Content = "Next Player"
+            
+            SOUND.speak("Game Start! Let's make some money rain!")
 
         # once started, the data grid is display only, cannot edit again.
         # all game play handle in there.
