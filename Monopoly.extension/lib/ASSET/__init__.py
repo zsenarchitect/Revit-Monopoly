@@ -43,6 +43,13 @@ class Asset(object):
         #print (self.__class__.__name__)
         #print (self.revit_object)
 
+
+    def get_action(self):
+        """return the action of the asset.
+        """
+        return self.revit_object.LookupParameter("Comments").AsString()
+    
+
     def hide(self, animated = False):
         """hide asset in view.
         

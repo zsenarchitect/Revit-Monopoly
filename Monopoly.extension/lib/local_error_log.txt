@@ -3,15 +3,17 @@ Traceback (most recent call last):
     out = func(*args, **kwargs)
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 181, in game_start_click
     result = self.game.play()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 54, in play
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 55, in play
     self.update_round()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 75, in update_round
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 76, in update_round
     self.update_player()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 88, in update_player
-    self.current_player.change_location()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 330, in change_location
-    dice = self.board.dice
-AttributeError: 'Board' object has no attribute 'dice'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 90, in update_player
+    self.current_player.get_action_option()
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 360, in get_action_option
+    print (abstract_marker.get_action())
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\__init__.py", line 50, in get_action
+    return self.revit_object.LookupParameter("Action").AsString()
+AttributeError: 'NoneType' object has no attribute 'AsString'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

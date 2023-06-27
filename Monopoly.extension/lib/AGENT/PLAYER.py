@@ -354,10 +354,13 @@ class Player(object):
         #print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
         self.move(target)
 
-    def take_action(self):
-        """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
-        pass
-
     def get_action_option(self):
         """return the action option at current position. and handle autoamtic action such as  update data,send to location, or pay rent"""
+        abstract_marker = self.board.map_key[self.position_index]
+        print (abstract_marker.get_action())
+
+
+
+    def take_action(self):
+        """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
         pass

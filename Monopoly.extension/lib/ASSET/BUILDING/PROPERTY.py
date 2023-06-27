@@ -2,33 +2,41 @@ from ASSET import Asset
 
 
 class Property(Asset):
-    def is_owned(self):
-        pass
-        # check if any player own it.
+    value_map = {0:100,
+                 1:200,
+                 2:300,
+                 3:500}
+    charge_map = {0:150,
+                  1:300,
+                  2:450,
+                  3:1000}
+    def __init__(self):
+        
+        self.level = 0 #0 is new land, 1, 2, 3
+        self.owner = None
+
 
     @property
-    def owner(self):
-        # return the owner of the asset
-        pass
+    def is_owned(self):
+        return self.owner is not None
+        # check if any player own it.
+
+
 
     @property
     def team(self):
         # return the team of the owner.
-        pass
+        return self.owner.team
+
+
 
     @property
-    def level(self):
-        # level of the asset, from 1 to 3
-        pass
+    def value(self):
+        return Property.value_map[self.level]
 
     @property
     def charge(self):
-        # the amount of charge is directedly linked to level.
-        """
-        level 0(someone is purchasing): $ 50
-        level 1: $100
-        level 2: $300
-        level 3: $500"""
+        return Property.charge_map[self.level]
 
     def upgrade_level(self):
         # increase the level, and cost some money unless waived by card.

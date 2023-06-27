@@ -42,6 +42,10 @@ def player_move_animation_single(player, target_asset):
     initial_pt = player.revit_obj.Location.Point
     final_pt = target_asset.revit_object.Location.Point
 
+    # use this to look like playing stepping on head
+    if target_asset.is_occupied:
+        final_pt += DB.XYZ(0,0,3)
+
     try:
         line = DB.Line.CreateBound(initial_pt, final_pt)
         mid_pt = line.Evaluate(0.5, True)
@@ -58,6 +62,8 @@ def player_move_animation_single(player, target_asset):
         #DB.ElementTransformUtils.MoveElement(doc, player.Id,vec)
 
         translation = DB.Transform.CreateTranslation(vec)
+        """
+        >>>>>>>>>>>>>>>>>also neeed to condider orienting object to the direction of travel"""
         DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player.revit_obj , translation, True)
         
 
