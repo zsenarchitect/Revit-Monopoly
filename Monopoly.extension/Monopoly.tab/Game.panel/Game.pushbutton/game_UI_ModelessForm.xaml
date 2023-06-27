@@ -117,7 +117,7 @@
             <StackPanel Margin="0, 20, 0, 0"
                         Grid.Column ="1">
                 <Image x:Name="main_logo" HorizontalAlignment="Center" Height="180"/>
-                <TextBlock x:Name = "title_text" Text="AAAAAAAAAAAAAAAAAAAAA" Foreground="#FFFFF1CA" FontSize="20" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name = "title_text" Text="AAAAAAAAAAAAAAAAAAAAA" Foreground="#FFFFF1CA" FontSize="30" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Center"/>
                 <TextBlock x:Name = "sub_text" 
                                Text="aaaaaaaaaaaaaaaaaa" 
                                
