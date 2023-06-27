@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 .pyc
 
+# ignore LOG folder
+LOG/
 
 # C extensions
 *.so
