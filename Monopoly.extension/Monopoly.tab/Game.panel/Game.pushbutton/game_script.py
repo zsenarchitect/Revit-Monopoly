@@ -42,16 +42,11 @@ import SOUND
 import pprint
 
 
-
 # A simple WPF form used to call the ExternalEvent
 class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def __init__(self):
-
-
-        
-
 
         xaml_file_name = "game_UI_ModelessForm.xaml"
         WPFWindow.__init__(self, xaml_file_name)
@@ -61,7 +56,7 @@ class game_ModelessForm(WPFWindow):
         self.Title = self.title_text.Text
         self.set_image_source(self.logo_img, "coin.png")
         self.set_image_source(self.main_logo, "title.png")
- 
+
         self.init_data_grid()
 
         self.Show()
@@ -69,10 +64,8 @@ class game_ModelessForm(WPFWindow):
         self.register_event_handler()
         SOUND.speak("Welcome to the world of Monopoly, in Revit!")
 
-
-
     @ERROR_HANDLE.try_catch_error
-    def register_event_handler(self, func_list = None):
+    def register_event_handler(self, func_list=None):
         """register the event handler to the player.
         Args:
 
@@ -91,28 +84,26 @@ class game_ModelessForm(WPFWindow):
             from ANIMATION import player_money_animation, player_move_animation
             from DISPLAY import colorize_players_by_team
 
-            func_list = [player_money_animation, 
-                         player_move_animation, 
+            func_list = [player_money_animation,
+                         player_move_animation,
                          colorize_players_by_team]
-            
-        
-        from Autodesk.Revit.UI import ExternalEvent
-        from EVENT_HANDLE import SimpleEventHandler
-        
 
+        from Autodesk.Revit.UI import ExternalEvent
+        from EVENT_HANDLE import SimpleEventHandler, ExternalEvent
 
         self.event_map = dict()
 
         for func in func_list:
-            setattr(self, "event_handler_{}".format(func.__name__), SimpleEventHandler(func))
+            setattr(self, "event_handler_{}".format(
+                func.__name__), SimpleEventHandler(func))
             handler = getattr(self, "event_handler_{}".format(func.__name__))
-            setattr(self, "ext_event_{}".format(func.__name__), ExternalEvent.Create(handler))
+            setattr(self, "ext_event_{}".format(func.__name__),
+                    ExternalEvent.Create(handler))
             ext_event = getattr(self, "ext_event_{}".format(func.__name__))
 
             self.event_map[func.__name__] = (handler, ext_event)
-        
 
-        #pprint.pprint (self.event_map)
+        # pprint.pprint (self.event_map)
 
         """note to self
         make sure to not asdd error catch wraper, otherwise the event map will not capture the name correctly."""
@@ -123,14 +114,13 @@ class game_ModelessForm(WPFWindow):
         # the team can be Tean A or B, or indepedent.
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
- 
+
         teams = ["Team A", "Team A", "Team B", "Team C"]
-        sample_characters = [ "Boot", "Cheese", "Duck","Hat"]
+        sample_characters = ["Boot", "Cheese", "Duck", "Hat"]
         characters = sample_characters[0: len(names)]
         template_players = [TemplatePlayer(name, team, character)
                             for name, team, character in zip(names, teams, characters)]
 
-        
         self.main_data_grid.ItemsSource = template_players
 
     @ERROR_HANDLE.try_catch_error
@@ -149,49 +139,43 @@ class game_ModelessForm(WPFWindow):
             self.real_players = []
             for template_player_info in self.main_data_grid.ItemsSource:
                 if template_player_info.team_name not in team_dict:
-                    new_team = Team(team_name=template_player_info.team_name, 
+                    new_team = Team(team_name=template_player_info.team_name,
                                     team_index=len(team_dict)+1)
                     team_dict[template_player_info.team_name] = new_team
 
-                else: 
+                else:
                     new_team = team_dict[template_player_info.team_name]
-                self.real_players.append(Player(new_team, 
-                                                template_player_info, 
+                self.real_players.append(Player(new_team,
+                                                template_player_info,
                                                 self.event_map))
-                    
-            self.main_data_grid.ItemsSource = self.real_players
-            #self.textblock_display_detail.Text = str(self.real_players)
-            #print (self.event_map)
 
+            self.main_data_grid.ItemsSource = self.real_players
+            # self.textblock_display_detail.Text = str(self.real_players)
+            # print (self.event_map)
 
             # lock the file, saveas the revit file so not losing original stage.
             players = self.real_players
             board = Board()
-            rule = Rule(max_game_round=40, 
+            rule = Rule(max_game_round=40,
                         max_money=1200)
             event_map = self.event_map
-            self.game = Game( players, board, rule, event_map)
+            self.game = Game(players, board, rule, event_map)
 
             self.bt_start_game.Content = " Next Player "
-            
+
             SOUND.speak("Game Start! Let's make some money rain!")
 
         # once started, the data grid is display only, cannot edit again.
         # all game play handle in there.
         result = self.game.play()
 
-
         self.textblock_display_detail.Text = str(result)
-
-
-        
-
 
     @ERROR_HANDLE.try_catch_error
     def close_Click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         self.Close()
-        #print (str(self.real_players))
+        # print (str(self.real_players))
 
     def mouse_down_main_panel(self, sender, args):
         # print "mouse down"

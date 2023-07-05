@@ -15,7 +15,6 @@ class Game:
         rule(Rule): rules of the game, such as how long play, winning money, win by team or by player
         """
         self.players = players
-        
 
         self.teams = []
         for player in self.players:
@@ -24,13 +23,13 @@ class Game:
 
             # add board data here to each player so can access key may
             player.board = board
-        
+            player.game = self
+
         self.player_collection = PlayerCollection(self.players)
-        
+
         self.board = board
         self.rule = rule
         self.event_map = event_map
-
 
         self.round = 1
         self.current_player_index = 0
@@ -42,8 +41,6 @@ class Game:
     @property
     def current_player(self):
         return self.players[self.current_player_index]
-
-
 
     def update_all_player_color(self):
         handler, ext_event = self.event_map["colorize_players_by_team"]
@@ -65,9 +62,9 @@ class Game:
             SOUND.game_over()
             return True
         for player in self.players:
-            if player.money >self.rule.max_money: 
+            if player.money > self.rule.max_money:
                 SOUND.game_over()
-                
+
                 return True
         return False
 
@@ -78,19 +75,19 @@ class Game:
         self.update_UI()
 
         self.round += 1
-        self.current_player_index = (self.current_player_index + 1) % len(self.players)
+        self.current_player_index = (
+            self.current_player_index + 1) % len(self.players)
 
     def update_player(self):
         if self.current_player.remaining_hold > 0:
-            SOUND.speak(self.current_player.name + " has " + str(self.current_player.remaining_hold) + " hold")
+            SOUND.speak(self.current_player.name + " has " +
+                        str(self.current_player.remaining_hold) + " hold")
             return
-        
+
         self.current_player.game = self
         self.current_player.change_location()
         self.current_player.get_action_option()
         self.current_player.take_action()
-       
- 
 
     def update_NPC(self):
         """iterate through all npc action"""
@@ -101,6 +98,6 @@ class Game:
         pass
 
     def post_game_summary(self):
-        return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}".format(self.current_player_index, 
+        return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}".format(self.current_player_index,
                                                                              self.players[self.current_player_index].name,
-                                                                               self.dice.last_roll)
+                                                                             self.dice.last_roll)
