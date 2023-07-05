@@ -105,11 +105,14 @@ class Asset(object):
         return self.revit_object.Location.Point
     
     
-
+    @property
     def is_occupied(self):
         """return True if there is a player or NPC on top."""
-        pass
+        print ("\ncurrent_players position:")
+        for player in self.game.players:
+            print (player.character, player.position_index)
+        return len(self.get_occupied_characters()) > 0
 
     def get_occupied_characters(self):
         """return all the players or NPC on top."""
-        pass
+        return [player for player in self.game.players if player.position_index == self.position_index]

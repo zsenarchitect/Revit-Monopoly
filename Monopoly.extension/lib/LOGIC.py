@@ -22,12 +22,14 @@ class Game:
                 self.teams.append(player.team)
 
             # add board data here to each player so can access key may
-            player.board = board
+            #player.board = board
             player.game = self
 
         self.player_collection = PlayerCollection(self.players)
 
         self.board = board
+        for asset in self.board.map_key.values():
+            asset.game = self
         self.rule = rule
         self.event_map = event_map
 

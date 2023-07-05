@@ -311,7 +311,7 @@ class Player(object):
         while True:
             num = dice.roll(self.luck)
             new_position = self.position_index + num * self.velocity
-            new_position = new_position % self.board.max_marker_index
+            new_position = new_position % (self.game.board.max_marker_index + 1)
             if new_position not in other_players_position:
                 break
 
@@ -326,7 +326,9 @@ class Player(object):
                 break
         """
         target = self.game.board.map_key[new_position]
-        # print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(player.position_index))
+        print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(self.position_index))
+        print ("After move, player posion_index is expected to be {}".format(new_position))
+        print ("Dice roll is {}".format(num))
         self.move(target)
 
     def get_action_option(self):

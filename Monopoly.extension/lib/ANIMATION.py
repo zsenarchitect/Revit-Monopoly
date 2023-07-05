@@ -44,7 +44,9 @@ def player_move_animation_single(player, target_asset):
 
     # use this to look like playing stepping on head
     if target_asset.is_occupied:
+        print target_asset
         final_pt += DB.XYZ(0,0,3)
+        pass
 
     try:
         line = DB.Line.CreateBound(initial_pt, final_pt)
@@ -114,16 +116,21 @@ def player_move_animation(player, target_asset):
         
         # this is to ensure all tile is reach
         # becasue if end in max marker index, the last tile will be formated to 0 and jump to gate. That is not right
-        next_position = next_position % (player.board.max_marker_index + 1)
+        next_position = next_position % (player.game.board.max_marker_index + 1)
        
         #print ("the next local position index is {}".format(next_position))
-        local_target_asset = player.board.map_key[next_position]
+        local_target_asset = player.game.board.map_key[next_position]
         player_move_animation_single(player, local_target_asset)
         
 
-        next_position += 1
+        next_position += player.velocity
+        
+        
+        player.position_index = local_target_asset.position_index
+    
 
     player.position_index = target_asset.position_index
+    print ("the player position index is {}".format(player.position_index))
 
 
 def gradually_appear(element, time_interval):
