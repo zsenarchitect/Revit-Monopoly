@@ -18,8 +18,9 @@ class Dice(Asset):
         """return random integer between 1 and 6"""
         SOUND.roll_dice()
         
+        
         while True:
-            num =  random.randint(1, 30) 
+            num =  random.randint(1, 15) 
             """
             num = int (num * ((luck + 50)/100) )
             if luck > 70 and num <= 1:
@@ -33,7 +34,8 @@ class Dice(Asset):
             break
 
         forms.toast("Dice = {}".format(num), title="Player {}'s Dice".format(self.player_name),  icon=self.icon_path, appid = "Monopoly")
-   
+    
+        
         self.last_roll = num
         return num
     

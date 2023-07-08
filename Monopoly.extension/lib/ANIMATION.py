@@ -74,7 +74,7 @@ def player_move_animation_single(player, target_asset):
 
    
 
-    step = 20 
+    step = 10 
     for i in range(step + 1):
   
         pt_para = float(i)/step
@@ -111,11 +111,12 @@ def player_move_animation(player, target_asset):
     current_position = player.position_index
     next_position = current_position # this is to assume the next position is the same as current position
 
-    while next_position != target_asset.position_index:
+    while player.position_index != target_asset.position_index:
         
         
         # this is to ensure all tile is reach
         # becasue if end in max marker index, the last tile will be formated to 0 and jump to gate. That is not right
+        next_position += player.velocity
         next_position = next_position % (player.game.board.max_marker_index + 1)
        
         #print ("the next local position index is {}".format(next_position))
@@ -123,14 +124,14 @@ def player_move_animation(player, target_asset):
         player_move_animation_single(player, local_target_asset)
         
 
-        next_position += player.velocity
+        
         
         
         player.position_index = local_target_asset.position_index
     
 
-    player.position_index = target_asset.position_index
-    print ("the player position index is {}".format(player.position_index))
+    # player.position_index = target_asset.position_index
+    # print ("the player position index is {}".format(player.position_index))
 
 
 def gradually_appear(element, time_interval):

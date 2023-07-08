@@ -108,9 +108,9 @@ class Asset(object):
     @property
     def is_occupied(self):
         """return True if there is a player or NPC on top."""
-        print ("\ncurrent_players position:")
-        for player in self.game.players:
-            print (player.character, player.position_index)
+        # print ("\ncurrent_players position:")
+        # for player in self.game.players:
+        #     print (player.character, player.position_index)
         return len(self.get_occupied_characters()) > 0
 
     def get_occupied_characters(self):

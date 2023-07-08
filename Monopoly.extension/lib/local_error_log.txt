@@ -9,9 +9,9 @@ Traceback (most recent call last):
     self.update_player()
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 90, in update_player
     self.current_player.change_location()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 314, in change_location
-    new_position = new_position % self.board.max_marker_index
-AttributeError: 'Player' object has no attribute 'board'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 333, in change_location
+    print (output.linkify(target.revit_obj.Id))
+AttributeError: 'AbstractMarker' object has no attribute 'revit_obj'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

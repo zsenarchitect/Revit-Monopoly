@@ -326,9 +326,12 @@ class Player(object):
                 break
         """
         target = self.game.board.map_key[new_position]
-        print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(self.position_index))
-        print ("After move, player posion_index is expected to be {}".format(new_position))
-        print ("Dice roll is {}".format(num))
+        # print ("\n\n\n>>>>>>>>>>>>>>>Before move, player posion_index is {}".format(self.position_index))
+        # print ("After move, player posion_index is expected to be {}".format(new_position))
+        # from pyrevit import script
+        # output = script.get_output()
+        # print (output.linkify(target.revit_object.Id))
+        # print ("Dice roll is {}".format(num))
         self.move(target)
 
     def get_action_option(self):
