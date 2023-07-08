@@ -1,0 +1,553 @@
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:PIT
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:SD
+INFO:root:SD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:Hospital
+INFO:root:Jail
+INFO:root:CARD
+INFO:root:#3
+INFO:root:#1
+INFO:root:#2
+INFO:root:Gate
+INFO:root:CARD
+INFO:root:UFO_main
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:UFO_beam
+INFO:root:Hat
+INFO:root:Boot
+INFO:root:Cheese
+INFO:root:Duck
+INFO:root:BirthPlace
+INFO:root:BirthPlace
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008CF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:PIT
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:SD
+INFO:root:SD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:Hospital
+INFO:root:Jail
+INFO:root:CARD
+INFO:root:#3
+INFO:root:#1
+INFO:root:#2
+INFO:root:Gate
+INFO:root:Gate
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:PIT
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:SD
+INFO:root:SD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:Hospital
+INFO:root:Hospital
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:PIT
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:SD
+INFO:root:SD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:Hospital
+INFO:root:Jail
+INFO:root:Jail
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DD [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008ED [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FD [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000900 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000901 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000902 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:AbstractMarker
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000903 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:SD
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:PIT
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:MAP_MARKER
+INFO:root:SD
+INFO:root:SD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:Hospital
+INFO:root:Jail
+INFO:root:CARD
+INFO:root:#3
+INFO:root:#1
+INFO:root:#2
+INFO:root:Gate
+INFO:root:CARD
+INFO:root:UFO_main
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:CARD
+INFO:root:UFO_beam
+INFO:root:Hat
+INFO:root:Boot
+INFO:root:Cheese
+INFO:root:Duck
+INFO:root:BirthPlace
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:AbstractMarker
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:House
+INFO:root:Model Text 1
+INFO:root:#3
+INFO:root:#3
+INFO:root:#1
+INFO:root:#2
+INFO:root:#3
+INFO:root:#3
+INFO:root:#1
+INFO:root:#1
+INFO:root:#3
+INFO:root:#4
+INFO:root:#5
+INFO:root:#6
+INFO:root:#7
+INFO:root:#rock
+INFO:root:#1
+INFO:root:#1
+INFO:root:#8
+WARNING:root:no such revit obj found
+INFO:root:Dice
+INFO:root:None
