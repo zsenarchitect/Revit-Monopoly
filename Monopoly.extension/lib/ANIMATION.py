@@ -39,12 +39,12 @@ def player_move_animation_single(player, target_asset):
     SOUND.player_moving()
 
 
-    initial_pt = player.revit_obj.Location.Point
+    initial_pt = player.revit_object.Location.Point
     final_pt = target_asset.revit_object.Location.Point
 
     # use this to look like playing stepping on head
     if target_asset.is_occupied:
-        print target_asset
+        #print target_asset
         final_pt += DB.XYZ(0,0,3)
         pass
 
@@ -66,7 +66,7 @@ def player_move_animation_single(player, target_asset):
         translation = DB.Transform.CreateTranslation(vec)
         """
         >>>>>>>>>>>>>>>>>also neeed to condider orienting object to the direction of travel"""
-        DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player.revit_obj , translation, True)
+        DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player.revit_object , translation, True)
         
 
         t.Commit()
@@ -82,7 +82,7 @@ def player_move_animation_single(player, target_asset):
 
         t = DB.Transaction(doc,"frame update" )
         t.Start()
-        player.revit_obj.Location.Point = temp_location
+        player.revit_object.Location.Point = temp_location
         # CLOUD.change_sky(wind)
         # MONEY_GATE.spin_gate()
         t.Commit()

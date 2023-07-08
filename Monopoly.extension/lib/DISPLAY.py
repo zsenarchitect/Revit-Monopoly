@@ -16,7 +16,7 @@ def colorize_players_by_team(players):
     t.Start()
     for player in players:
         material = player.team.team_material
-        player.revit_obj.LookupParameter('accent_color').Set(material.Id)
+        player.revit_object.LookupParameter('accent_color').Set(material.Id)
     t.Commit()
     pass
 

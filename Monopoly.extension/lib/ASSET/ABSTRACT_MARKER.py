@@ -4,53 +4,77 @@
 
 
 from ASSET import Asset
+import ERROR_HANDLE
 import json
 
 class AbstractMarker(Asset):
 
-    pass
 
+    @ERROR_HANDLE.try_catch_error
     def get_action(self):
-        return
-        """return all kind of action
-        case 1: empty tile
-        case 2: empty tile with lot, no one build
-        case 3: empty tile with lot, someone build(self, or others)
-        case 4: card tile
-        case 5: hard code go to, this is for hospital and jails with direct send."""
-
-        # case 5
-        if self.data.get("to", None):
-            print "Go to " + self.data.get("to")
-
-        # case 4
-        if self.has_card_associated:
-            print self.associated_card.get_action()
         
-        # case 1
-        if self.revit_obj.LookupParameter("can_purchase").AsInteger() == 0:
-            # nothing to do here
-            return
+        """return all kind of action
+        case 1: special tile, cannot do anything here.
+            |-case 2: hard code go to, this is for hospital and jails with direct send.
+            |-case 3: card tile
+        case 4: empty tile with lot, no one build
+        case 5: empty tile with lot, someone build(self, or others)
+        """
 
-        # case 2
-        if not self.owner:
+        # case 1
+        
+        if self.revit_object.LookupParameter("can_purchase").AsInteger() == 0:
+            # nothing to do here
+            print ("case 1: Nothing to do here")
+            # return 1
+        
+        
+            # case 2
+            if self.data.get("to", None):
+                print ("case 2: go somehwere")
+                print ("Go to " + self.data.get("to"))
+                
+                return 2
             
-            return "Land on a purchaseable , do you want to buy it? "
-        # case 3
+
+            # case 3
+            if self.has_card_associated:
+                print ("case 3: use card")
+                print (self.associated_card.get_action())
+                return 3
+        
+        
+        # if reach here, it means the spot is purchaseable, so lets check if it has a property or not.
+        has_property = hasattr(self, "property")
+        
+        
+        # case 4
+        if not has_property:
+            print ("case 4: Land on a purchaseable and no property there , do you want to buy it? ")
+            return 4
+        
+        # case 5
         else:
             # this is not a free land
-            print self.property
-            print  "Land on a property owned by " + owner
+            print ("case 5: Land on NOT purchaseable ")
+            print (self.property)
+            print  ("Land on a property owned by " + self.owner)
             if self.owner == self.get_occupied_characters:
-                print "you own this property, want to upgrade?"
+                print ("you own this property, want to upgrade?")
+                return 5.1
             if self.ower.team != self.occupying_player.team:
-                print " owner of this property is from other team, you need to pay charge."
+                print (" owner of this property is from other team, you need to pay charge.")
+                return 5.2
+                
 
  
     @property
     def data(self):
-        comments = self.revit_obj.LookupParameter("Comments").AsString()
-        return json.loads(comments)
+        comments = self.revit_object.LookupParameter("Comments").AsString()
+        if comments:
+            return json.loads(comments)
+        else:
+            return {}
 
     @property
     def has_card_associated(self):

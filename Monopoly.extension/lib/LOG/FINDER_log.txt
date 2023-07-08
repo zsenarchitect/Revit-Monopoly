@@ -85,7 +85,7 @@ INFO:root:Cheese
 INFO:root:Duck
 INFO:root:BirthPlace
 INFO:root:BirthPlace
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008CF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001472 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:SD
 INFO:root:MAP_MARKER
 INFO:root:MAP_MARKER
@@ -145,7 +145,7 @@ INFO:root:#1
 INFO:root:#2
 INFO:root:Gate
 INFO:root:Gate
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001473 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:SD
 INFO:root:MAP_MARKER
 INFO:root:MAP_MARKER
@@ -199,7 +199,7 @@ INFO:root:CARD
 INFO:root:CARD
 INFO:root:Hospital
 INFO:root:Hospital
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001474 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:SD
 INFO:root:MAP_MARKER
 INFO:root:MAP_MARKER
@@ -254,105 +254,105 @@ INFO:root:CARD
 INFO:root:Hospital
 INFO:root:Jail
 INFO:root:Jail
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001475 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001476 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001477 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001478 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001479 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147A [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147B [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008D9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147C [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147D [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147E [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000147F [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DD [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001480 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001481 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008DF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001482 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001483 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001484 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001485 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001486 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001487 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001488 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001489 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148A [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148B [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008E9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148C [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148D [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148E [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000148F [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008ED [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001490 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001491 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008EF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001492 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F0 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001493 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F1 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001494 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F2 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001495 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F3 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001496 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F4 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001497 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F5 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001498 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F6 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000001499 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F7 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149A [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F8 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149B [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008F9 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149C [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FA [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149D [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FB [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149E [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FC [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x000000000000149F [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FD [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A0 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FE [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A1 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000008FF [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A2 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000900 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A3 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000901 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A4 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000902 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A5 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:AbstractMarker
-INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x0000000000000903 [Autodesk.Revit.DB.FamilyInstance]>
+INFO:root:<Autodesk.Revit.DB.FamilyInstance object at 0x00000000000014A6 [Autodesk.Revit.DB.FamilyInstance]>
 INFO:root:SD
 INFO:root:MAP_MARKER
 INFO:root:MAP_MARKER

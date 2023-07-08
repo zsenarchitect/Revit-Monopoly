@@ -79,11 +79,11 @@ class Player(object):
 
         # this is the name of the character: Cat, Hat, Bat, etc..
         self.character = template_player.character
-        self.revit_obj = FINDER.get_revit_obj_by_player_character_name(
+        self.revit_object = FINDER.get_revit_obj_by_player_character_name(
             template_player.character)
         # print (999999999999999999999999999999999999)
-        # print (self.revit_obj.Id)
-        self.Id = self.revit_obj.Id
+        # print (self.revit_object.Id)
+        self.Id = self.revit_object.Id
 
         self.money = template_player.money
         self.properties = template_player.properties
@@ -184,9 +184,9 @@ class Player(object):
             return None
         
         """
-        if self.revit_obj is None:
+        if self.revit_object is None:
             return None
-        return self.revit_obj.Location.Point
+        return self.revit_object.Location.Point
 
     @property
     def format_rank(self):
@@ -266,7 +266,7 @@ class Player(object):
 
         """
         # print ("##############")
-        # print (self.revit_obj)
+        # print (self.revit_object)
         handler, ext_event = self.event_map["player_move_animation"]
         handler.kwargs = self, target
         ext_event.Raise()
@@ -297,7 +297,14 @@ class Player(object):
         self.update_color()
 
     def change_location(self):
+        """
         # get a list of other player current position.
+        
+        
+        return the final target that the player will move to.
+        
+        """
+        pass
 
         other_players_position = [
             other_player.position_index for other_player in self.game.player_collection.get_other_players(self)]
@@ -333,11 +340,21 @@ class Player(object):
         # print (output.linkify(target.revit_object.Id))
         # print ("Dice roll is {}".format(num))
         self.move(target)
+        return target
 
-    def get_action_option(self):
+    def get_action_option(self, target):
+        """
+        args:
+            target(Asset): the target to get action option. This is needed because external event make the script run here before player is actually at the spot
+        return:
+            list: the action option.
+        """
+        pass
         """return the action option at current position. and handle autoamtic action such as  update data,send to location, or pay rent"""
-        abstract_marker = self.game.board.map_key[self.position_index]
-        print(abstract_marker.get_action())
+        abstract_marker = self.game.board.map_key[target.position_index]
+        # print abstract_marker
+        print abstract_marker.get_action()
+        
 
     def take_action(self):
         """all the handle for make decision on purchase, all action here need be descion made by pplayer."""

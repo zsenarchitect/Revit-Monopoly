@@ -1,17 +1,9 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 170, in game_start_click
-    result = self.game.play()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 54, in play
-    self.update_round()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 75, in update_round
-    self.update_player()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\LOGIC.py", line 90, in update_player
-    self.current_player.change_location()
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 333, in change_location
-    print (output.linkify(target.revit_obj.Id))
-AttributeError: 'AbstractMarker' object has no attribute 'revit_obj'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\ABSTRACT_MARKER.py", line 48, in get_action
+    if not self.owner:
+AttributeError: 'AbstractMarker' object has no attribute 'owner'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

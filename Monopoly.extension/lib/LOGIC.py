@@ -87,9 +87,10 @@ class Game:
             return
 
         self.current_player.game = self
-        self.current_player.change_location()
-        self.current_player.get_action_option()
+        target = self.current_player.change_location()
+        self.current_player.get_action_option(target)
         self.current_player.take_action()
+  
 
     def update_NPC(self):
         """iterate through all npc action"""
