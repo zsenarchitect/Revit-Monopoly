@@ -25,9 +25,7 @@ class AbstractMarker(Asset):
         # case 1
         
         if self.revit_object.LookupParameter("can_purchase").AsInteger() == 0:
-            # nothing to do here
-            print ("case 1: Nothing to do here")
-            # return 1
+           
         
         
             # case 2
@@ -44,6 +42,9 @@ class AbstractMarker(Asset):
                 print (self.associated_card.get_action())
                 return 3
         
+            # nothing to do here
+            print ("case 1: Nothing to do here")
+            return 1
         
         # if reach here, it means the spot is purchaseable, so lets check if it has a property or not.
         has_property = hasattr(self, "property")
@@ -59,11 +60,11 @@ class AbstractMarker(Asset):
             # this is not a free land
             print ("case 5: Land on NOT purchaseable ")
             print (self.property)
-            print  ("Land on a property owned by " + self.owner)
-            if self.owner == self.get_occupied_characters:
+            print  ("Land on a property owned by {}".format(self.property.owner))
+            if self.property.owner == self.get_occupied_characters:
                 print ("you own this property, want to upgrade?")
                 return 5.1
-            if self.ower.team != self.occupying_player.team:
+            if self.property.owner.team != self.occupying_player.team:
                 print (" owner of this property is from other team, you need to pay charge.")
                 return 5.2
                 

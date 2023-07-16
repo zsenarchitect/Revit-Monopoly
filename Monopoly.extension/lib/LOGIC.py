@@ -1,5 +1,5 @@
 # this handle all the game logic.
-
+from Autodesk.Revit import DB
 from ASSET.DICE import Dice
 import SOUND
 from PLAYER_COLLECTION import PlayerCollection
@@ -109,3 +109,22 @@ class Game:
 
 def master_game_play(game):
     game.play()
+    
+def reset_board():
+    import FINDER
+    all_abstract_markers = [x for x in FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.Family.Name == "AbstractMarker"]
+    
+    for marker in all_abstract_markers:
+        marker.LookupParameter("show_house_desire").Set(0)
+        marker.LookupParameter("level").Set(0)
+        
+    all_players = [x for x in  FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.FamilyName == "PlayerModel"]
+    for player in all_players:
+        
+        initial_pt = player.Location.Point
+        final_pt = FINDER.get_revit_obj_by_index(-1).Location.Point
+        vec = final_pt - initial_pt
+        translation = DB.Transform.CreateTranslation(vec)
+        DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player , translation, True)
+        
+ 

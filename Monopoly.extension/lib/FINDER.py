@@ -80,7 +80,11 @@ def get_revit_obj_by_index(index):
         DB.Element: the revit obj
     
     """
-    pass
+    all_gms = get_all_generic_models()
+    for gm in all_gms:
+        #print gm.LookupParameter("Mark").AsString()
+        if gm.LookupParameter("Mark").AsString() == str(index):
+            return gm
 
 
 

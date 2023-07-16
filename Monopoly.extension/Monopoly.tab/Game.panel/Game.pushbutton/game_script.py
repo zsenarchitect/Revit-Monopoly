@@ -33,7 +33,7 @@ __persistentengine__ = True
 import ERROR_HANDLE
 from AGENT.PLAYER import Player, TemplatePlayer
 from AGENT.TEAM import Team
-from LOGIC import Game
+from LOGIC import Game, reset_board
 from ASSET.BOARD import Board
 from RULE import Rule
 
@@ -158,7 +158,7 @@ class game_ModelessForm(WPFWindow):
             # lock the file, saveas the revit file so not losing original stage.
             players = self.real_players
             board = Board()
-            rule = Rule(max_game_round=40,
+            rule = Rule(max_game_round=80,
                         max_money=1200)
             event_map = self.event_map
             self.game = Game(players, board, rule, event_map)
@@ -195,6 +195,11 @@ output.close_others()
 
 
 if __name__ == "__main__":
+    t = DB.Transaction(doc, "Reset")
+    t.Start()
+    reset_board()
+    t.Commit()
+    
     # Let's launch our beautiful and useful form !
-
+    
     modeless_form = game_ModelessForm()
