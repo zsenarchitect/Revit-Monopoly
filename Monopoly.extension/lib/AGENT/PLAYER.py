@@ -27,7 +27,8 @@ import time
 
 import FINDER
 from TEAM import Team
-from ANIMATION import player_money_animation, player_move_animation
+
+import ANIMATION
 import ERROR_HANDLE
 from EVENT_HANDLE import SimpleEventHandler
 
@@ -102,40 +103,7 @@ class Player(object):
         # kidnapped: no money in/out, can happen anywhere.
         # bankrupted: out of game. Property free to take.
 
-    @ERROR_HANDLE.try_catch_error
-    def NOT_IN_USE_register_event_handler(self, func_list):
-        """register the event handler to the player.
-        Args:
 
-            example: func_list = [player_money_animation, player_move_animation]
-
-        """
-
-        """
-        Note to self:
-        after many tri, cannot create extra event handler at this step.
-        Next idea is to create a all the ext event in UI init stage as usual. Then pass the collection to Players or Asset when make instance at game beginging.
-        
-        
-        """
-
-        from Autodesk.Revit.UI import ExternalEvent
-
-        self.simple_event_handler = SimpleEventHandler(player_money_animation)
-        self.ext_event = ExternalEvent.Create(self.simple_event_handler)
-
-        return
-
-        for func in func_list:
-            setattr(self, "event_handler_{}".format(
-                func.__name__), SimpleEventHandler(func))
-            handler = getattr(self, "event_handler_{}".format(func.__name__))
-
-            # ext_event_attr = getattr(self, "ext_event_{}".format(func.__name__))
-            # ext_event_attr = ExternalEvent.Create(handler)
-            # continue
-            setattr(self, "ext_event_{}".format(func.__name__),
-                    ExternalEvent.Create(handler))
 
     def __repr__(self):
         return "{}:{}:{}".format(self.name, self.team.team_name, self.character)
@@ -212,13 +180,17 @@ class Player(object):
         self.money -= abs(money)
 
         is_gain = False
-
-        handler, ext_event = self.game.event_map["player_money_animation"]
-        handler.kwargs = self, abs(money), is_gain
-        ext_event.Raise()
-
+        
+        ANIMATION.player_money_animation(self, abs(money), is_gain)
+        # handler, ext_event = self.game.event_map["player_money_animation"]
+        # handler.kwargs = self, abs(money), is_gain
+        # ext_event.Raise()
+        
+        if not target:
+            return
         if isinstance(target, Player):
             target.receive_money(money)
+    
         else:
             target.owner.receive_money(money)
 
@@ -238,9 +210,13 @@ class Player(object):
         handler.kwargs = self, abs(money), is_gain
         ext_event.Raise()
 
-    def purchase_property(self, property):
+    def purchase_property(self, abstract_marker):
         # payout money and own a land.
-        pass
+        abstract_marker.create_new_property(self)
+        charge = abstract_marker.property.__class__.value_map[0]
+        self.pay_money_to_target(charge, None)
+        print self.money
+        
 
     def exchange_player_data(self, other_player, attr_name):
         """
@@ -265,6 +241,12 @@ class Player(object):
             target(Asset):  target object to move into. .
 
         """
+
+        ANIMATION.player_move_animation(self, target)
+        return True
+    
+    
+        """below are old event system. It is depreciated becaue cannot sequence the post move action after move signal is sent out first."""
         # print ("##############")
         # print (self.revit_object)
         handler, ext_event = self.event_map["player_move_animation"]
@@ -342,20 +324,56 @@ class Player(object):
         self.move(target)
         return target
 
-    def get_action_option(self, target):
+    def take_action(self, target):
         """
         args:
             target(Asset): the target to get action option. This is needed because external event make the script run here before player is actually at the spot
         return:
             list: the action option.
         """
-        pass
+        
         """return the action option at current position. and handle autoamtic action such as  update data,send to location, or pay rent"""
         abstract_marker = self.game.board.map_key[target.position_index]
         # print abstract_marker
-        print abstract_marker.get_action()
+        action_index = abstract_marker.get_action()
+        
+        
+        if action_index is None:
+            return
+        
+        import FORMS
+        if action_index == 2:
+            FORMS.dialogue(main_text= "You have to go to " + self.data.get("to"))
+            print (abstract_marker.data.get("to"))
+            return
+        if action_index == 3:
+            
+            FORMS.dialogue(main_text= "You pick up a card!",
+                           sub_text= self.associated_card.get_action())
+            print (abstract_marker.associated_card.get_action())
+            return
+        if action_index == 4:
+            res = FORMS.dialogue(main_text="Land on a purchaseable and no property there , do you want to buy it? ",
+                                 options=["Yes", "No"])
+            if res == "Yes":
+                print ("buy")
+                self.purchase_property(abstract_marker)
+            elif res == "No":print ("nothing")
+            return
+        if action_index == 5.1:
+            res = FORMS.dialogue(main_text="Land on a property owned by " + self.owner,
+                                 sub_text="Do you want to upgrade it? ",
+                                 options=["Yes", "No"])
+            if res == "Yes":print ("upgrade")
+            elif res == "No":print ("nothing")
+            return
+        if action_index == 5.2:
+            res = FORMS.dialogue(main_text="Land on a property owned by " + self.owner,
+                                 sub_text="owner of this property is from other team, you need to pay charge.")
+            print ("pay charge")
+            return
         
 
-    def take_action(self):
-        """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
-        pass
+    # def take_action(self):
+    #     """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
+    #     pass

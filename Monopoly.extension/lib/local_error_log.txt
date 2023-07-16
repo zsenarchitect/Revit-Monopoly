@@ -1,8 +1,8 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\ABSTRACT_MARKER.py", line 48, in get_action
-    if not self.owner:
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\ABSTRACT_MARKER.py", line 62, in get_action
+    print  ("Land on a property owned by " + self.owner)
 AttributeError: 'AbstractMarker' object has no attribute 'owner'
 
 

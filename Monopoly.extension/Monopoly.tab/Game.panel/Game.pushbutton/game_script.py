@@ -83,10 +83,12 @@ class game_ModelessForm(WPFWindow):
         if func_list is None:
             from ANIMATION import player_money_animation, player_move_animation
             from DISPLAY import colorize_players_by_team
+            from LOGIC import master_game_play
 
             func_list = [player_money_animation,
                          player_move_animation,
-                         colorize_players_by_team]
+                         colorize_players_by_team,
+                         master_game_play]
 
         from Autodesk.Revit.UI import ExternalEvent
         from EVENT_HANDLE import SimpleEventHandler, ExternalEvent
@@ -167,7 +169,12 @@ class game_ModelessForm(WPFWindow):
 
         # once started, the data grid is display only, cannot edit again.
         # all game play handle in there.
-        result = self.game.play()
+        # result = self.game.play()# this is the old method but cannot sequence the event with good timing.
+        # so changing to new method that wrap the entire round in one event. All things inside should happen in good sequence.
+        handler, ext_event = self.event_map["master_game_play"]
+        handler.kwargs = self.game,
+        ext_event.Raise()
+        result = handler.OUT
 
         self.textblock_display_detail.Text = str(result)
 

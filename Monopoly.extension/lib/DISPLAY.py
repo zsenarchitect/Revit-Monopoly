@@ -28,6 +28,11 @@ def colorize_asset_by_agent(asset, agent):
         asset (Asset): the asset, can be property.
         agent (Agent): the agent, can be player, NPC, team
     """
+    t = DB.Transaction(doc, 'colorize_player_by_agent')
+    t.Start()
+    material = agent.team.team_material
+    asset.revit_object.LookupParameter('accent_color').Set(material.Id)
+    t.Commit()
     pass
 
 def show_element(element):

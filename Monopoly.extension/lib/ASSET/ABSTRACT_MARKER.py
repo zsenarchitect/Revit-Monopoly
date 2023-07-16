@@ -7,6 +7,7 @@ from ASSET import Asset
 import ERROR_HANDLE
 import json
 
+
 class AbstractMarker(Asset):
 
 
@@ -85,3 +86,9 @@ class AbstractMarker(Asset):
         """find closest card object who is VERY close to this marker. 
         Do not use index to search becasue when designing the board thing can be moved around."""
         return None
+    
+    def create_new_property(self, player):
+        """create property object for this marker"""
+        from BUILDING.PROPERTY import Property
+        self.property = Property(player, self)
+

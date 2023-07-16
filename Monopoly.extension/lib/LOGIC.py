@@ -51,6 +51,7 @@ class Game:
 
     def play(self):
         if not self.is_game_over:
+            
             self.update_round()
 
         return self.post_game_summary()
@@ -88,8 +89,8 @@ class Game:
 
         self.current_player.game = self
         target = self.current_player.change_location()
-        self.current_player.get_action_option(target)
-        self.current_player.take_action()
+        self.current_player.take_action(target)
+
   
 
     def update_NPC(self):
@@ -104,3 +105,7 @@ class Game:
         return "Last Player Index:{}, Player Name:{}\nRecent Dice:{}".format(self.current_player_index,
                                                                              self.players[self.current_player_index].name,
                                                                              self.dice.last_roll)
+
+
+def master_game_play(game):
+    game.play()

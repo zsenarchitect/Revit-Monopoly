@@ -1,4 +1,10 @@
+from Autodesk.Revit import DB
+doc = __revit__.ActiveUIDocument.Document
+
+
 from ASSET import Asset
+import DISPLAY
+
 
 
 class Property(Asset):
@@ -10,12 +16,28 @@ class Property(Asset):
                   1:300,
                   2:450,
                   3:1000}
-    def __init__(self):
+    def __init__(self, player, marker):
         
-        self.level = 0 #0 is new land, 1, 2, 3
-        self.owner = None
+        self.level = 1 #0 is new land, 1, 2, 3
+        self.owner = player
+        self.associated_marker = marker
+        
+        
+        t = DB.Transaction(doc, "create property")
+        t.Start()
+        self.associated_marker.revit_object.LookupParameter("show_house_desire").Set(1)
+        self.associated_marker.revit_object.LookupParameter("level").Set(1)
+        t.Commit()
+        
+        self.update_color()
+        
+       
 
-
+    def update_color(self):
+        # update the color of the asset.
+        DISPLAY.colorize_asset_by_agent(self.associated_marker, self.owner)
+    
+    
     @property
     def is_owned(self):
         return self.owner is not None
