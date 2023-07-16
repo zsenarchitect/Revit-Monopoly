@@ -1,9 +1,11 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\ABSTRACT_MARKER.py", line 67, in get_action
-    if self.property.owner.team != self.occupying_player.team:
-AttributeError: 'AbstractMarker' object has no attribute 'occupying_player'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 184, in pay_money_to_target
+    ANIMATION.player_money_animation(self, abs(money), is_gain)
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 35, in player_money_animation
+    DB.ElementTransformUtils.MoveElement(doc, money_symbol.Id , translation)
+TypeError: expected XYZ, got Transform
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
