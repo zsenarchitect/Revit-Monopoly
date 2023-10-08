@@ -21,3 +21,11 @@ class PlayerCollection:
     
     def get_other_players(self, excluded_player):
         return [player for player in self.players if excluded_player.Id != player.Id]
+    
+    def get_same_team_players(self, my_player):
+        return [player for player in self.players if player.team == my_player.team]
+    
+    
+ 
+    def get_same_team_number_count(self, player):
+        return len(self.get_same_team_players(player))
