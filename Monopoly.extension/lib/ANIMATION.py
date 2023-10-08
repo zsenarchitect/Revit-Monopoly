@@ -10,6 +10,9 @@ asset show and hide gradient effect
     """
 import ERROR_HANDLE
 import SOUND
+import FINDER
+import DISPLAY
+import time
 from Autodesk.Revit import DB
 doc = __revit__.ActiveUIDocument.Document
 uidoc = __revit__.ActiveUIDocument
@@ -21,9 +24,49 @@ def player_money_animation(player, money, is_gain):
         money(abs.int): revit object
         is_gain(bool): is gain or lose
     """
-    pass
+
 
     # call sound
+    
+    money_symbol = FINDER.get_revit_obj_by_type_name("Money_Symbol")
+    t = DB.Transaction(doc,"money" )
+    t.Start()
+    vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
+    # translation = DB.Transform.CreateTranslation(vec)
+    DB.ElementTransformUtils.MoveElement(doc, money_symbol.Id , vec)
+    
+    
+    mat = FINDER.get_material_by_name("money_positive") if is_gain else FINDER.get_material_by_name("money_negative")
+    money_symbol.LookupParameter("money_mat.").Set(mat.Id)
+
+    t.Commit()
+    uidoc.RefreshActiveView()
+    
+    
+    step = 60 
+    for i in range(step + 1):
+
+   
+
+        t = DB.Transaction(doc,"frame update" )
+        t.Start()
+        # vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
+        money_symbol.Location.Point += DB.XYZ(0,0,0.2*i/float(step))
+        # CLOUD.change_sky(wind)
+        # MONEY_GATE.spin_gate()
+        setting = DB.OverrideGraphicSettings()
+        if i > step * 0.3:
+            opacity =  (i - step*0.3)/float((1-0.3)*step)
+            print opacity
+            setting.SetSurfaceTransparency (opacity*100)
+            doc.ActiveView.SetElementOverrides(money_symbol.Id, setting)
+  
+        t.Commit()
+
+
+     
+        uidoc.RefreshActiveView()
+     
 
 
 def player_rotate_animation(player, angle):
@@ -74,7 +117,7 @@ def player_move_animation_single(player, target_asset):
 
    
 
-    step = 10 
+    step = 20 
     for i in range(step + 1):
   
         pt_para = float(i)/step

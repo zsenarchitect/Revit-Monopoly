@@ -14,10 +14,13 @@ def play_sound(sound_file):
 
     #print "final path = " + path
 
-    
-    sp = SoundPlayer()
-    sp.SoundLocation = sound_file_path
-    sp.Play()
+    try:
+        sp = SoundPlayer()
+        sp.SoundLocation = sound_file_path
+        sp.Play()
+        return
+    except:
+        pass
 
 
 
@@ -35,10 +38,12 @@ def player_won():
 
 def money_transaction():
     """play sound when money transaction"""
+    play_sound("sound effect_money transaction.wav")
     pass
 
 def construction():
     """play sound when player build a building, upgrade or downgrade a property."""
+    play_sound("sound effect_construction_1.wav")
     pass
 
 
@@ -106,23 +111,30 @@ def speak(text, language='en', accent='com'):
     """
  
 
-    if text:
-        data = dict()
-        data["text"] = text
-        data["language"] = language
-        data["accent"] = accent
-        file_name = "Monopoly_Speaker.json"
-        user_doc_folder =  "{}\Documents".format(os.environ["USERPROFILE"])
+    if not text:
+        return
+    
+    if isinstance(text, list):
+        import random
+        text = random.choice(text)
         
-        monopoly_folder = "{}\Monopoly".format(user_doc_folder)
+        
+    data = dict()
+    data["text"] = text
+    data["language"] = language
+    data["accent"] = accent
+    file_name = "Monopoly_Speaker.json"
+    user_doc_folder =  "{}\Documents".format(os.environ["USERPROFILE"])
+    
+    monopoly_folder = "{}\Monopoly".format(user_doc_folder)
 
-        if not os.path.exists(monopoly_folder):
-            os.makedirs(monopoly_folder)
+    if not os.path.exists(monopoly_folder):
+        os.makedirs(monopoly_folder)
 
 
-        file_path = os.path.join(monopoly_folder, file_name)
-        with open(file_path, 'w') as f:
-            json.dump(data, f)
+    file_path = os.path.join(monopoly_folder, file_name)
+    with open(file_path, 'w') as f:
+        json.dump(data, f)
 
 
 

@@ -80,6 +80,9 @@ class Game:
         self.round += 1
         self.current_player_index = (
             self.current_player_index + 1) % len(self.players)
+        
+        # from pyrevit import forms
+        # forms.toast("player index  = {}".format(self.current_player_index))
 
     def update_player(self):
         if self.current_player.remaining_hold > 0:

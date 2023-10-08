@@ -22,9 +22,9 @@ I think it is more flexible to update game if store atr in python.
     """
 from Autodesk.Revit import DB
 
-
+IS_SIMULATED_GAME = True
 import time
-
+import SOUND
 import FINDER
 from TEAM import Team
 
@@ -178,6 +178,7 @@ class Player(object):
             target(Player or BuildingLocation object): the target to pay.
         """
         self.money -= abs(money)
+        SOUND.money_transaction()
 
         is_gain = False
         
@@ -204,6 +205,7 @@ class Player(object):
             money(abs.int): the money to come in.
         """
         self.money += abs(money)
+        SOUND.money_transaction()
 
         is_gain = True
         handler, ext_event = self.event_map["player_money_animation"]
@@ -217,6 +219,13 @@ class Player(object):
         self.pay_money_to_target(charge, None)
         print self.money
         
+
+    def pay_property(self, abstract_marker):
+        charge = abstract_marker.property.__class__.value_map[0]
+        property_owner = abstract_marker.property.owner
+        for player in self.game.player_collection.get_same_team_players(property_owner):
+            self.pay_money_to_target(charge/self.game.player_collection.get_same_team_number_count(property_owner), player)
+                
 
     def exchange_player_data(self, other_player, attr_name):
         """
@@ -353,24 +362,31 @@ class Player(object):
             print (abstract_marker.associated_card.get_action())
             return
         if action_index == 4:
-            res = FORMS.dialogue(main_text="Land on a purchaseable and no property there , do you want to buy it? ",
-                                 options=["Yes", "No"])
-            if res == "Yes":
+            if IS_SIMULATED_GAME:
+                res = "Yes"
+            else:
+                res = FORMS.dialogue(main_text="Land on a purchaseable and no property there , do you want to buy it? ",
+                                    options=["Yes", "No"])
+            if res == "Yes" :
                 print ("buy")
                 self.purchase_property(abstract_marker)
-            elif res == "No":print ("nothing")
+            elif res == "No":
+                print ("nothing")
+            print ("end action")
             return
         if action_index == 5.1:
-            res = FORMS.dialogue(main_text="Land on a property owned by " + self.owner,
+            res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
                                  sub_text="Do you want to upgrade it? ",
                                  options=["Yes", "No"])
             if res == "Yes":print ("upgrade")
             elif res == "No":print ("nothing")
             return
+        
         if action_index == 5.2:
-            res = FORMS.dialogue(main_text="Land on a property owned by " + self.owner,
+            res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
                                  sub_text="owner of this property is from other team, you need to pay charge.")
             print ("pay charge")
+            self.pay_property(abstract_marker)
             return
         
 

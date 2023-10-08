@@ -6,7 +6,7 @@ import random
 from ASSET import Asset
 import SOUND
 from pyrevit import forms
-
+import NOTIFICATION
 import os
 
 
@@ -20,11 +20,12 @@ class Dice(Asset):
         
         
         while True:
-            num =  random.randint(1, 15) 
+            num =  random.randint(1, 30) 
             """
             num = int (num * ((luck + 50)/100) )
             if luck > 70 and num <= 1:
                 continue
+                
             if luck < 30 and abs(num) >= 3:
                 continue
 
@@ -34,7 +35,7 @@ class Dice(Asset):
             break
 
         forms.toast("Dice = {}".format(num), title="Player {}'s Dice".format(self.player_name),  icon=self.icon_path, appid = "Monopoly")
-    
+        NOTIFICATION.pop_msg("Dice = {}".format(num))
         
         self.last_roll = num
         return num

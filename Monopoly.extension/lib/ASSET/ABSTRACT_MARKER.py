@@ -6,7 +6,7 @@
 from ASSET import Asset
 import ERROR_HANDLE
 import json
-
+import SOUND
 
 class AbstractMarker(Asset):
 
@@ -44,6 +44,9 @@ class AbstractMarker(Asset):
         
             # nothing to do here
             print ("case 1: Nothing to do here")
+            SOUND.speak(["There is nothing to do here.",
+                         "hmm, there is not much you can do here."])
+            
             return 1
         
         # if reach here, it means the spot is purchaseable, so lets check if it has a property or not.
@@ -53,6 +56,9 @@ class AbstractMarker(Asset):
         # case 4
         if not has_property:
             print ("case 4: Land on a purchaseable and no property there , do you want to buy it? ")
+            SOUND.speak(["Hi, this land is open for purchase. Do you want to buy it?",
+                         "You find a empty lot. Do you want to buy it?",
+                         "Great news, no one is owning this land. Do you want to buy it?"])
             return 4
         
         # case 5
@@ -61,14 +67,22 @@ class AbstractMarker(Asset):
             print ("case 5: Land on NOT purchaseable ")
             print (self.property)
             print  ("Land on a property owned by {}".format(self.property.owner))
-            if self.property.owner == self.get_occupied_characters:
+            if self.property.owner == self.occupying_player:
                 print ("you own this property, want to upgrade?")
+                SOUND.speak(["Oh, this land is owned by you. Do you want to upgrade it?",
+                             "You can upgrade this land if you want."])
                 return 5.1
             if self.property.owner.team != self.occupying_player.team:
                 print (" owner of this property is from other team, you need to pay charge.")
+                SOUND.speak(["Oops, this land is owned by another team. You will need to pay some charge",
+                             "Bummer, this land is owned by another team. You will need to pay some charge.",
+                             "Unlucky, you will need to pay another team for the charge here."])
                 return 5.2
-                
-
+        
+        
+    @property        
+    def occupying_player(self):
+        return self.get_occupied_characters()[0]
  
     @property
     def data(self):
