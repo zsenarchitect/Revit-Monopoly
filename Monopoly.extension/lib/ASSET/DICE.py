@@ -6,7 +6,7 @@ import random
 from ASSET import Asset
 import SOUND
 from pyrevit import forms
-
+import NOTIFICATION
 import os
 
 
@@ -34,7 +34,7 @@ class Dice(Asset):
             break
 
         forms.toast("Dice = {}".format(num), title="Player {}'s Dice".format(self.player_name),  icon=self.icon_path, appid = "Monopoly")
-    
+        NOTIFICATION.pop_msg("Dice = {}".format(num))
         
         self.last_roll = num
         return num
