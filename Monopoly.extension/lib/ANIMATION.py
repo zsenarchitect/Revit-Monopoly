@@ -24,7 +24,7 @@ def player_money_animation(player, money, is_gain):
         money(abs.int): revit object
         is_gain(bool): is gain or lose
     """
-    pass
+
 
     # call sound
     
@@ -34,6 +34,10 @@ def player_money_animation(player, money, is_gain):
     vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
     # translation = DB.Transform.CreateTranslation(vec)
     DB.ElementTransformUtils.MoveElement(doc, money_symbol.Id , vec)
+    
+    
+    mat = FINDER.get_material_by_name("money_positive") if is_gain else FINDER.get_material_by_name("money_negative")
+    money_symbol.LookupParameter("money_mat.").Set(mat.Id)
 
     t.Commit()
     uidoc.RefreshActiveView()
@@ -50,10 +54,12 @@ def player_money_animation(player, money, is_gain):
         money_symbol.Location.Point += DB.XYZ(0,0,0.2*i/float(step))
         # CLOUD.change_sky(wind)
         # MONEY_GATE.spin_gate()
-        
+        setting = DB.OverrideGraphicSettings()
         if i > step * 0.3:
-            opacity = 1 - (i - step*0.3)/float((1-0.3)*step)
+            opacity =  (i - step*0.3)/float((1-0.3)*step)
             print opacity
+            setting.SetSurfaceTransparency (opacity*100)
+            doc.ActiveView.SetElementOverrides(money_symbol.Id, setting)
   
         t.Commit()
 

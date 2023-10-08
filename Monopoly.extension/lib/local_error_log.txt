@@ -1,11 +1,11 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 184, in pay_money_to_target
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 185, in pay_money_to_target
     ANIMATION.player_money_animation(self, abs(money), is_gain)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 35, in player_money_animation
-    DB.ElementTransformUtils.MoveElement(doc, money_symbol.Id , translation)
-TypeError: expected XYZ, got Transform
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 40, in player_money_animation
+    money_symbol.LookupParameter("money_mat.").Set(mat)
+TypeError: expected int, got Material
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

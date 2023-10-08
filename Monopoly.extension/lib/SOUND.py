@@ -14,10 +14,13 @@ def play_sound(sound_file):
 
     #print "final path = " + path
 
-    
-    sp = SoundPlayer()
-    sp.SoundLocation = sound_file_path
-    sp.Play()
+    try:
+        sp = SoundPlayer()
+        sp.SoundLocation = sound_file_path
+        sp.Play()
+        return
+    except:
+        pass
 
 
 

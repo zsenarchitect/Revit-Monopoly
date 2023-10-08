@@ -360,7 +360,9 @@ class Player(object):
             if res == "Yes":
                 print ("buy")
                 self.purchase_property(abstract_marker)
-            elif res == "No":print ("nothing")
+            elif res == "No":
+                print ("nothing")
+            print ("end action")
             return
         if action_index == 5.1:
             res = FORMS.dialogue(main_text="Land on a property owned by " + self.owner,
