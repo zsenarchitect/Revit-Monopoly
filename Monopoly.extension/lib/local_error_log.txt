@@ -1,9 +1,11 @@
 Traceback (most recent call last):
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
+  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\ABSTRACT_MARKER.py", line 67, in get_action
-    if self.property.owner.team != self.occupying_player.team:
-AttributeError: 'AbstractMarker' object has no attribute 'occupying_player'
+  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 65, in __init__
+    SOUND.speak("Welcome to the world of Monopoly, in Revit!")
+  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\SOUND.py", line 125, in speak
+    json.dump(data, f)
+SystemError: Access to the path is denied.
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
