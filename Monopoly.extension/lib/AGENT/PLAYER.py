@@ -24,7 +24,7 @@ from Autodesk.Revit import DB
 
 
 import time
-
+import SOUND
 import FINDER
 from TEAM import Team
 
@@ -178,6 +178,7 @@ class Player(object):
             target(Player or BuildingLocation object): the target to pay.
         """
         self.money -= abs(money)
+        SOUND.money_transaction()
 
         is_gain = False
         
@@ -204,6 +205,7 @@ class Player(object):
             money(abs.int): the money to come in.
         """
         self.money += abs(money)
+        SOUND.money_transaction()
 
         is_gain = True
         handler, ext_event = self.event_map["player_money_animation"]

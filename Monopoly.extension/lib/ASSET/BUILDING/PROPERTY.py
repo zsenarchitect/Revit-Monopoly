@@ -4,6 +4,8 @@ doc = __revit__.ActiveUIDocument.Document
 
 from ASSET import Asset
 import DISPLAY
+import SOUND
+
 
 
 
@@ -29,6 +31,7 @@ class Property(Asset):
         self.associated_marker.revit_object.LookupParameter("level").Set(1)
         t.Commit()
         
+        SOUND.construction()
         self.update_color()
         
        

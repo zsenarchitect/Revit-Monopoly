@@ -35,10 +35,12 @@ def player_won():
 
 def money_transaction():
     """play sound when money transaction"""
+    play_sound("sound effect_money transaction.wav")
     pass
 
 def construction():
     """play sound when player build a building, upgrade or downgrade a property."""
+    play_sound("sound effect_construction_1.wav")
     pass
 
 
