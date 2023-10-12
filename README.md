@@ -11,3 +11,11 @@ So this time, i will be only store key information that will not get changed in 
 Another thing I have larned from the battleship game development  is that a good UI window and a in-game curser can real make thing interesting. And shared-family can be a great solution to add sub-element control in game.
 
 I have also learned that freeform rotation is possible when main model hosted to a adptive point. This will make the animation much better than before, becasue now player piece can face the direction of travel, that is a big visual improvement.
+
+
+
+issues:
+need money gate spin
+upgrade land property
+pay charge to two ember split
+ranking on form(regen form every 1 sec) and revit schedule
