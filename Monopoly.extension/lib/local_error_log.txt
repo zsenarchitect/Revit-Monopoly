@@ -3,7 +3,7 @@ Traceback (most recent call last):
     out = func(*args, **kwargs)
   File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 65, in __init__
     SOUND.speak("Welcome to the world of Monopoly, in Revit!")
-  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\SOUND.py", line 125, in speak
+  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\SOUND.py", line 137, in speak
     json.dump(data, f)
 SystemError: Access to the path is denied.
 

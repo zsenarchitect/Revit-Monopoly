@@ -129,7 +129,10 @@ def speak(text, language='en', accent='com'):
     monopoly_folder = "{}\Monopoly".format(user_doc_folder)
 
     if not os.path.exists(monopoly_folder):
-        os.makedirs(monopoly_folder)
+        try:
+            os.makedirs(monopoly_folder)
+        except:
+            return
 
 
     file_path = os.path.join(monopoly_folder, file_name)
