@@ -11,8 +11,8 @@ import SOUND
 
 class Property(Asset):
     value_map = {0:100,
-                 1:200,
-                 2:300,
+                 1:50,
+                 2:100,
                  3:500}
     charge_map = {0:150,
                   1:300,
@@ -65,7 +65,14 @@ class Property(Asset):
 
     def upgrade_level(self):
         # increase the level, and cost some money unless waived by card.
-        pass
+        fee = self.value
+        self.level += 1
+        t = DB.Transaction(doc, "upgrade property")
+        t.Start()
+        self.associated_marker.revit_object.LookupParameter("level").Set(self.level)
+        t.Commit()
+        return fee
+        
 
     def downgrade_level(self):
         # decrease the level.

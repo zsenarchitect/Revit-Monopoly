@@ -2,6 +2,7 @@
 import os
 from System.Media import SoundPlayer
 import json
+import random
 
 def play_sound(sound_file):
     """play sound"""
@@ -35,6 +36,15 @@ def player_bankrupted():
 def player_won():
     """play sound when player won"""
     pass
+
+def payday():
+    """_summary_
+    
+    """
+    play_sound("sound effect_money transaction.wav")
+
+def get_attention():
+    speak("Come back comeback."*20)
 
 def money_transaction():
     """play sound when money transaction"""
@@ -115,7 +125,7 @@ def speak(text, language='en', accent='com'):
         return
     
     if isinstance(text, list):
-        import random
+        
         text = random.choice(text)
         
         

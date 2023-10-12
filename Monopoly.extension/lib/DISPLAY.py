@@ -1,7 +1,10 @@
 # this handle the revit display.
 # include setting color in view, change filter.
 from Autodesk.Revit import DB
-doc = __revit__.ActiveUIDocument.Document
+try:
+    doc = __revit__.ActiveUIDocument.Document
+except:
+    pass
 import ERROR_HANDLE
 
 #@ERROR_HANDLE.try_catch_error--------------> do not add wrapper, otherwise the event register will fail.

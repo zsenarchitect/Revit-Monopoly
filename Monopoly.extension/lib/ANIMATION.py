@@ -14,8 +14,11 @@ import FINDER
 import DISPLAY
 import time
 from Autodesk.Revit import DB
-doc = __revit__.ActiveUIDocument.Document
-uidoc = __revit__.ActiveUIDocument
+try:
+    doc = __revit__.ActiveUIDocument.Document
+    uidoc = __revit__.ActiveUIDocument
+except:
+    pass
 
 def player_money_animation(player, money, is_gain):
     """money animation on revit object. affect color, symbol, sound, gradient change.
@@ -31,7 +34,8 @@ def player_money_animation(player, money, is_gain):
     money_symbol = FINDER.get_revit_obj_by_type_name("Money_Symbol")
     t = DB.Transaction(doc,"money" )
     t.Start()
-    vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
+    money_symbol.LookupParameter("text_display").Set("${}".format(money))
+    vec = player.revit_object.Location.Point + DB.XYZ(0,0,4) - money_symbol.Location.Point
     # translation = DB.Transform.CreateTranslation(vec)
     DB.ElementTransformUtils.MoveElement(doc, money_symbol.Id , vec)
     
@@ -42,7 +46,7 @@ def player_money_animation(player, money, is_gain):
     t.Commit()
     uidoc.RefreshActiveView()
     
-    
+    gate = player.game.board.map_key[0]
     step = 60 
     for i in range(step + 1):
 
@@ -53,11 +57,11 @@ def player_money_animation(player, money, is_gain):
         # vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
         money_symbol.Location.Point += DB.XYZ(0,0,0.2*i/float(step))
         # CLOUD.change_sky(wind)
-        # MONEY_GATE.spin_gate()
+        gate.spin()
         setting = DB.OverrideGraphicSettings()
         if i > step * 0.3:
             opacity =  (i - step*0.3)/float((1-0.3)*step)
-            print opacity
+            # print opacity
             setting.SetSurfaceTransparency (opacity*100)
             doc.ActiveView.SetElementOverrides(money_symbol.Id, setting)
   
@@ -66,6 +70,7 @@ def player_money_animation(player, money, is_gain):
 
      
         uidoc.RefreshActiveView()
+    uidoc.RefreshActiveView()
      
 
 
@@ -118,6 +123,7 @@ def player_move_animation_single(player, target_asset):
    
 
     step = 20 
+    gate = player.game.board.map_key[0]
     for i in range(step + 1):
   
         pt_para = float(i)/step
@@ -127,7 +133,7 @@ def player_move_animation_single(player, target_asset):
         t.Start()
         player.revit_object.Location.Point = temp_location
         # CLOUD.change_sky(wind)
-        # MONEY_GATE.spin_gate()
+        gate.spin(is_default_speed = target_asset.position_index != 0)
         t.Commit()
 
 
@@ -139,7 +145,9 @@ def player_move_animation_single(player, target_asset):
         uidoc.RefreshActiveView()
      
 
-
+    if target_asset.position_index == 0:
+        
+        player.go_thru_payday()
 
     return True
 
@@ -192,3 +200,4 @@ def gradually_disappear(element, time_interval):
         time_interval(int): time interval
     """
     pass
+

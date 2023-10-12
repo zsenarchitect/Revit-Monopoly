@@ -85,6 +85,7 @@ class game_ModelessForm(WPFWindow):
             from DISPLAY import colorize_players_by_team
             from LOGIC import master_game_play
 
+
             func_list = [player_money_animation,
                          player_move_animation,
                          colorize_players_by_team,
@@ -117,7 +118,7 @@ class game_ModelessForm(WPFWindow):
 
         names = ["Tom", "Jerry", "Timon", "Pumbaa"]
 
-        teams = ["Team A", "Team A", "Team B", "Team C"]
+        teams = ["Team A", "Team A", "Team B", "Team B"]
         sample_characters = ["Boot", "Cheese", "Duck", "Hat"]
         characters = sample_characters[0: len(names)]
         template_players = [TemplatePlayer(name, team, character)
@@ -135,6 +136,8 @@ class game_ModelessForm(WPFWindow):
 
     @ERROR_HANDLE.try_catch_error
     def game_start_click(self, sender, args):
+        self.open_auto_clicker()
+        
         if not hasattr(self, "game"):
             # validate the player info, make sure all field has valid input
             team_dict = dict()
@@ -147,9 +150,13 @@ class game_ModelessForm(WPFWindow):
 
                 else:
                     new_team = team_dict[template_player_info.team_name]
-                self.real_players.append(Player(new_team,
-                                                template_player_info,
-                                                self.event_map))
+                
+                real_player = Player(new_team,
+                                    template_player_info,
+                                    self.event_map)
+                self.real_players.append(real_player)
+
+                
 
             self.main_data_grid.ItemsSource = self.real_players
             # self.textblock_display_detail.Text = str(self.real_players)
@@ -172,7 +179,8 @@ class game_ModelessForm(WPFWindow):
         # result = self.game.play()# this is the old method but cannot sequence the event with good timing.
         # so changing to new method that wrap the entire round in one event. All things inside should happen in good sequence.
         handler, ext_event = self.event_map["master_game_play"]
-        handler.kwargs = self.game,
+        simulated_round = 80 # this if for the auto play when testing. set this as 1 for actual game
+        handler.kwargs = self.game, simulated_round
         ext_event.Raise()
         result = handler.OUT
 
@@ -188,13 +196,18 @@ class game_ModelessForm(WPFWindow):
         # print "mouse down"
         sender.DragMove()
 
+    def open_auto_clicker(self):
+        import os
+        exe = r"L:\4b_Applied Computing\01_Revit\04_Tools\08_EA Extensions\Project Settings\Exe\GENERAL_AUTO_CLICKER\GENERAL_AUTO_CLICKER.exe"
+        os.startfile(exe)
 
-################## main code below #####################
-output = script.get_output()
-output.close_others()
-
-
-if __name__ == "__main__":
+def main():
+    if not doc.Title.StartsWith("Monopoly Game Board"):
+        import open_main_file as OMF
+        OMF.open()
+        
+        return
+    
     t = DB.Transaction(doc, "Reset")
     t.Start()
     reset_board()
@@ -203,3 +216,11 @@ if __name__ == "__main__":
     # Let's launch our beautiful and useful form !
     
     modeless_form = game_ModelessForm()
+
+################## main code below #####################
+output = script.get_output()
+output.close_others()
+
+
+if __name__ == "__main__":
+    main()

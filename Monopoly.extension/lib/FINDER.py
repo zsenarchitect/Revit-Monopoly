@@ -10,8 +10,10 @@ logging.basicConfig(level=logging.INFO,
 
 
 from Autodesk.Revit import DB
-doc = __revit__.ActiveUIDocument.Document
-
+try:
+    doc = __revit__.ActiveUIDocument.Document
+except:
+    pass
 
 
 def get_all_generic_models():

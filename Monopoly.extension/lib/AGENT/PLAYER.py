@@ -166,6 +166,11 @@ class Player(object):
         """return True if money is less than 0"""
         return self.money < 0
 
+
+    def go_thru_payday(self):
+        SOUND.payday()
+        self.receive_money(200)
+        
     @ERROR_HANDLE.try_catch_error
     def pay_money_to_target(self, money, target):
         """This is the constructor method.
@@ -183,6 +188,7 @@ class Player(object):
         is_gain = False
         
         ANIMATION.player_money_animation(self, abs(money), is_gain)
+        self.update_schedulable_data()
         # handler, ext_event = self.game.event_map["player_money_animation"]
         # handler.kwargs = self, abs(money), is_gain
         # ext_event.Raise()
@@ -191,6 +197,7 @@ class Player(object):
             return
         if isinstance(target, Player):
             target.receive_money(money)
+            print 999
     
         else:
             target.owner.receive_money(money)
@@ -206,11 +213,13 @@ class Player(object):
         """
         self.money += abs(money)
         SOUND.money_transaction()
+        self.update_schedulable_data()
 
         is_gain = True
-        handler, ext_event = self.event_map["player_money_animation"]
-        handler.kwargs = self, abs(money), is_gain
-        ext_event.Raise()
+        ANIMATION.player_money_animation(self, abs(money), is_gain)
+        # handler, ext_event = self.event_map["player_money_animation"]
+        # handler.kwargs = self, abs(money), is_gain
+        # ext_event.Raise()
 
     def purchase_property(self, abstract_marker):
         # payout money and own a land.
@@ -219,12 +228,15 @@ class Player(object):
         self.pay_money_to_target(charge, None)
         print self.money
         
+    def upgrade_property(self, abstract_marker):
+        abstract_marker.property.upgrade_level()
 
     def pay_property(self, abstract_marker):
-        charge = abstract_marker.property.__class__.value_map[0]
+        charge = abstract_marker.property.charge
         property_owner = abstract_marker.property.owner
-        for player in self.game.player_collection.get_same_team_players(property_owner):
-            self.pay_money_to_target(charge/self.game.player_collection.get_same_team_number_count(property_owner), player)
+        for player in self.game.player_collection.get_same_team_players(property_owner):            
+            self.pay_money_to_target(int(charge/self.game.player_collection.get_same_team_number_count(property_owner)), 
+                                     player)
                 
 
     def exchange_player_data(self, other_player, attr_name):
@@ -239,6 +251,14 @@ class Player(object):
 
         """
         pass
+
+    def update_schedulable_data(self):
+        t = DB.Transaction(self.revit_object.Document, "Update Player Shedukleable Data")
+        t.Start()
+        self.revit_object.LookupParameter("Team Name").Set(self.team_name)
+        self.revit_object.LookupParameter("Comments").Set(self.format_name)
+        self.revit_object.LookupParameter("Money").Set(self.money)
+        t.Commit()
 
     @ERROR_HANDLE.try_catch_error
     def move(self, target):
@@ -368,28 +388,59 @@ class Player(object):
                 res = FORMS.dialogue(main_text="Land on a purchaseable and no property there , do you want to buy it? ",
                                     options=["Yes", "No"])
             if res == "Yes" :
-                print ("buy")
+                # print ("buy")
                 self.purchase_property(abstract_marker)
             elif res == "No":
-                print ("nothing")
-            print ("end action")
+                pass
+                # print ("nothing")
+            # print ("end action")
             return
         if action_index == 5.1:
-            res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
-                                 sub_text="Do you want to upgrade it? ",
-                                 options=["Yes", "No"])
-            if res == "Yes":print ("upgrade")
-            elif res == "No":print ("nothing")
+            fee = abstract_marker.property.value
+            if IS_SIMULATED_GAME:
+                res = "Yes"
+            else:
+                res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
+                                     sub_text="Do you want to upgrade it with ${}? ".format(fee),
+                                    options=["Yes", "No"])
+            # SOUND.get_attention()
+            if res == "Yes":
+                self.upgrade_property(abstract_marker)
+                self.pay_money_to_target(fee, None)
+                # print ("upgrade")
+            elif res == "No":
+                pass 
+                #print ("nothing")
             return
         
         if action_index == 5.2:
-            res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
-                                 sub_text="owner of this property is from other team, you need to pay charge.")
-            print ("pay charge")
+            if IS_SIMULATED_GAME:
+                res = "Yes"
+            else:
+                res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
+                                    sub_text="owner of this property is from other team, you need to pay charge.")
+            # print ("pay charge")
+            # SOUND.get_attention()
             self.pay_property(abstract_marker)
             return
         
-
+        if action_index == 5.3:
+            fee = int(abstract_marker.property.value * 1.5)
+            if IS_SIMULATED_GAME:
+                res = "Yes"
+            else:
+                res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name + "and you are on same team",
+                                     sub_text="Do you want to upgrade it with extra fee than upgrading yours, it will be ${}? ".format(fee),
+                                    options=["Yes", "No"])
+            # SOUND.get_attention()
+            if res == "Yes":
+                self.upgrade_property(abstract_marker)
+                self.pay_money_to_target(fee, None)
+                # print ("upgrade")
+            elif res == "No":
+                pass
+                # print ("nothing")
+            return
     # def take_action(self):
     #     """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
     #     pass

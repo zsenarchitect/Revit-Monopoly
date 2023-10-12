@@ -43,7 +43,7 @@ class AbstractMarker(Asset):
                 return 3
         
             # nothing to do here
-            print ("case 1: Nothing to do here")
+            # print ("case 1: Nothing to do here")
             SOUND.speak(["There is nothing to do here.",
                          "hmm, there is not much you can do here."])
             
@@ -55,29 +55,34 @@ class AbstractMarker(Asset):
         
         # case 4
         if not has_property:
-            print ("case 4: Land on a purchaseable and no property there , do you want to buy it? ")
+            # print ("case 4: Land on a purchaseable and no property there , do you want to buy it? ")
             SOUND.speak(["Hi, this land is open for purchase. Do you want to buy it?",
-                         "You find a empty lot. Do you want to buy it?",
-                         "Great news, no one is owning this land. Do you want to buy it?"])
+                         "You find a empty lot. Maybe it is time to invest?",
+                         "Great news, no one is owning this land. Build a house here if you want!"])
             return 4
         
         # case 5
         else:
             # this is not a free land
-            print ("case 5: Land on NOT purchaseable ")
-            print (self.property)
-            print  ("Land on a property owned by {}".format(self.property.owner))
+            # print ("case 5: Land on NOT purchaseable ")
+            # print (self.property)
+            # print  ("Land on a property owned by {}".format(self.property.owner))
             if self.property.owner == self.occupying_player:
-                print ("you own this property, want to upgrade?")
+                # print ("you own this property, want to upgrade?")
                 SOUND.speak(["Oh, this land is owned by you. Do you want to upgrade it?",
                              "You can upgrade this land if you want."])
                 return 5.1
             if self.property.owner.team != self.occupying_player.team:
-                print (" owner of this property is from other team, you need to pay charge.")
+                # print (" owner of this property is from other team, you need to pay charge.")
                 SOUND.speak(["Oops, this land is owned by another team. You will need to pay some charge",
                              "Bummer, this land is owned by another team. You will need to pay some charge.",
                              "Unlucky, you will need to pay another team for the charge here."])
                 return 5.2
+            if self.property.owner.team == self.occupying_player.team:
+                # print ("your team own this property, want to upgrade?")
+                SOUND.speak(["Oh, this land is owned by your team. Do you want to help to upgrade it? It will cost slight more than upgrading your own.",
+                             "You can upgrade this land if you want. It is your team's property, so it will cost slight more to upgrade."])
+                return 5.3
         
         
     @property        
@@ -87,6 +92,7 @@ class AbstractMarker(Asset):
     @property
     def data(self):
         comments = self.revit_object.LookupParameter("Comments").AsString()
+        return {}
         if comments:
             return json.loads(comments)
         else:

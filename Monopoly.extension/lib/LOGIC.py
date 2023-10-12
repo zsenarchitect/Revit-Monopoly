@@ -37,12 +37,20 @@ class Game:
         self.current_player_index = 0
         self.dice = Dice()
         self.update_all_player_color()
+        self.update_all_player_schedule_data()
 
         # change camera to view XX
 
     @property
     def current_player(self):
         return self.players[self.current_player_index]
+
+    def update_all_player_schedule_data(self):
+        return
+        handler, ext_event = self.event_map["update_schedulable_data"]
+        for player in self.players:
+            handler.kwargs = player,
+            ext_event.Raise()
 
     def update_all_player_color(self):
         handler, ext_event = self.event_map["colorize_players_by_team"]
@@ -110,10 +118,12 @@ class Game:
                                                                              self.dice.last_roll)
 
 
-def master_game_play(game):
-    game.play()
+def master_game_play(game, simulated_round = 1):
+    for i in range(simulated_round):
+        game.play()
     
 def reset_board():
+    
     import FINDER
     all_abstract_markers = [x for x in FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.Family.Name == "AbstractMarker"]
     
@@ -129,5 +139,10 @@ def reset_board():
         vec = final_pt - initial_pt
         translation = DB.Transform.CreateTranslation(vec)
         DB.AdaptiveComponentInstanceUtils.MoveAdaptiveComponentInstance (player , translation, True)
+        
+        
+        player.LookupParameter("Team Name").Set("Wait...")
+        player.LookupParameter("Comments").Set("Wait...")
+        player.LookupParameter("Money").Set(0)
         
  
