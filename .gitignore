@@ -7,7 +7,7 @@ __pycache__/
 Speaker_Error_Log.txt
 Monopoly.extension/lib/FINDER_log.txt
 Monopoly.extension/lib/local_error_log.txt
-
+Monopoly.extension\lib\LOG\FINDER_log.txt
 # ignore LOG folder
 Monopoly.extension/lib/LOG/*
 
