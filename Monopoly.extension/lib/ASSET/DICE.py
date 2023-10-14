@@ -14,6 +14,8 @@ class Dice(Asset):
     pass
 
 
+
+
     def roll(self, luck):
         """return random integer between 1 and 6"""
         SOUND.roll_dice()
