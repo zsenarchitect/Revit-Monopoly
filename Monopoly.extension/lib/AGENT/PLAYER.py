@@ -197,7 +197,7 @@ class Player(object):
             return
         if isinstance(target, Player):
             target.receive_money(money)
-            print 999
+            
     
         else:
             target.owner.receive_money(money)
@@ -226,7 +226,7 @@ class Player(object):
         abstract_marker.create_new_property(self)
         charge = abstract_marker.property.__class__.value_map[0]
         self.pay_money_to_target(charge, None)
-        print self.money
+        # print self.money
         
     def upgrade_property(self, abstract_marker):
         abstract_marker.property.upgrade_level()
