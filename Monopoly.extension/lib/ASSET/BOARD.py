@@ -50,13 +50,14 @@ class Board(Asset):
         for abstract_marker_instance in abstract_marker_instances:
             abstract_marker = AbstractMarker(abstract_marker_instance)
             self.map_key[abstract_marker.position_index] = abstract_marker
-          
+        self.on_track_marker_count = len(abstract_marker_instances) + 1 # plus 1 is for the gate
         #print (self.map_key)
         #self.update_file_position_index()
 
 
+    def validate_index_on_track(self, index):
 
-
+        return index % self.on_track_marker_count
 
 
     def update_file_position_index(self):

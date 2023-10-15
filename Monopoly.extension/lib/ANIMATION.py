@@ -13,12 +13,30 @@ import SOUND
 import FINDER
 import DISPLAY
 import time
+import System
 from Autodesk.Revit import DB
 try:
     doc = __revit__.ActiveUIDocument.Document
     uidoc = __revit__.ActiveUIDocument
 except:
     pass
+
+
+def highlight_asset(asset, turn_on = True):
+    """highlight asset.
+    Args:
+        asset(Asset): revit object
+    """
+    highlighter_symbol = FINDER.get_revit_obj_by_type_name("Highlighter")
+    t = DB.Transaction(doc,"highlighter" )
+    t.Start()
+    vec = asset.revit_object.Location.Point  - highlighter_symbol.Location.Point
+    DB.ElementTransformUtils.MoveElement(doc, highlighter_symbol.Id , vec)
+    if turn_on:
+        doc.ActiveView.UnhideElements (System.Collections.Generic.List[DB.ElementId]([highlighter_symbol.Id]))
+    else:
+        doc.ActiveView.HideElements (System.Collections.Generic.List[DB.ElementId]([highlighter_symbol.Id]))
+    t.Commit()
 
 def player_money_animation(player, money, is_gain):
     """money animation on revit object. affect color, symbol, sound, gradient change.

@@ -118,10 +118,11 @@ class Game:
                                                                              self.dice.last_roll)
 
 
-def master_game_play(game):
-    simulated_round = 80 if game.rule.is_simulated else 1
+def master_game_play(game, UI_window):
+    simulated_round = 10 if game.rule.is_simulated else 1
     for i in range(simulated_round):
         game.play()
+        UI_window.main_data_grid.ItemsSource = game.players
     
 def reset_board():
     
@@ -131,6 +132,10 @@ def reset_board():
     for marker in all_abstract_markers:
         marker.LookupParameter("show_house_desire").Set(0)
         marker.LookupParameter("level").Set(0)
+        
+    highlighter_symbol = FINDER.get_revit_obj_by_type_name("Highlighter")
+    import System
+    highlighter_symbol.Document.ActiveView.HideElements (System.Collections.Generic.List[DB.ElementId]([highlighter_symbol.Id]))
         
     all_players = [x for x in  FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.FamilyName == "PlayerModel"]
     for player in all_players:

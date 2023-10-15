@@ -276,12 +276,13 @@ class Player(object):
         
         
     def pay_property_singlar(self, abstract_marker):
+        ANIMATION.highlight_asset(abstract_marker.property)        
         charge = abstract_marker.property.charge
         property_owner = abstract_marker.property.owner
-        for player in self.game.player_collection.get_same_team_players(property_owner):            
+        for player in self.game.player_collection.get_same_team_players(property_owner):    
             self.pay_money_to_target(int(charge/self.game.player_collection.get_same_team_number_count(property_owner)), 
                                      player)
-        return
+        ANIMATION.highlight_asset(abstract_marker.property, turn_on=False)        
     
 
     def exchange_player_data(self, other_player, attr_name):

@@ -1,9 +1,9 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 168, in game_start_click
-    rule = Rule(max_game_round=80,
-TypeError: __init__() got an unexpected keyword argument 'is_simulated_game'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\FINDER.py", line 105, in get_abstract_marker_by_index
+    return board.map_key[index]
+KeyError: 50
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

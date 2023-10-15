@@ -126,6 +126,8 @@ class game_ModelessForm(WPFWindow):
 
         self.main_data_grid.ItemsSource = template_players
 
+
+
     @ERROR_HANDLE.try_catch_error
     def preview_selection_changed(self, sender, args):
         return
@@ -181,7 +183,7 @@ class game_ModelessForm(WPFWindow):
         # so changing to new method that wrap the entire round in one event. All things inside should happen in good sequence.
         handler, ext_event = self.event_map["master_game_play"]
         
-        handler.kwargs = self.game,
+        handler.kwargs = self.game, self
         ext_event.Raise()
         result = handler.OUT
 

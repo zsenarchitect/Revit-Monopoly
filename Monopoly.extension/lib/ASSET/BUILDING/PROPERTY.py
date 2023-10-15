@@ -34,12 +34,15 @@ class Property(Asset):
         SOUND.construction()
         self.update_color()
         
+        self.revit_object = doc.GetElement(self.associated_marker.revit_object.GetSubComponentIds ()[0])
+        
        
 
     def update_color(self):
         # update the color of the asset.
         DISPLAY.colorize_asset_by_agent(self.associated_marker, self.owner)
     
+
     
     @property
     def is_owned(self):

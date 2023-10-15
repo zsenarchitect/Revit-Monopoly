@@ -102,6 +102,7 @@ def get_abstract_marker_by_index(index, board = None):
     
     """
     if board:
+        index = board.validate_index_on_track(index)
         return board.map_key[index]
     
     all_gms = get_all_generic_models()
