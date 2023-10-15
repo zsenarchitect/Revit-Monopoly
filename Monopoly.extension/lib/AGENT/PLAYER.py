@@ -27,7 +27,7 @@ import time
 import SOUND
 import FINDER
 from TEAM import Team
-
+import FORMS
 import ANIMATION
 import ERROR_HANDLE
 from EVENT_HANDLE import SimpleEventHandler
@@ -51,7 +51,7 @@ class TemplatePlayer(object):
 
         self.luck = 50
         self.format_luck = "{}%".format(self.luck)
-        self.status = "Normal"
+        self.status = "Not Started"
         self.rank = 1
         self.format_rank = "NO.{}".format(self.rank)
 
@@ -94,6 +94,7 @@ class Player(object):
         self.position_index = 0  # 0 means have not start.
         self.velocity = 1  # this could be +4 or -3 to record speed and drecition on track
 
+        
         self.remaining_hold = 0
         self.status = template_player.status
         self.rank = template_player.rank
@@ -375,11 +376,23 @@ class Player(object):
         # avoid getting in the sam espot as other player
         while True:
             num = dice.roll(self.luck)
+            
+            if self.status == "Not Started" and num < 6:
+                # print ("dice too small to begin")
+                SOUND.speak("Need to roll 6 or larger to begin the game.")
+                if not self.is_in_simulated_game:
+                    FORMS.dialogue(main_text="{} need to roll 6 or larger to begin the game.".format(self.name))
+                return
+            else:
+                self.status = "Normal"
+                
+            
+            
             new_position = self.position_index + num * self.velocity
             new_position = new_position % (self.game.board.max_marker_index + 1)
             if new_position not in other_players_position:
                 break
-
+        
         """
         while True:
             current_position = player.position_index
@@ -409,6 +422,9 @@ class Player(object):
         """
         
         """return the action option at current position. and handle autoamtic action such as  update data,send to location, or pay rent"""
+        
+        
+        
         abstract_marker = self.game.board.map_key[target.position_index]
         # print abstract_marker
         action_index = abstract_marker.get_action()
@@ -417,7 +433,7 @@ class Player(object):
         if action_index is None:
             return
         
-        import FORMS
+        
         if action_index == 2:
             FORMS.dialogue(main_text= "You have to go to " + self.data.get("to"))
             print (abstract_marker.data.get("to"))
@@ -443,6 +459,8 @@ class Player(object):
             # print ("end action")
             return
         if action_index == 5.1:
+            if not abstract_marker.property.can_upgrade():
+                return
             fee = abstract_marker.property.value
             if self.is_in_simulated_game:
                 res = "Yes"

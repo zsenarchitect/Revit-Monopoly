@@ -107,9 +107,13 @@ class Game:
             SOUND.speak(self.current_player.name + " has " +
                         str(self.current_player.remaining_hold) + " hold")
             return
+        
+        
 
         self.current_player.game = self
         target = self.current_player.change_location()
+        if not target:
+            return
         self.current_player.take_action(target)
 
   

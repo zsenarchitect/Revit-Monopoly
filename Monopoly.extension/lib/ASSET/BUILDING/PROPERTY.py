@@ -66,9 +66,16 @@ class Property(Asset):
     def charge(self):
         return Property.charge_map[self.level]
 
+
+    def can_upgrade(self):
+        # check if the property can be upgraded.
+        return self.level < len(Property.value_map) - 1
+    
+    
     def upgrade_level(self):
         # increase the level, and cost some money unless waived by card.
         fee = self.value
+        
         self.level += 1
         t = DB.Transaction(doc, "upgrade property")
         t.Start()
