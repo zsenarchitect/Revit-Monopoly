@@ -47,14 +47,18 @@ def payday():
 def get_attention():
     speak("Come back comeback."*20)
 
-def money_transaction():
+def money_transaction(is_gain = True):
     """play sound when money transaction"""
-    play_sound("sound effect_money transaction.wav")
+    if is_gain:
+        play_sound("sound effect_mario coin.wav")
+    else:
+        play_sound("sound effect_money transaction.wav")
     pass
 
 def construction():
     """play sound when player build a building, upgrade or downgrade a property."""
     play_sound("sound effect_construction_1.wav")
+    play_sound("sound effect_mario 1up.wav")
     pass
 
 

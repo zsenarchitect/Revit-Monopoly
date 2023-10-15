@@ -36,7 +36,7 @@ class Dice(Asset):
 
         forms.toast("Dice = {}".format(num), title="Player {}'s Dice".format(self.player_name),  icon=self.icon_path, appid = "Monopoly")
         NOTIFICATION.pop_msg("Dice = {}".format(num))
-        SOUND.speak("Player {}'s Dice get {}".format(self.player_name, num))
+        SOUND.speak("Player {} get {} on dice".format(self.player_name, num))
         
         self.last_roll = num
         return num

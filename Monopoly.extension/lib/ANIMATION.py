@@ -38,7 +38,7 @@ def highlight_asset(asset, turn_on = True):
         doc.ActiveView.HideElements (System.Collections.Generic.List[DB.ElementId]([highlighter_symbol.Id]))
     t.Commit()
 
-def player_money_animation(player, money, is_gain):
+def player_money_animation(player, money, is_gain, is_quick = False):
     """money animation on revit object. affect color, symbol, sound, gradient change.
     Args:
         player(Player): game player
@@ -65,7 +65,7 @@ def player_money_animation(player, money, is_gain):
     uidoc.RefreshActiveView()
     
     gate = player.game.board.map_key[0]
-    step = 60 
+    step = 10 if is_quick else 60 
     for i in range(step + 1):
 
    
@@ -101,7 +101,7 @@ def player_rotate_animation(player, angle):
     pass
 
 
-def player_move_animation_single(player, target_asset):
+def player_move_animation_single(player, target_asset, is_quick):
     SOUND.player_moving()
 
 
@@ -140,7 +140,7 @@ def player_move_animation_single(player, target_asset):
 
    
 
-    step = 20 
+    step = 5 if is_quick else 20 
     gate = player.game.board.map_key[0]
     for i in range(step + 1):
   
@@ -169,7 +169,7 @@ def player_move_animation_single(player, target_asset):
 
     return True
 
-def player_move_animation(player, target_asset):
+def player_move_animation(player, target_asset, is_quick = False):
     """player move animation.
     Args:
         player(Player): player object
@@ -190,7 +190,7 @@ def player_move_animation(player, target_asset):
        
         #print ("the next local position index is {}".format(next_position))
         local_target_asset = player.game.board.map_key[next_position]
-        player_move_animation_single(player, local_target_asset)
+        player_move_animation_single(player, local_target_asset, is_quick)
         
 
         

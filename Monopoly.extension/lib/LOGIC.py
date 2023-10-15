@@ -119,10 +119,13 @@ class Game:
 
 
 def master_game_play(game, UI_window):
-    simulated_round = 10 if game.rule.is_simulated else 1
+    game.rule.is_simulated = UI_window.checkbox_is_simulated.IsChecked
+    
+    factor = 100 if UI_window.checkbox_full_auto.IsChecked else 1
+    simulated_round = len(game.players) * factor if game.rule.is_simulated else len(game.players)
     for i in range(simulated_round):
         game.play()
-        UI_window.main_data_grid.ItemsSource = game.players
+        
     
 def reset_board():
     

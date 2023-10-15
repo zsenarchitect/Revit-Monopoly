@@ -4,7 +4,8 @@ from ASSET import Asset
 class Gate(Asset):
     
     def spin(self, is_default_speed = True):
-        return
+        if is_default_speed:
+            return
         current_angle = self.revit_object.LookupParameter("angle").AsDouble()
         if is_default_speed:
             step = 0.05

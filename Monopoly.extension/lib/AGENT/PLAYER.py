@@ -175,7 +175,8 @@ class Player(object):
 
     def go_thru_payday(self):
         SOUND.payday()
-        self.receive_money(200)
+        money = int(abs(0.1 * self.money))
+        self.receive_money(money)
         
     @ERROR_HANDLE.try_catch_error
     def pay_money_to_target(self, money, target):
@@ -189,11 +190,11 @@ class Player(object):
             target(Player or BuildingLocation object): the target to pay.
         """
         self.money -= abs(money)
-        SOUND.money_transaction()
+        SOUND.money_transaction(is_gain = False)
 
         is_gain = False
         
-        ANIMATION.player_money_animation(self, abs(money), is_gain)
+        ANIMATION.player_money_animation(self, abs(money), is_gain, is_quick = self.game.rule.is_simulated)
         self.update_schedulable_data()
         # handler, ext_event = self.game.event_map["player_money_animation"]
         # handler.kwargs = self, abs(money), is_gain
@@ -218,11 +219,11 @@ class Player(object):
             money(abs.int): the money to come in.
         """
         self.money += abs(money)
-        SOUND.money_transaction()
+        SOUND.money_transaction(is_gain = True)
         self.update_schedulable_data()
 
         is_gain = True
-        ANIMATION.player_money_animation(self, abs(money), is_gain)
+        ANIMATION.player_money_animation(self, abs(money), is_gain, is_quick = self.game.rule.is_simulated)
         # handler, ext_event = self.event_map["player_money_animation"]
         # handler.kwargs = self, abs(money), is_gain
         # ext_event.Raise()
@@ -317,7 +318,7 @@ class Player(object):
 
         """
 
-        ANIMATION.player_move_animation(self, target)
+        ANIMATION.player_move_animation(self, target, is_quick = self.game.rule.is_simulated)
         return True
     
     
@@ -369,7 +370,7 @@ class Player(object):
         dice = self.game.dice
 
         # print (player.name + " is playing")
-        dice.player_name = self.name
+        dice.player_name = "{}'s {}".format(self.name, self.character)
 
         # avoid getting in the sam espot as other player
         while True:

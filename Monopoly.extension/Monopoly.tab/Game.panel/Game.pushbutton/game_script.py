@@ -12,13 +12,13 @@ __title__ = "Play\nMonopoly"
 from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
 # from System import EventHandler, Uri
 
-
+import System
 from Autodesk.Revit.Exceptions import InvalidOperationException
 from pyrevit.forms import WPFWindow
 from pyrevit import forms
 from pyrevit import script
-
-
+import threading
+import datetime
 from Autodesk.Revit import DB  # fastest DB
 from Autodesk.Revit import UI
 try:
@@ -167,13 +167,13 @@ class game_ModelessForm(WPFWindow):
             # lock the file, saveas the revit file so not losing original stage.
             players = self.real_players
             board = Board()
-            rule = Rule(max_game_round=80,
+            rule = Rule(max_game_round=800,
                         max_money=8000,
-                        is_simulated = True)
+                        is_simulated = self.checkbox_is_simulated)
             event_map = self.event_map
             self.game = Game(players, board, rule, event_map)
 
-            self.bt_start_game.Content = " Next Player "
+            self.bt_start_game.Content = " Next Round "
 
             SOUND.speak("Game Start! Let's make some money rain!")
 
@@ -188,7 +188,36 @@ class game_ModelessForm(WPFWindow):
         result = handler.OUT
 
         self.textblock_display_detail.Text = str(result)
+        self.main_data_grid.ItemsSource = self.game.players
+        
+        self.main_data_grid.Visibility = System.Windows.Visibility.Collapsed
+        
+        self.start_clocked_update_grid()
+        
+    def start_clocked_update_grid(self):
+        
+        self.timer_count = 100
+        self.timer = threading.Timer(1, self.on_timed_event)
+        self.timer.start()
+        # print 123
+        
+        
+        
+    def on_timed_event(self):
+        # begin main action
+        self.main_data_grid.ItemsSource = []
+        # end of main action
+        print 000
+        print("The Elapsed event was raised at", datetime.datetime.now())
+        self.timer_count -= 1
+        if self.timer_count > 0:
 
+            self.timer = threading.Timer(1, self.on_timed_event)
+            self.timer.start()
+        else:
+            print -999
+            self.timer.cancel()
+                
     @ERROR_HANDLE.try_catch_error
     def close_Click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context

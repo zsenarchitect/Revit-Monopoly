@@ -176,9 +176,10 @@
                     </DataGrid>
 
                     <TextBlock x:Name="textblock_display_detail" Text="text display:" Grid.Column="0" Grid.Row="1"/>
-
+                    
                 </Grid>
-
+                <CheckBox x:Name="checkbox_full_auto" Content ="Fully Auto(run continously for many round)"/>
+                <CheckBox x:Name="checkbox_is_simulated" Content ="Simulated Game(Ignore all action window)" IsChecked="False"/>
                 <Button Content=" Start Game " Click="game_start_click" x:Name="bt_start_game"
                         HorizontalAlignment="Center" VerticalAlignment="Center"  
                         Margin="0,5,0,1" BorderBrush="#FFF40101" BorderThickness="1,1,1,1"

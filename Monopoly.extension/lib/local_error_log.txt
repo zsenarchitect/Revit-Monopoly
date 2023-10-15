@@ -1,9 +1,9 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\FINDER.py", line 105, in get_abstract_marker_by_index
-    return board.map_key[index]
-KeyError: 50
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 197, in pay_money_to_target
+    ANIMATION.player_money_animation(self, abs(money), is_gain, is_quick = self.game.rule.is_simulated)
+AttributeError: Rule instance has no attribute 'is_simulated_game'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
