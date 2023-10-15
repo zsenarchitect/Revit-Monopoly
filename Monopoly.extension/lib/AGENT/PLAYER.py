@@ -22,7 +22,7 @@ I think it is more flexible to update game if store atr in python.
     """
 from Autodesk.Revit import DB
 
-IS_SIMULATED_GAME = True
+
 import time
 import SOUND
 import FINDER
@@ -44,7 +44,7 @@ class TemplatePlayer(object):
         self.format_name = name
         self.team_name = team_name
         self.character = character
-        self.money = 1000
+        self.money = 2000
         self.format_money = "${}".format(self.money)
         self.properties = []
         self.format_properties = len(self.properties)
@@ -103,10 +103,16 @@ class Player(object):
         # kidnapped: no money in/out, can happen anywhere.
         # bankrupted: out of game. Property free to take.
 
-
-
+    def __eq__(self, other):
+        return self.name == other.name and self.team == other.team
+    
+    
     def __repr__(self):
         return "{}:{}:{}".format(self.name, self.team.team_name, self.character)
+
+    @property
+    def is_in_simulated_game(self):
+        return self.game.rule.is_simulated
 
     @property
     def format_name(self):
@@ -231,13 +237,52 @@ class Player(object):
     def upgrade_property(self, abstract_marker):
         abstract_marker.property.upgrade_level()
 
-    def pay_property(self, abstract_marker):
+    def pay_property(self, abstract_marker, search_dir = 0):
+
+        next_collection = self.search_connected_properties(abstract_marker, search_dir = 1)
+        previous_collection = self.search_connected_properties(abstract_marker, search_dir = -1)
+        # temp = []
+        # for pair in zip(next_collection, previous_collection):
+        #     for item in pair :
+        #         temp.append(item )
+        temp = next_collection + previous_collection
+        # print (temp)
+        # print [abstract_marker] + temp
+        for abstract_marker in [abstract_marker] + temp:
+            self.pay_property_singlar(abstract_marker)
+
+
+    def search_connected_properties(self, begining_marker, search_dir = 1):
+        # search next many
+        next_collection = []
+        next_abstract_marker = FINDER.get_abstract_marker_by_index(begining_marker.position_index + search_dir,
+                                                                   board = self.game.board)
+
+        while True:
+            if not next_abstract_marker:
+                # print("no next marker found, exiting")
+                break
+            if not hasattr(next_abstract_marker, "property"):
+                # print("no next marker property  found, exiting")
+                break
+            if next_abstract_marker.property.owner.team == begining_marker.property.owner.team:
+                next_collection.append(next_abstract_marker)
+            else: 
+                break
+            next_abstract_marker = FINDER.get_abstract_marker_by_index(next_abstract_marker.position_index + search_dir,
+                                                                       board = self.game.board)
+                
+        return next_collection
+        
+        
+    def pay_property_singlar(self, abstract_marker):
         charge = abstract_marker.property.charge
         property_owner = abstract_marker.property.owner
         for player in self.game.player_collection.get_same_team_players(property_owner):            
             self.pay_money_to_target(int(charge/self.game.player_collection.get_same_team_number_count(property_owner)), 
                                      player)
-                
+        return
+    
 
     def exchange_player_data(self, other_player, attr_name):
         """
@@ -382,7 +427,7 @@ class Player(object):
             print (abstract_marker.associated_card.get_action())
             return
         if action_index == 4:
-            if IS_SIMULATED_GAME:
+            if self.is_in_simulated_game:
                 res = "Yes"
             else:
                 res = FORMS.dialogue(main_text="Land on a purchaseable and no property there , do you want to buy it? ",
@@ -397,7 +442,7 @@ class Player(object):
             return
         if action_index == 5.1:
             fee = abstract_marker.property.value
-            if IS_SIMULATED_GAME:
+            if self.is_in_simulated_game:
                 res = "Yes"
             else:
                 res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
@@ -414,7 +459,7 @@ class Player(object):
             return
         
         if action_index == 5.2:
-            if IS_SIMULATED_GAME:
+            if self.is_in_simulated_game:
                 res = "Yes"
             else:
                 res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name,
@@ -426,7 +471,7 @@ class Player(object):
         
         if action_index == 5.3:
             fee = int(abstract_marker.property.value * 1.5)
-            if IS_SIMULATED_GAME:
+            if self.is_in_simulated_game:
                 res = "Yes"
             else:
                 res = FORMS.dialogue(main_text="Land on a property owned by " + abstract_marker.property.owner.format_name + "and you are on same team",

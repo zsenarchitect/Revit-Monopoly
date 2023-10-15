@@ -1,11 +1,9 @@
 Traceback (most recent call last):
-  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 185, in pay_money_to_target
-    ANIMATION.player_money_animation(self, abs(money), is_gain)
-  File "C:\Users\sen.zhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 34, in player_money_animation
-    vec = player.revit_object.Location.Point + DB.XYZ(0,0,7) - money_symbol.Location.Point
-AttributeError: 'NoneType' object has no attribute 'Location'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\Monopoly.tab\Game.panel\Game.pushbutton\game_script.py", line 168, in game_start_click
+    rule = Rule(max_game_round=80,
+TypeError: __init__() got an unexpected keyword argument 'is_simulated_game'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

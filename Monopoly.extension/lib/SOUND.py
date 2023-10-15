@@ -42,6 +42,7 @@ def payday():
     
     """
     play_sound("sound effect_money transaction.wav")
+    speak("Payday!Receiving some money in your pocket.")
 
 def get_attention():
     speak("Come back comeback."*20)

@@ -166,7 +166,8 @@ class game_ModelessForm(WPFWindow):
             players = self.real_players
             board = Board()
             rule = Rule(max_game_round=80,
-                        max_money=1200)
+                        max_money=8000,
+                        is_simulated = True)
             event_map = self.event_map
             self.game = Game(players, board, rule, event_map)
 
@@ -179,8 +180,8 @@ class game_ModelessForm(WPFWindow):
         # result = self.game.play()# this is the old method but cannot sequence the event with good timing.
         # so changing to new method that wrap the entire round in one event. All things inside should happen in good sequence.
         handler, ext_event = self.event_map["master_game_play"]
-        simulated_round = 80 # this if for the auto play when testing. set this as 1 for actual game
-        handler.kwargs = self.game, simulated_round
+        
+        handler.kwargs = self.game,
         ext_event.Raise()
         result = handler.OUT
 

@@ -2,7 +2,7 @@
 
 
 class Rule:
-    def __init__(self, max_game_round, max_money):
+    def __init__(self, max_game_round, max_money, is_simulated):
         """setupt game rule
         
         Args:
@@ -12,4 +12,5 @@ class Rule:
         """
         self.max_game_round = max_game_round
         self.max_money = max_money
+        self.is_simulated = is_simulated
         pass

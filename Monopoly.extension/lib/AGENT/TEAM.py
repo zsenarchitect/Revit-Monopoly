@@ -21,7 +21,10 @@ class Team(object):
     def __str__(self):
         return "{}".format(self.team_name)
     
-
+    def __eq__(self, other):
+        return self.team_name == other.team_name
+    
+    
     @property
     def is_solo(self):
         return self.team_name == "Solo"

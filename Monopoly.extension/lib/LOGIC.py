@@ -118,7 +118,8 @@ class Game:
                                                                              self.dice.last_roll)
 
 
-def master_game_play(game, simulated_round = 1):
+def master_game_play(game):
+    simulated_round = 80 if game.rule.is_simulated else 1
     for i in range(simulated_round):
         game.play()
     

@@ -91,7 +91,7 @@ def get_revit_obj_by_index(index):
 
 
 @ERROR_HANDLE.try_catch_error
-def get_abstract_marker_by_index(index):
+def get_abstract_marker_by_index(index, board = None):
     """get the abstract marker by the position index, the index can be lookup in the board map
     
     Args:
@@ -101,13 +101,16 @@ def get_abstract_marker_by_index(index):
         AbstractMarker: the abstract marker
     
     """
+    if board:
+        return board.map_key[index]
+    
     all_gms = get_all_generic_models()
     for gm in all_gms:
         if not gm.LookupParameter("Mark"):
-            print (gm.Id)
+            # print (gm.Id)
             continue
         if gm.LookupParameter("Mark").AsString() == str(index):
-            print ("find ")
+            # print ("find ")
             return gm
 
 
