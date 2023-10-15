@@ -3,6 +3,8 @@ from Autodesk.Revit import DB
 from ASSET.DICE import Dice
 import SOUND
 from PLAYER_COLLECTION import PlayerCollection
+import System
+doc = __revit__.ActiveUIDocument.Document
 
 
 class Game:
@@ -38,6 +40,13 @@ class Game:
         self.dice = Dice()
         self.update_all_player_color()
         self.update_all_player_schedule_data()
+        
+        all_views = DB.FilteredElementCollector(doc).OfClass(DB.View).ToElements()
+        for view in all_views:
+            if view.Name == "$Camera_Main":
+                self.main_view = view
+                break
+
 
         # change camera to view XX
 
@@ -58,6 +67,7 @@ class Game:
         ext_event.Raise()
 
     def play(self):
+        __revit__.ActiveUIDocument.ActiveView = self.main_view
         if not self.is_game_over:
             
             self.update_round()
@@ -137,7 +147,7 @@ def reset_board():
         marker.LookupParameter("level").Set(0)
         
     highlighter_symbol = FINDER.get_revit_obj_by_type_name("Highlighter")
-    import System
+    
     highlighter_symbol.Document.ActiveView.HideElements (System.Collections.Generic.List[DB.ElementId]([highlighter_symbol.Id]))
         
     all_players = [x for x in  FINDER.get_all_generic_models() if hasattr(x, "Symbol") and x.Symbol.FamilyName == "PlayerModel"]

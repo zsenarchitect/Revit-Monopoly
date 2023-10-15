@@ -20,7 +20,7 @@ class Dice(Asset):
         
         
         while True:
-            num =  random.randint(1, 10) 
+            num =  random.randint(1, 15) 
             """
             num = int (num * ((luck + 50)/100) )
             if luck > 70 and num <= 1:
