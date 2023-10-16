@@ -224,6 +224,19 @@ class game_ModelessForm(WPFWindow):
         self.Close()
         # print (str(self.real_players))
 
+    def ranking_click(self, sender, e):
+        all_views = DB.FilteredElementCollector(doc).OfClass(DB.View).ToElements()
+        for view in all_views:
+            if view.Name == "Player Ranking":
+                __revit__.ActiveUIDocument.ActiveView = view
+                return
+    def main_view_click(self, sender, e):
+        all_views = DB.FilteredElementCollector(doc).OfClass(DB.View).ToElements()
+        for view in all_views:
+            if view.Name == "$Camera_Main":
+                __revit__.ActiveUIDocument.ActiveView = view
+                return
+
     def mouse_down_main_panel(self, sender, args):
         # print "mouse down"
         sender.DragMove()

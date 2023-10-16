@@ -3,11 +3,9 @@ Traceback (most recent call last):
     out = func(*args, **kwargs)
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 322, in move
     ANIMATION.player_move_animation(self, target, is_quick = self.game.rule.is_simulated)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 199, in player_move_animation
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 181, in player_move_animation
     player.position_index = local_target_asset.position_index
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ASSET\__init__.py", line 85, in position_index
-    return int(self.revit_object.LookupParameter("Mark").AsString())
-Exception: The referenced object is not valid, possibly because it has been deleted from the database, or its creation was undone.
+UnboundLocalError: Local variable 'local_target_asset' referenced before assignment.
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

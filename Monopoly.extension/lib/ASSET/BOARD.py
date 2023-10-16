@@ -39,8 +39,8 @@ class Board(Asset):
         self.map_key = {
             -1: birth_place,
             0: gate,
-            -10: hospital,
-            -11: jail#,
+            -10: jail,
+            -11: hospital#,
             #-12: train_station_A,
             #-13: train_station_B,
             #-14: store

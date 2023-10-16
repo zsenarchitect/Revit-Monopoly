@@ -178,7 +178,7 @@ def player_move_animation(player, target_asset, is_quick = False):
     if target_asset.position_index < 0:
 
         player_move_animation_single(player, target_asset, is_quick)
-        player.position_index = local_target_asset.position_index
+        player.position_index = target_asset.position_index
         return
 
     current_position = player.position_index
