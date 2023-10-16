@@ -65,7 +65,7 @@ def player_money_animation(player, money, is_gain, is_quick = False):
     uidoc.RefreshActiveView()
     
     gate = player.game.board.map_key[0]
-    step = 10 if is_quick else 60 
+    step = 10 if is_quick else 30 
     for i in range(step + 1):
 
    
@@ -140,7 +140,7 @@ def player_move_animation_single(player, target_asset, is_quick):
 
    
 
-    step = 5 if is_quick else 20 
+    step = 5 if is_quick else 10 
     gate = player.game.board.map_key[0]
     for i in range(step + 1):
   
@@ -175,7 +175,11 @@ def player_move_animation(player, target_asset, is_quick = False):
         player(Player): player object
         target_asset(Asset ): targt object
     """
+    if target_asset.position_index < 0:
 
+        player_move_animation_single(player, target_asset, is_quick)
+        player.position_index = local_target_asset.position_index
+        return
 
     current_position = player.position_index
     next_position = current_position # this is to assume the next position is the same as current position
@@ -191,10 +195,6 @@ def player_move_animation(player, target_asset, is_quick = False):
         #print ("the next local position index is {}".format(next_position))
         local_target_asset = player.game.board.map_key[next_position]
         player_move_animation_single(player, local_target_asset, is_quick)
-        
-
-        
-        
         
         player.position_index = local_target_asset.position_index
     

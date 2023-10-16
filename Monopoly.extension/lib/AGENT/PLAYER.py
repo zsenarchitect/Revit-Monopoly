@@ -435,8 +435,9 @@ class Player(object):
         
         
         if action_index == 2:
-            FORMS.dialogue(main_text= "You have to go to " + self.data.get("to"))
-            print (abstract_marker.data.get("to"))
+            FORMS.dialogue(main_text= "You have to go to {}".format( abstract_marker.data.get("to")))
+            target = self.game.board.map_key[abstract_marker.data.get("to")] 
+            self.move(target)
             return
         if action_index == 3:
             
@@ -460,6 +461,7 @@ class Player(object):
             return
         if action_index == 5.1:
             if not abstract_marker.property.can_upgrade():
+                SOUND.speak("Your property is at highest upgradable level.")
                 return
             fee = abstract_marker.property.value
             if self.is_in_simulated_game:

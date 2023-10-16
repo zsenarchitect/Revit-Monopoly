@@ -135,7 +135,7 @@ class Game:
 def master_game_play(game, UI_window):
     game.rule.is_simulated = UI_window.checkbox_is_simulated.IsChecked
     
-    factor = 100 if UI_window.checkbox_full_auto.IsChecked else 1
+    factor = 20 if UI_window.checkbox_full_auto.IsChecked else 1
     simulated_round = len(game.players) * factor if game.rule.is_simulated else len(game.players)
     for i in range(simulated_round):
         game.play()
@@ -149,6 +149,10 @@ def reset_board():
     for marker in all_abstract_markers:
         marker.LookupParameter("show_house_desire").Set(0)
         marker.LookupParameter("level").Set(0)
+        
+        if marker.LookupParameter("show_card_desire").AsInteger() == 1 and marker.LookupParameter("can_purchase").AsInteger() == 0:
+            marker.LookupParameter("Comments").Set(r'{"action":"card"}')
+        
         
     highlighter_symbol = FINDER.get_revit_obj_by_type_name("Highlighter")
     

@@ -29,11 +29,17 @@ class AbstractMarker(Asset):
         
         
             # case 2
-            if self.data.get("to", None):
+            if self.data.has_key("to"):
                 print ("case 2: go somehwere")
-                print ("Go to " + self.data.get("to"))
+                print ("Go to {}".format(self.data.get("to")))
                 
                 return 2
+            
+            if self.data.has_key("action"):
+                print ("case 2.1: get card")
+      
+                
+                return 2.1
             
 
             # case 3
@@ -92,8 +98,10 @@ class AbstractMarker(Asset):
     @property
     def data(self):
         comments = self.revit_object.LookupParameter("Comments").AsString()
-        return {}
+        # convert a string of json to a dict
+
         if comments:
+            comments = comments.replace("'", '"')
             return json.loads(comments)
         else:
             return {}

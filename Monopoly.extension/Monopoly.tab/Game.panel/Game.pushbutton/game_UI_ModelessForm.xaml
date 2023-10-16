@@ -162,13 +162,13 @@
                             <DataGridTextColumn  IsReadOnly="True" Header="Character" Width="*"  Binding="{Binding character}"/>
                             <DataGridTextColumn  IsReadOnly="False" Header="Name" Width="*" Binding="{Binding format_name}"/>
                             <DataGridTextColumn  IsReadOnly="False" Header="Team" Width="*"  Binding="{Binding team_name}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Luck" Width="*"  Binding="{Binding format_luck}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Status" Width="*"   Binding="{Binding status}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Luck" Width="*" Visibility="Collapsed" Binding="{Binding format_luck}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Status" Width="*" Visibility="Collapsed"  Binding="{Binding status}"/>
 
 
-                            <DataGridTextColumn  IsReadOnly="True" Header="Money" Width="*"   Binding="{Binding format_money}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Property" Width="*"  Binding="{Binding format_properties}"/>
-                            <DataGridTextColumn  IsReadOnly="True" Header="Ranking" Width="*"   Binding="{Binding format_rank}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Money" Width="*"  Visibility="Collapsed" Binding="{Binding format_money}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Property" Width="*" Visibility="Collapsed" Binding="{Binding format_properties}"/>
+                            <DataGridTextColumn  IsReadOnly="True" Header="Ranking" Width="*"  Visibility="Collapsed" Binding="{Binding format_rank}"/>
 
 
 
