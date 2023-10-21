@@ -36,7 +36,7 @@ class AbstractMarker(Asset):
                 return 2
             
             if self.data.has_key("action"):
-                print ("case 2.1: get card")
+                # print ("case 2.1: get card")
       
                 
                 return 2.1
@@ -95,16 +95,7 @@ class AbstractMarker(Asset):
     def occupying_player(self):
         return self.get_occupied_characters()[0]
  
-    @property
-    def data(self):
-        comments = self.revit_object.LookupParameter("Comments").AsString()
-        # convert a string of json to a dict
 
-        if comments:
-            comments = comments.replace("'", '"')
-            return json.loads(comments)
-        else:
-            return {}
 
     @property
     def has_card_associated(self):

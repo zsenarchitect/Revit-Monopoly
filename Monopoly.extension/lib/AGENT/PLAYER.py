@@ -29,6 +29,7 @@ import FINDER
 from TEAM import Team
 import FORMS
 import ANIMATION
+from ASSET.CARD import Card
 import ERROR_HANDLE
 from EVENT_HANDLE import SimpleEventHandler
 
@@ -234,6 +235,7 @@ class Player(object):
         abstract_marker.create_new_property(self)
         charge = abstract_marker.property.__class__.value_map[0]
         self.pay_money_to_target(charge, None)
+        self.properties.append(abstract_marker.property)
         # print self.money
         
     def upgrade_property(self, abstract_marker):
@@ -309,7 +311,7 @@ class Player(object):
         t.Commit()
 
     @ERROR_HANDLE.try_catch_error
-    def move(self, target):
+    def move(self, target, is_direct = False):
         """
          target can be any asset obj.
         # this will call animation.
@@ -318,8 +320,13 @@ class Player(object):
             target(Asset):  target object to move into. .
 
         """
-
-        ANIMATION.player_move_animation(self, target, is_quick = self.game.rule.is_simulated)
+        if is_direct:
+            ANIMATION.player_move_animation_single(self, target, is_quick=self.game.rule.is_simulated)
+        
+        else:
+            ANIMATION.player_move_animation(self, target, is_quick = self.game.rule.is_simulated)
+        
+        self.position_index = target.position_index
         return True
     
     
@@ -437,13 +444,17 @@ class Player(object):
         if action_index == 2:
             FORMS.dialogue(main_text= "You have to go to {}".format( abstract_marker.data.get("to")))
             target = self.game.board.map_key[abstract_marker.data.get("to")] 
-            self.move(target)
-            return
-        if action_index == 3:
+            self.move(target, is_direct = True)
+            self.remaining_hold = target.data.get("hold",  0)
+            self.status = target.data.get("hold_text", "")
             
-            FORMS.dialogue(main_text= "You pick up a card!",
-                           sub_text= self.associated_card.get_action())
-            print (abstract_marker.associated_card.get_action())
+            return
+        if action_index == 2.1:
+            
+            FORMS.dialogue(main_text= Card.get_card()["title"],
+                           sub_text= str(Card.get_card()))
+            # print (abstract_marker.associated_card.get_action())
+            
             return
         if action_index == 4:
             if self.is_in_simulated_game:

@@ -1,6 +1,7 @@
 import logging
 import ERROR_HANDLE
 import os
+import json
 logging.basicConfig(level=logging.INFO,
                     filename="{}\{}_log.txt".format(ERROR_HANDLE.LOG_FOLDER,
                                                     os.path.basename(__file__).rstrip(".py")),
@@ -49,6 +50,17 @@ class Asset(object):
         """
         return self.revit_object.LookupParameter("Comments").AsString()
     
+    
+    @property
+    def data(self):
+        comments = self.revit_object.LookupParameter("Comments").AsString()
+        # convert a string of json to a dict
+
+        if comments:
+            comments = comments.replace("'", '"')
+            return json.loads(comments)
+        else:
+            return {}
 
     def hide(self, animated = False):
         """hide asset in view.

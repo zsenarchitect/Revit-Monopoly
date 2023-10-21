@@ -2,6 +2,8 @@
 from Autodesk.Revit import DB
 from ASSET.DICE import Dice
 import SOUND
+import NOTIFICATION
+import FORMS
 from PLAYER_COLLECTION import PlayerCollection
 import System
 doc = __revit__.ActiveUIDocument.Document
@@ -49,6 +51,7 @@ class Game:
 
 
         # change camera to view XX
+        self.dice.last_roll = -1
 
     @property
     def current_player(self):
@@ -104,9 +107,27 @@ class Game:
 
     def update_player(self):
         if self.current_player.remaining_hold > 0:
-            SOUND.speak(self.current_player.name + " has " +
-                        str(self.current_player.remaining_hold) + " hold")
+            
+            self.current_player.remaining_hold -= 1
+            note = "{} is {}.\n{} rounds remaining.".format(self.current_player.name,
+                               self.current_player.status,
+                               str(self.current_player.remaining_hold))
+            FORMS.dialogue(main_text=note)
+            SOUND.speak(note)
             return
+        
+        elif self.current_player.remaining_hold == 0 and self.current_player.status != "Normal":
+            
+            if self.current_player.status != "Not Started":
+                
+                current_location_asset = self.board.map_key[self.current_player.position_index]
+                target_index = current_location_asset.data.get("to",None)
+                if target_index:
+                    target = self.board.map_key[target_index]
+                    self.current_player.move(target,is_direct=True)
+                    self.current_player.status = "Normal"
+                    SOUND.speak("{} is now back in game!".format(self.current_player.name))
+                return
         
         
 
@@ -135,7 +156,7 @@ class Game:
 def master_game_play(game, UI_window):
     game.rule.is_simulated = UI_window.checkbox_is_simulated.IsChecked
     
-    factor = 20 if UI_window.checkbox_full_auto.IsChecked else 1
+    factor = 5 if UI_window.checkbox_full_auto.IsChecked else 1
     simulated_round = len(game.players) * factor if game.rule.is_simulated else len(game.players)
     for i in range(simulated_round):
         game.play()

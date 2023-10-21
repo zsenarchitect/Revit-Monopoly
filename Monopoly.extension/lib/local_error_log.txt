@@ -1,11 +1,9 @@
 Traceback (most recent call last):
   File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 322, in move
-    ANIMATION.player_move_animation(self, target, is_quick = self.game.rule.is_simulated)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 181, in player_move_animation
-    player.position_index = local_target_asset.position_index
-UnboundLocalError: Local variable 'local_target_asset' referenced before assignment.
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 323, in move
+    ANIMATION.player_move_animation_single(self, target, is_quick=self.is_in_simulated)
+AttributeError: 'Player' object has no attribute 'is_in_simulated'
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########
