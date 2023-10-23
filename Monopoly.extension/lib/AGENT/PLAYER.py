@@ -458,10 +458,12 @@ class Player(object):
             # print (abstract_marker.associated_card.get_action())
             if card_data["action"] == "to":
                 self.action_to_special_location(card_data)
-            if card_data["action"] == "hold":
+            elif card_data["action"] == "hold":
                 self.action_hold_in_place(card_data)
-            if card_data["action"] == "money":
+            elif card_data["action"] == "money":
                 self.action_money(card_data)
+            else:
+                FORMS.dialogue(main_text= "the card is work-in-progress")
             return
         if action_index == 4:
             if self.is_in_simulated_game:
@@ -537,11 +539,13 @@ class Player(object):
         self.move(target, is_direct = True)
         if hasattr(target, "holding_round"):
             
-            sim_holding = target.holding_round
-            print ("sim holding round is {}".format(sim_holding))
-         
-        self.remaining_hold = target.data.get("hold",  0)
-        self.status = target.data.get("hold_text", "")
+            holding_round = target.holding_round
+            # print ("sim holding round is {}".format(holding_round))
+        
+            # self.remaining_hold = target.data.get("hold",  0)         
+            # self.status = target.data.get("hold_text", "")
+            self.status = target.holding_text
+            self.remaining_hold = holding_round
         
         
     def action_money(self, card_data):
@@ -563,22 +567,30 @@ class Player(object):
         current_location_asset = self.game.board.map_key[self.position_index]
         if hasattr(current_location_asset, "get_holding_charge"):
             
-            sim_holding_charge = current_location_asset.get_holding_charge(self)
-            print ("sim holding charge is {}".format(sim_holding_charge))
-        holding_charge = current_location_asset.data.get("charge",None)
-        if holding_charge:
-            additional_note = "You are paying ${} for holding.".format(holding_charge)
+            holding_charge = current_location_asset.get_holding_charge(self)
+            # print ("sim holding charge is {}".format(holding_charge))
+            
+            # holding_charge = current_location_asset.data.get("charge",None)
+   
+    
+            additional_note = "You are paying ${} while holding.".format(holding_charge)
         
-        FORMS.dialogue(main_text=note, sub_text=additional_note)
-        if holding_charge:
+            FORMS.dialogue(main_text=note, sub_text=additional_note)
+       
             self.pay_money_to_target(holding_charge, None)
+            
+        else:
+            FORMS.dialogue(main_text=note)
         SOUND.speak(note)
         
     def clear_holding(self):
-        current_location_asset = self.board.map_key[self.position_index]
-        target_index = current_location_asset.data.get("to",None)
-        if target_index:
-            target = self.board.map_key[target_index]
+        current_location_asset = self.game.board.map_key[self.position_index]
+        # target_index = current_location_asset.data.get("to",None)
+        if hasattr(current_location_asset,"exit_to"):
+        
+            target_index = current_location_asset.exit_to
+        
+            target = self.game.board.map_key[target_index]
             self.move(target,is_direct=True)
             self.status = "Normal"
             SOUND.speak("{} is now back in game!".format(self.name))

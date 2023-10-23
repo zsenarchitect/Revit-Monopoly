@@ -10,4 +10,13 @@ class Jail(Asset):
     
     @property
     def holding_round(self):
-        return 3
+        return 5
+    
+    
+    @property
+    def holding_text(self):
+        return "still in jail."
+    
+    @property
+    def exit_to(self):
+        return 13

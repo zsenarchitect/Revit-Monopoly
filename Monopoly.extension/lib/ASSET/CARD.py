@@ -12,12 +12,16 @@ class Card(Asset):
                 {"title":"Invader! ", "action":"exchange",},
                 {"title":"Thunder storm hit best building", "action":"demolish",},
                 {"title":"rat found! building downgrade", "action":"downgrade"},
+                {"title":"Free building upgrade for all your properties", "action":"upgrade", "value":"player"},
                 {"title":"bigest credit card! Force purchurse any building", "action":"force_buy"},
                 {"title":"demolish the richest buikding in enermy team", "action":"demolish"},
 
 
-
+                {"title":"Tax season! All other team player play 20% tax","action":"other_team_tax","value":0.2},
                 {"title":"Winning lottery","action":"money","value":500},
+                {"title":"Winning lottery","action":"money","value":500},
+                {"title":"Winning lottery","action":"money","value":500},
+                {"title":"Winning big lottery!","action":"money","value":2000},
                 {"title":"Fined for missing tax season","action":"money","value":-1000},
                 {"title":"Finding wallet on the trash can","action":"money","value":1000}]
 

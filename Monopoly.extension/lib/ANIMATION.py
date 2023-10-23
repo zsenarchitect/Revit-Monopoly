@@ -65,7 +65,7 @@ def player_money_animation(player, money, is_gain, is_quick = False):
     uidoc.RefreshActiveView()
     
     gate = player.game.board.map_key[0]
-    step = 10 if is_quick else 30 
+    step = 5 if is_quick else 12 
     for i in range(step + 1):
 
    
@@ -140,7 +140,7 @@ def player_move_animation_single(player, target_asset, is_quick):
 
    
 
-    step = 5 if is_quick else 10 
+    step = 3 if is_quick else 5 
     gate = player.game.board.map_key[0]
     for i in range(step + 1):
   

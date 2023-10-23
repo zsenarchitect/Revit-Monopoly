@@ -1,9 +1,11 @@
 Traceback (most recent call last):
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 23, in wrapper
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ERROR_HANDLE.py", line 24, in wrapper
     out = func(*args, **kwargs)
-  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 323, in move
-    ANIMATION.player_move_animation_single(self, target, is_quick=self.is_in_simulated)
-AttributeError: 'Player' object has no attribute 'is_in_simulated'
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\AGENT\PLAYER.py", line 200, in pay_money_to_target
+    ANIMATION.player_money_animation(self, abs(money), is_gain, is_quick = self.game.rule.is_simulated)
+  File "C:\Users\szhang\github\Revit-Monopoly\Monopoly.extension\lib\ANIMATION.py", line 84, in player_money_animation
+    doc.ActiveView.SetElementOverrides(money_symbol.Id, setting)
+Exception: The view type does not support Visibility/Graphics Overriddes.
 
 
 ######If you have EnneadTab UI window open, just close the window. Do no more action, otherwise the program might crash.##########

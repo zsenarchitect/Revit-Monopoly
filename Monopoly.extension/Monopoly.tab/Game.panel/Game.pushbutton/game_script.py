@@ -116,9 +116,9 @@ class game_ModelessForm(WPFWindow):
         # this will be replaced by idenpendent dropdown menu Each cell can edit the name, team.
         # the team can be Tean A or B, or indepedent.
 
-        names = ["Tom", "Jerry", "Timon", "Pumbaa"]
+        names = ["Tom",  "Timon", "Jerry","Pumbaa"]
 
-        teams = ["Team A", "Team A", "Team B", "Team B"]
+        teams = ["Team A", "Team B", "Team A", "Team B"]
         sample_characters = ["Boot", "Cheese", "Duck", "Hat"]
         characters = sample_characters[0: len(names)]
         template_players = [TemplatePlayer(name, team, character)
