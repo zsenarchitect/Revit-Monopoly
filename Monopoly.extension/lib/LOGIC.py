@@ -108,25 +108,15 @@ class Game:
     def update_player(self):
         if self.current_player.remaining_hold > 0:
             
-            self.current_player.remaining_hold -= 1
-            note = "{} is {}.\n{} rounds remaining.".format(self.current_player.name,
-                               self.current_player.status,
-                               str(self.current_player.remaining_hold))
-            FORMS.dialogue(main_text=note)
-            SOUND.speak(note)
+            self.current_player.update_holding()
+            
             return
         
         elif self.current_player.remaining_hold == 0 and self.current_player.status != "Normal":
             
             if self.current_player.status != "Not Started":
                 
-                current_location_asset = self.board.map_key[self.current_player.position_index]
-                target_index = current_location_asset.data.get("to",None)
-                if target_index:
-                    target = self.board.map_key[target_index]
-                    self.current_player.move(target,is_direct=True)
-                    self.current_player.status = "Normal"
-                    SOUND.speak("{} is now back in game!".format(self.current_player.name))
+                self.current_player.clear_holding()
                 return
         
         

@@ -442,19 +442,25 @@ class Player(object):
         
         
         if action_index == 2:
-            FORMS.dialogue(main_text= "You have to go to {}".format( abstract_marker.data.get("to")))
+          
             target = self.game.board.map_key[abstract_marker.data.get("to")] 
+            FORMS.dialogue(main_text= "Transporting to {}".format( target.__class__.__name__))
             self.move(target, is_direct = True)
             self.remaining_hold = target.data.get("hold",  0)
             self.status = target.data.get("hold_text", "")
             
             return
         if action_index == 2.1:
-            
-            FORMS.dialogue(main_text= Card.get_card()["title"],
-                           sub_text= str(Card.get_card()))
+            card_data = Card.get_card()
+            FORMS.dialogue(main_text= card_data["title"],
+                           sub_text= str(card_data))
             # print (abstract_marker.associated_card.get_action())
-            
+            if card_data["action"] == "to":
+                self.action_to_special_location(card_data)
+            if card_data["action"] == "hold":
+                self.action_hold_in_place(card_data)
+            if card_data["action"] == "money":
+                self.action_money(card_data)
             return
         if action_index == 4:
             if self.is_in_simulated_game:
@@ -522,3 +528,48 @@ class Player(object):
     # def take_action(self):
     #     """all the handle for make decision on purchase, all action here need be descion made by pplayer."""
     #     pass
+
+
+
+    def action_to_special_location(self, card_data):
+        target = self.game.board.map_key[card_data.get("value")] 
+        self.move(target, is_direct = True)
+        self.remaining_hold = target.data.get("hold",  0)
+        self.status = target.data.get("hold_text", "")
+        
+        
+    def action_money(self, card_data):
+        if card_data["value"]>0:
+            self.receive_money(card_data["value"])
+            return
+        self.pay_money_to_target(abs(card_data["value"]), None)
+        
+    def action_hold_in_place(self, card_data):
+        self.remaining_hold = card_data.get("value",  0)
+        self.status = card_data.get("title", "")
+        
+    def update_holding(self):
+        self.remaining_hold -= 1
+        note = "{} is {}.\n{} rounds remaining.".format(self.name,
+                                                        self.status,
+                                                        str(self.remaining_hold))
+        
+        current_location_asset = self.game.board.map_key[self.position_index]
+        holding_charge = current_location_asset.data.get("charge",None)
+        if holding_charge:
+            additional_note = "You are paying ${} for holding.".format(holding_charge)
+        
+        FORMS.dialogue(main_text=note, sub_text=additional_note)
+        if holding_charge:
+            self.pay_money_to_target(holding_charge, None)
+        SOUND.speak(note)
+        
+    def clear_holding(self):
+        current_location_asset = self.board.map_key[self.position_index]
+        target_index = current_location_asset.data.get("to",None)
+        if target_index:
+            target = self.board.map_key[target_index]
+            self.move(target,is_direct=True)
+            self.status = "Normal"
+            SOUND.speak("{} is now back in game!".format(self.name))
+        

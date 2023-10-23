@@ -4,21 +4,21 @@ from ASSET import Asset
 
 
 class Card(Asset):
-    contents = [{"title":"Go to Jail for being too sexy","to":-10},
-                {"title":"get hit by a flying baseball","to":-11},
-                {"title":"kidnapped by UFO","hold":2},
-                {"title":"spy reveal! Exchanging team", "exchange":"team"},
-                {"title":"Theft of the year!Exchange money with richest player", "exchange":"richest_player"},
-                {"title":"Invader! ", "exchange":"xxx"},
-                {"title":"Thunder storm hit best building", "demolish":"xxx"},
-                {"title":"rat found! building downgrade", "downgrade":"xxx"},
-                {"title":"demolish the richest buikding in enermy team", "exchange":"xxx"},
+    contents = [{"title":"Go to Jail for being too sexy","action":"to", "value":-10},
+                {"title":"get hit by a flying baseball","action":"to","value":-11},
+                {"title":"kidnapped by UFO","action":"hold", "value":2},
+                {"title":"spy reveal! Exchanging team", "action":"exchange", "value": "team"},
+                {"title":"Theft of the year!Exchange money with richest player", "action":"exchange", "value":"richest_player"},
+                {"title":"Invader! ", "action":"exchange",},
+                {"title":"Thunder storm hit best building", "action":"demolish",},
+                {"title":"rat found! building downgrade", "action":"downgrade"},
+                {"title":"demolish the richest buikding in enermy team", "action":"downgrade"},
 
 
 
-
-                {"title":"Fined for missing tax season","money":-1000},
-                {"title":"Finding wallet on the trash can","money":1000}]
+                {"title":"Winning lottery","action":"money","value":500},
+                {"title":"Fined for missing tax season","action":"money","value":-1000},
+                {"title":"Finding wallet on the trash can","action":"money","value":1000}]
 
     @classmethod
     def get_card(cls):
