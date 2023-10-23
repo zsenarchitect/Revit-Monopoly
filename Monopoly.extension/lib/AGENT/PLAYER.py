@@ -99,6 +99,7 @@ class Player(object):
         self.remaining_hold = 0
         self.status = template_player.status
         self.rank = template_player.rank
+        self.profession = None
 
         # jail: no money in/out, can use money to get out early, display as grey
         # hospital: can receive money, must pay fee per round.
@@ -534,6 +535,11 @@ class Player(object):
     def action_to_special_location(self, card_data):
         target = self.game.board.map_key[card_data.get("value")] 
         self.move(target, is_direct = True)
+        if hasattr(target, "holding_round"):
+            
+            sim_holding = target.holding_round
+            print ("sim holding round is {}".format(sim_holding))
+         
         self.remaining_hold = target.data.get("hold",  0)
         self.status = target.data.get("hold_text", "")
         
@@ -555,6 +561,10 @@ class Player(object):
                                                         str(self.remaining_hold))
         
         current_location_asset = self.game.board.map_key[self.position_index]
+        if hasattr(current_location_asset, "get_holding_charge"):
+            
+            sim_holding_charge = current_location_asset.get_holding_charge(self)
+            print ("sim holding charge is {}".format(sim_holding_charge))
         holding_charge = current_location_asset.data.get("charge",None)
         if holding_charge:
             additional_note = "You are paying ${} for holding.".format(holding_charge)

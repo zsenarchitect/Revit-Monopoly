@@ -12,7 +12,8 @@ class Card(Asset):
                 {"title":"Invader! ", "action":"exchange",},
                 {"title":"Thunder storm hit best building", "action":"demolish",},
                 {"title":"rat found! building downgrade", "action":"downgrade"},
-                {"title":"demolish the richest buikding in enermy team", "action":"downgrade"},
+                {"title":"bigest credit card! Force purchurse any building", "action":"force_buy"},
+                {"title":"demolish the richest buikding in enermy team", "action":"demolish"},
 
 
 

@@ -3,6 +3,7 @@ from __future__ import print_function
 # -*- coding: utf-8 -*-
 import traceback
 import os
+from pyrevit import script
 """
 import logging
 
@@ -44,7 +45,7 @@ def print_note(string):
     show_note = True
     if show_note:
         try:
-            #from pyrevit import script
+            
           
             script.get_output().print_md( "***[DEBUG NOTE]***:{}".format(string))
         except Exception as e:

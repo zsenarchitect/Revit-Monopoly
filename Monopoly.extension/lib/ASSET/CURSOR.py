@@ -15,7 +15,7 @@ class Cursor(Asset):
     
 
     def move_forward(self, step = 1):
-        """move the curver object forward by syep number
+        """move the curver object forward by step number
         Args:
             step (positive int, optional): step number. Defaults to 1.
         """
@@ -24,14 +24,14 @@ class Cursor(Asset):
         pass
 
     def move_backward(self, step = 1):
-        """move the curver object backward by syep number
+        """move the curver object backward by step number
         Args:
             step (positive int, optional): step number. Defaults to 1.
             #this will call the move forward with negative step
         """
         pass
 
-        self.move_forward(-step)
+        self.move_forward(-abs(step))
 
     
     

@@ -8,7 +8,7 @@ class Bank:
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls)
-            cls._instance.global_balance = 2500
+            cls._instance.global_balance = 5000
         return cls._instance
     
     def pay_player(self, player):
