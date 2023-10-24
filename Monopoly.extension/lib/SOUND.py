@@ -3,12 +3,25 @@ import os
 from System.Media import SoundPlayer
 import json
 import random
+import threading
+
 
 def play_sound(sound_file):
+    SoundPlayer(sound_file)
+
+class SoundPlayer:
+    def __init__(self, file):
+        self.sound_file = file
+        self. timer = threading. timer(1, self.play_sound_func)
+        self.timer. start()
+        self.timer. cancel()
+
+
+def play_sound_func(self):
     """play sound"""
 
     root_folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    sound_file_path = "{}\\bin\\audio\\{}".format(root_folder, sound_file)
+    sound_file_path = "{}\\bin\\audio\\{}".format(root_folder, self.sound_file)
 
     #print "sound_file_path = " + sound_file_path
 
