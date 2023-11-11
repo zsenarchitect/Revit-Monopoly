@@ -239,8 +239,13 @@ class Player(object):
         self.properties.append(abstract_marker.property)
         # print self.money
         
-    def upgrade_property(self, abstract_marker):
-        abstract_marker.property.upgrade_level()
+    def upgrade_property(self, abstract_marker_or_property):
+        if hasattr(abstract_marker_or_property,"property"):
+            
+            abstract_marker_or_property.property.upgrade_level()
+            return
+        abstract_marker_or_property.upgrade_level()
+        
 
     def pay_property(self, abstract_marker, search_dir = 0):
 
@@ -462,6 +467,8 @@ class Player(object):
                 self.action_hold_in_place(card_data)
             elif card_data["action"] == "money":
                 self.action_money(card_data)
+            elif card_data["action"] == "upgrade":
+                self.action_upgrade(card_data)
             else:
                 FORMS.dialogue(main_text= "the card is work-in-progress")
             return
@@ -546,7 +553,14 @@ class Player(object):
             # self.status = target.data.get("hold_text", "")
             self.status = target.holding_text
             self.remaining_hold = holding_round
-        
+    
+    
+    def action_upgrade(self, card_data):
+        if card_data["value"]=="self all":
+            for property in self.properties:
+                self.upgrade_property(property)
+        else:
+            FORMS.dialogue(main_text="wip")
         
     def action_money(self, card_data):
         if card_data["value"]>0:
