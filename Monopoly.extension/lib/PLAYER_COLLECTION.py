@@ -18,12 +18,6 @@ class PlayerCollection:
     def players(self):
         return PlayerCollection._instance.players
 
-    def update_player_info(self, player):
-        for i in range(len(self.players)):
-            if self.players[i].Id == player.Id:
-                self.players[i] = player
-                return
-    
     
     def get_other_players(self, excluded_player):
         return [player for player in self.players if excluded_player.Id != player.Id]
@@ -31,8 +25,7 @@ class PlayerCollection:
     def get_same_team_players(self, my_player):
         return [player for player in self.players if player.team == my_player.team]
     
-    def get_enermy_players(self, my_player):
-        return [player for player in self.players if player.team != my_player.team]
+    
  
     def get_same_team_number_count(self, player):
         return len(self.get_same_team_players(player))
