@@ -4,26 +4,35 @@ from ASSET import Asset
 
 
 class Card(Asset):
-    contents = [{"title":"Go to Jail for being too sexy","action":"to", "value":-10},
-                {"title":"get hit by a flying baseball","action":"to","value":-11},
-                {"title":"kidnapped by UFO","action":"hold", "value":2},
-                {"title":"spy reveal! Exchanging team", "action":"exchange", "value": "team"},
-                {"title":"Theft of the year!Exchange money with richest player", "action":"exchange", "value":"richest_player"},
-                {"title":"Invader! ", "action":"exchange",},
-                {"title":"Thunder storm hit best building", "action":"demolish",},
-                {"title":"rat found! building downgrade", "action":"downgrade"},
-                {"title":"Free building upgrade for all your properties", "action":"upgrade", "value":"self all"},
-                {"title":"bigest credit card! Force purchurse any building", "action":"force_buy"},
-                {"title":"demolish the richest buikding in enermy team", "action":"demolish"},
+    raw_contents = [{"title":"Go to Jail for being too sexy","action":"to", "value":-10, "chance": 1},
+                    {"title":"get hit by a flying baseball","action":"to","value":-11, "chance": 1},
+                    {"title":"kidnapped by UFO","action":"hold", "value":2, "chance": 1},
+                    {"title":"spy reveal! Exchanging team", "action":"exchange", "value": "team", "chance": 1},
+                    {"title":"Theft of the year!Exchange money with richest player", "action":"exchange", "value":"richest_player", "chance": 1},
+                    {"title":"Invader! ", "action":"exchange", "chance": 1},
+                    {"title":"Thunder storm hit best building", "action":"demolish", "chance": 1},
+                    {"title":"rat found! building downgrade", "action":"downgrade", "chance": 1},
+                    
+                    {"title":"Free building upgrade for all your properties", "action":"upgrade", "value":"self all", "chance": 1},
+                    {"title":"You pay 3 random buildings upgrade for your enermy team", "action":"upgrade", "value":"enermy 3", "chance": 100},
+                    {"title":"bigest credit card! Force purchurse any building", "action":"force_buy", "chance": 1},
+                    {"title":"demolish the richest buikding in enermy team", "action":"demolish", "chance": 1},
 
 
-                {"title":"Tax season! All other team player play 20% tax","action":"other_team_tax","value":0.2},
-                {"title":"Winning lottery","action":"money","value":500},
-                {"title":"Winning lottery","action":"money","value":500},
-                {"title":"Winning lottery","action":"money","value":500},
-                {"title":"Winning big lottery!","action":"money","value":2000},
-                {"title":"Fined for missing tax season","action":"money","value":-1000},
-                {"title":"Finding wallet on the trash can","action":"money","value":1000}]
+                    {"title":"Tax season! All other team player play 20% tax","action":"other_team_tax","value":0.2, "chance": 1},
+                    {"title":"Winning lottery","action":"money","value":500, "chance": 1},
+                    {"title":"Winning lottery","action":"money","value":500, "chance": 1},
+                    {"title":"Winning lottery","action":"money","value":500, "chance": 1},
+                    {"title":"Winning big lottery!","action":"money","value":2000, "chance": 1},
+                    {"title":"Fined for missing tax season","action":"money","value":-1000, "chance": 1},
+                    {"title":"Finding wallet on the trash can","action":"money","value":1000, "chance": 1}]
+
+    contents = []
+    for item in raw_contents:
+        count = item["chance"]
+        for i in range(count):
+            contents.append(item)
+
 
     @classmethod
     def get_card(cls):

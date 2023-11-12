@@ -22,7 +22,7 @@ I think it is more flexible to update game if store atr in python.
     """
 from Autodesk.Revit import DB
 
-
+import random
 import time
 import SOUND
 import FINDER
@@ -559,6 +559,29 @@ class Player(object):
         if card_data["value"]=="self all":
             for property in self.properties:
                 self.upgrade_property(property)
+        elif card_data["value"]=="enermy 3":
+            enermies = self.game.player_collection.get_enermy_players(self)
+            count = 0
+            safety = 0
+            r = random.Random(time.time())
+            while count < 3:
+                safety += 1
+                if safety > 10:
+                    FORMS.dialogue(main_text="cannot find enough lucky bustard with property that can upgrade anymore")
+                    
+                    break
+                
+                lucky_enermy = r.choice(enermies)
+                enermy_properties = lucky_enermy.properties
+                print ("{}:{}".format(lucky_enermy, enermy_properties))
+                if enermy_properties == []:
+                    continue
+                lucky_enermy_property = r.choice(enermy_properties)
+                if not lucky_enermy_property.can_upgrade():
+                    continue
+                lucky_enermy.upgrade_property(lucky_enermy_property)
+                self.pay_money_to_target(lucky_enermy_property.value, lucky_enermy)
+                count += 1
         else:
             FORMS.dialogue(main_text="wip")
         

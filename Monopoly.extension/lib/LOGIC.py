@@ -126,6 +126,8 @@ class Game:
         if not target:
             return
         self.current_player.take_action(target)
+        
+        self.player_collection.update_player_info(self.current_player)
 
   
 
